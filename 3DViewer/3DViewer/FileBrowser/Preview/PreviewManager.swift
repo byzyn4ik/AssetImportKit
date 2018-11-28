@@ -18,7 +18,6 @@ class PreviewManager: NSObject, QLPreviewControllerDataSource {
     
     // MARK: - Methods
     
-    @available(iOS, deprecated: 9.0)
     func previewViewControllerForFile(_ file: FBFile, fromNavigation: Bool) -> UIViewController {
         
         if file.type == .PLIST || file.type == .JSON {

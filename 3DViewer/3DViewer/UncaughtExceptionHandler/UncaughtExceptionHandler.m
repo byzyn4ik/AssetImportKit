@@ -45,9 +45,6 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 
 - (void)handleException:(NSException *)exception
 {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    
     //here you can show your alert
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@""
@@ -56,8 +53,6 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
                           cancelButtonTitle:@"Okay"
                           otherButtonTitles:nil, nil];
     [alert show];
-    
-#pragma clang diagnostic pop
     
     NSString* reason = [exception reason];
     if([reason length]>200)
@@ -95,8 +90,6 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 
 @end
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 void HandleException(NSException *exception)
 {
     int32_t exceptionCount = OSAtomicIncrement32(&UncaughtExceptionCount);
@@ -155,7 +148,6 @@ void SignalHandler(int signal)
        forKey:UncaughtExceptionHandlerSignalKey]]
      waitUntilDone:YES];
 }
-#pragma clang diagnostic pop
 
 void InstallUncaughtExceptionHandler()
 {

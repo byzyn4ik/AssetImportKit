@@ -6,8 +6,7 @@
 //  Copyright © 2018 Eugene Bokhan. All rights reserved.
 //
 
-import Foundation
-import cimport
+import assimp.cimport
 
 public func tupleOfInt8sToString( _ tupleOfInt8s:Any ) -> NSString {
     var result:String? = nil

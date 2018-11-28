@@ -10,11 +10,7 @@ import Foundation
 import GLKit
 import SceneKit
 import SceneKit.ModelIO
-import postProcessingFlags
-import cimport
-import light
-import material
-import scene
+import assimp.cimport
 
 /**
  An importer that imports the files with formats supported by Assimp and
@@ -86,8 +82,8 @@ import scene
      @param postProcessFlags The flags for all possible post processing steps.
      @return A new scene object, or nil if no scene could be loaded.
      */
-    public func importScene(_ filePath: String, postProcessFlags: AssetImporterPostProcessSteps) -> AssetImporterScene? {
-        return importScene(filePath, postProcessFlags: postProcessFlags, error: nil)
+    public func importScene(_ filePath: String, postProcessSteps: PostProcessSteps) -> AssetImporterScene? {
+        return importScene(filePath, postProcessSteps: postProcessSteps, error: nil)
     }
     
     /**
@@ -98,14 +94,14 @@ import scene
      @param error Scene import error.
      @return A new scene object, or nil if no scene could be loaded.
      */
-    public func importScene(_ filePath: String, postProcessFlags: AssetImporterPostProcessSteps, error: Error?) -> AssetImporterScene? {
+    public func importScene(_ filePath: String, postProcessSteps: PostProcessSteps, error: Error?) -> AssetImporterScene? {
         
         // Start the import on the given file with some example postprocessing
         // Usually - if speed is not the most important aspect for you - you'll t
         // probably to request more postprocessing than we do in this example.
         let pFile = filePath
         
-        guard let aiScenePointer = aiImportFile(pFile , postProcessFlags.rawValue) else {
+        guard let aiScenePointer = aiImportFile(pFile , UInt32(postProcessSteps.rawValue)) else {
             
             // The pointer has a renference to nil if the import failed.
             let errorString = tupleOfInt8sToString(aiGetErrorString().pointee)
@@ -832,7 +828,7 @@ import scene
         color.b = 0.0
         var matColor: Int = -100
         matColor = Int(aiGetMaterialColor(&aiMaterial, AI_MATKEY_COLOR_TRANSPARENT.pKey, AI_MATKEY_COLOR_TRANSPARENT.type, AI_MATKEY_COLOR_TRANSPARENT.index, &color).rawValue)
-        if Int(AI_SUCCESS.rawValue) == matColor {
+        if Int(aiReturn_SUCCESS.rawValue) == matColor {
             
             if color.r != 0 && color.g != 0 && color.b != 0 {
                 
@@ -951,7 +947,7 @@ import scene
                     } else if lightingModelRawValue == 3 {
                         lightingModel = .phong
                     } else {
-                        lightingModel = .blinn
+                        lightingModel = .physicallyBased
                     }
                     
                     material.lightingModel = lightingModel
@@ -981,8 +977,23 @@ import scene
         if scnGeometrySources.count > 0 {
             
             var scnGeometry = SCNGeometry()
-            let scnGeometryElements = makeGeometryElementsForNode(aiNode, in: aiScene)
-            scnGeometry = SCNGeometry(sources: scnGeometrySources, elements: scnGeometryElements)
+            
+            if (path as NSString).pathExtension == "obj" {
+                // Create a MDLAsset from url
+                let asset = MDLAsset(url:URL(fileURLWithPath: path))
+                guard let object = asset.object(at: 0) as? MDLMesh else {
+                    fatalError("Failed to get mesh from asset.")
+                }
+                // Wrap the ModelIO object in a SceneKit object
+                let node = SCNNode(mdlObject: object)
+                if let geometry = node.geometry {
+                    scnGeometry = geometry
+                }
+            } else {
+                let scnGeometryElements = makeGeometryElementsForNode(aiNode, in: aiScene)
+                scnGeometry = SCNGeometry(sources: scnGeometrySources, elements: scnGeometryElements)
+            }
+            
             let scnMaterials = makeMaterials(for: aiNode, in: &aiScene, atPath: path)
             if scnMaterials.count > 0 {
                 scnGeometry.materials = scnMaterials

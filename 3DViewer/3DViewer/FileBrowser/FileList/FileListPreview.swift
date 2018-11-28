@@ -14,16 +14,19 @@ extension FileListViewController: UIViewControllerPreviewingDelegate {
     // MARK: - UIViewControllerPreviewingDelegate
     
     func registerFor3DTouch() {
-        registerForPreviewing(with: self, sourceView: tableView)
+        if #available(iOS 9.0, *) {
+            registerForPreviewing(with: self, sourceView: tableView)
+        }
     }
     
-    @available(iOS, deprecated: 9.0)
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        if let indexPath = tableView.indexPathForRow(at: location) {
-            let selectedFile = fileForIndexPath(indexPath)
-            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-            if selectedFile.isDirectory == false {
-                return previewManager.previewViewControllerForFile(selectedFile, fromNavigation: false)
+        if #available(iOS 9.0, *) {
+            if let indexPath = tableView.indexPathForRow(at: location) {
+                let selectedFile = fileForIndexPath(indexPath)
+                previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+                if selectedFile.isDirectory == false {
+                    return previewManager.previewViewControllerForFile(selectedFile, fromNavigation: false)
+                }
             }
         }
         return nil

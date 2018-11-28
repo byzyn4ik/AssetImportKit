@@ -15,9 +15,9 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
     private var selectedVirtualObjectRow: Int = -1
     weak var delegate: VirtualObjectSelectionViewControllerDelegate?
     
-    init() {
+    init(size: CGSize) {
         super.init(nibName: nil, bundle: nil)
-        calculateSize()
+        self.size = size
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,63 +27,36 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reloadTableView()
+        tableView = UITableView()
+        tableView.frame = CGRect(origin: CGPoint.zero, size: self.size)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = UIColor.clear
+        tableView.separatorEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: .light))
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.bounces = false
+        
+        self.preferredContentSize = self.size
+        
+        self.view.addSubview(tableView)
+        
+        // Retrieve the row of the currently selected object
+        selectedVirtualObjectRow = UserDefaults.standard.integer(for: .selectedObjectID)
+        
         setupNotifications()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        calculateSize()
-        reloadTableView()
-    }
-    
     func setupNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "Virtual objects didSet"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "Added virtual object"), object: nil)
     }
     
     @objc func handleNotification(_ notification: NSNotification) {
-        if notification.name.rawValue == "Virtual objects didSet" {
-            calculateSize()
-            reloadTableView()
-        }
-    }
-    
-    func calculateSize() {
-        let rowHeight = 45
-        let size = CGSize(width: 250, height: rowHeight * (VirtualObject.availableObjects.count + 1))
-        self.size = size
-    }
-    
-    func reloadTableView() {
-        DispatchQueue.main.async {
-            self.tableView = UITableView()
-            self.tableView.frame = CGRect(origin: CGPoint.zero, size: self.size)
-            self.tableView.dataSource = self
-            self.tableView.delegate = self
-            self.tableView.backgroundColor = UIColor.clear
-            self.tableView.separatorEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: .light))
-            self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            self.tableView.bounces = false
-            
-            self.preferredContentSize = self.size
-            
-            if !self.view.subviews.isEmpty {
-                for subview in self.view.subviews {
-                    if subview.isKind(of: UITableView.self) {
-                        subview.removeFromSuperview()
-                    }
-                }
-            }
-            self.view.addSubview(self.tableView)
-            
-            // Retrieve the row of the currently selected object
-            self.selectedVirtualObjectRow = UserDefaults.standard.integer(for: .selectedObjectID)
-            
-            self.tableView.reloadData()
+        if notification.name.rawValue == "Added virtual object" {
+            tableView.reloadData()
         }
     }
     
     // MARK: - UITableViewDelegate
-    @available(iOS, deprecated: 9.0)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView.cellForRow(at: indexPath)?.textLabel?.text == "Add new object" {
@@ -154,21 +127,10 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
         return cell
     }
     
-    func tableViewtableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            if indexPath.row == selectedVirtualObjectRow {
-                delegate?.virtualObjectSelectionViewControllerDidDeselectObject(self)
-            }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) && tableView.cellForRow(at: indexPath)?.textLabel?.text != "Virtual objects didSet" {
             VirtualObject.availableObjects.remove(at: indexPath.row)
             tableView.reloadSections([indexPath.section], with: .automatic)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        if tableView.cellForRow(at: indexPath)?.textLabel?.text == "Add new object" {
-            return .none
-        } else {
-            return .delete
         }
     }
     

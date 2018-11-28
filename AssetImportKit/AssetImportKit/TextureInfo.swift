@@ -9,8 +9,7 @@
 import Foundation
 import ImageIO
 import CoreImage
-import scene
-import postprocess
+import assimp.scene
 
 #if os(iOS) || os(watchOS) || os(tvOS)
 import UIKit
@@ -327,7 +326,7 @@ import AppKit
         if(aiTextureType == aiTextureType_OPACITY) {
             matColor = aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT.pKey, AI_MATKEY_COLOR_TRANSPARENT.type, AI_MATKEY_COLOR_TRANSPARENT.index, &color)
         }
-        if AI_SUCCESS == matColor {
+        if aiReturn_SUCCESS == matColor {
             self.colorSpace = CGColorSpaceCreateDeviceRGB()
             let components: [CGFloat] = [CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a)]
             if self.colorSpace != nil {

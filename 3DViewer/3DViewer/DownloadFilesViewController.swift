@@ -27,14 +27,13 @@ class DownloadFilesViewController: UIViewController, DownloadManagerDelegate {
     
     // MARK: - Interface Actions
     
-    @available(iOS, deprecated: 9.0)
+    
     @IBAction func browseFilesAction(_ sender: Any) {
         FileBrowser.inARmode = false
         let file = FileBrowser()
         self.present(file, animated: true, completion: nil)
     }
     
-    @available(iOS, deprecated: 9.0)
     @IBAction func openARAction(_ sender: Any) {
         FileBrowser.inARmode = true
         MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -185,7 +184,6 @@ class DownloadFilesViewController: UIViewController, DownloadManagerDelegate {
         progressView.setProgress(downloadProgress, animated: true)
     }
     
-    @available(iOS, deprecated: 9.0)
     func didFinishDownloadingTo(location: URL) {
         deactivateDownloadButtons()
         // Check if the downloaded file is .zip

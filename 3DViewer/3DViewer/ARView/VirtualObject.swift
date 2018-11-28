@@ -84,17 +84,15 @@ var VirtualObjectsFilePath: String {
         self.init(from: file)
     }
     
-    func loadModel() -> Bool {
+    func loadModel() {
         
-        var loadIsSuccessful = false
-        
-        guard let file = self.file else {
-            return false
+        guard let file = file else {
+            return
         }
         
-        if FileManager.default.fileExists(atPath: self.updateFilePath(for: file).filePath.path) {
+        if FileManager.default.fileExists(atPath: updateFilePath(for: file).filePath.path) {
             
-            let wrapperNode = self.getNode(from: file)
+            let wrapperNode = getNode(from: file)
             
             self.addChildNode(wrapperNode)
             
@@ -103,13 +101,11 @@ var VirtualObjectsFilePath: String {
                 child.movabilityHint = .movable
             }
             
-            self.modelLoaded = true
-            loadIsSuccessful = true
+            modelLoaded = true
             
         } else {
             
-            loadIsSuccessful = false
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "Model file not found"), object: nil, userInfo: nil)
+            self.unloadModel()
             
             for objectIndex in 0 ... VirtualObject.availableObjects.count - 1 {
                 if VirtualObject.availableObjects[objectIndex].modelName == self.modelName {
@@ -117,9 +113,11 @@ var VirtualObjectsFilePath: String {
                 }
             }
             
+            let alertView = UIAlertView(title: "Model Error", message: "Model file not found", delegate: nil, cancelButtonTitle: "Okay")
+            alertView.show()
+            
         }
         
-        return loadIsSuccessful
         
     }
     
@@ -144,7 +142,7 @@ var VirtualObjectsFilePath: String {
     
     func getNode(from sceneFile: FBFile) -> SCNNode {
         
-        let node = SCNNode()
+        var node = SCNNode()
         
         let filePath = updateFilePath(for: sceneFile).filePath.path as NSString
         
@@ -161,9 +159,11 @@ var VirtualObjectsFilePath: String {
         } else {
             
             let assetImporter = AssetImporter()
-            guard let importedScene = assetImporter.importScene(filePath as String, postProcessFlags: [.defaultQuality]),
-                let modelScene = importedScene.modelScene else { return node }
-            modelScene.rootNode.childNodes.forEach { node.addChildNode($0) }
+            let assetImporterScene = assetImporter.importScene(filePath as String,
+                                                               postProcessSteps: [.defaultQuality])
+            for childNode in (assetImporterScene?.modelScene?.rootNode.childNodes)! {
+                node.addChildNode(childNode)
+            }
         }
         
         return node
@@ -245,15 +245,21 @@ extension VirtualObject {
     static var availableObjects: [VirtualObject] = [] {
         didSet {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "Virtual objects didSet"), object: nil, userInfo: nil)
-            // Write objects to coreData
-            NSKeyedArchiver.archiveRootObject(availableObjects, toFile: VirtualObjectsFilePath)
+            
+            if VirtualObject.availableObjects.count != 0 {
+                // Write objects to coreData
+                
+                NSKeyedArchiver.archiveRootObject(availableObjects, toFile: VirtualObjectsFilePath)
+                
+               
+            }
         }
     }
     
-    static func readArchivedData() {
+    static func readCoreData() {
         
-        if let availableObjects = NSKeyedUnarchiver.unarchiveObject(withFile: VirtualObjectsFilePath) as? [VirtualObject] {
-            VirtualObject.availableObjects = availableObjects
+        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: VirtualObjectsFilePath) as? [VirtualObject] {
+            VirtualObject.availableObjects = ourData
         }
         
     }

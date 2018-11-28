@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // FBFile is a class representing a file in FileBrowser
-public class FBFile: NSObject, NSCoding {
+open class FBFile: NSObject, NSCoding {
     
     /// Display name. String.
     public let displayName: String
@@ -25,7 +25,7 @@ public class FBFile: NSObject, NSCoding {
     // FBFileType
     public let type: FBFileType
     
-    public func delete()
+    open func delete()
     {
         do
         {

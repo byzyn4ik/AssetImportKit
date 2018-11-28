@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 // File browser containing navigation controller.
-@available(iOS, deprecated: 9.0)
 open class FileBrowser: UINavigationController {
     
     // MARK: - Properties

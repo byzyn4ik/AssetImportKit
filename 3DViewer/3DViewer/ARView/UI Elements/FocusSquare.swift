@@ -64,7 +64,7 @@ class FocusSquare: SCNNode {
         } else {
             open()
         }
-        updateTransform(for: position, camera: camera, planeAnchor: planeAnchor)
+        updateTransform(for: position, camera: camera)
     }
     
     func hide() {
@@ -87,7 +87,7 @@ class FocusSquare: SCNNode {
     
     private var anchorsOfVisitedPlanes: Set<ARAnchor> = []
     
-    private func updateTransform(for position: SCNVector3, camera: ARCamera?, planeAnchor: ARPlaneAnchor?) {
+    private func updateTransform(for position: SCNVector3, camera: ARCamera?) {
         // add to list of recent positions
         recentFocusSquarePositions.append(position)
         
@@ -101,7 +101,7 @@ class FocusSquare: SCNNode {
         }
         
         // Correct y rotation of camera square
-        if let camera = camera, let planeAnchor = planeAnchor {
+        if let camera = camera {
             let tilt = abs(camera.eulerAngles.x)
             let threshold1: Float = Float.pi / 2 * 0.65
             let threshold2: Float = Float.pi / 2 * 0.75
@@ -118,13 +118,7 @@ class FocusSquare: SCNNode {
             default:
                 angle = yaw
             }
-            if planeAnchor.alignment == .horizontal {
-                self.rotation = SCNVector4Make(0, 1, 0, angle)
-            } else {
-                let planeAnchorNode = SCNNode()
-                planeAnchorNode.transform = SCNMatrix4(planeAnchor.transform)
-                self.eulerAngles = planeAnchorNode.eulerAngles
-            }
+            self.rotation = SCNVector4Make(0, 1, 0, angle)
         }
     }
     

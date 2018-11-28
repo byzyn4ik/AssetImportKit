@@ -47,6 +47,7 @@
 		1835A7C9202A30E200CFE82A /* Zipper+Writing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835A7C1202A30E200CFE82A /* Zipper+Writing.swift */; };
 		1835A7CA202A30E200CFE82A /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835A7C2202A30E200CFE82A /* Data+Serialization.swift */; };
 		18507AB7202475AA007ADB17 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 18507AB6202475A9007ADB17 /* Models.scnassets */; };
+		18507ABA20247E53007ADB17 /* 3DViewer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18507AB820247E53007ADB17 /* 3DViewer.xcdatamodeld */; };
 		1888D18020232EB5009679AE /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1888D17F20232EB5009679AE /* ARViewController.swift */; };
 		1888D18220232F63009679AE /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1888D18120232F63009679AE /* VirtualObject.swift */; };
 		1888D18420232FDC009679AE /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1888D18320232FDC009679AE /* FocusSquare.swift */; };
@@ -122,6 +123,7 @@
 		1835A7C1202A30E200CFE82A /* Zipper+Writing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Zipper+Writing.swift"; sourceTree = "<group>"; };
 		1835A7C2202A30E200CFE82A /* Data+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Serialization.swift"; sourceTree = "<group>"; };
 		18507AB6202475A9007ADB17 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
+		18507AB920247E53007ADB17 /* 3DViewer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = 3DViewer.xcdatamodel; sourceTree = "<group>"; };
 		1888D17F20232EB5009679AE /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		1888D18120232F63009679AE /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		1888D18320232FDC009679AE /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				08BD97AA1F6AB9D500F9A59A /* Assets.xcassets */,
 				18507AB6202475A9007ADB17 /* Models.scnassets */,
 				08BD97AF1F6AB9D500F9A59A /* Info.plist */,
+				18507AB820247E53007ADB17 /* 3DViewer.xcdatamodeld */,
 				08BD97D71F6AC2C400F9A59A /* 3DViewer-Bridging-Header.h */,
 			);
 			path = 3DViewer;
@@ -415,6 +418,7 @@
 				1835A7C3202A30E200CFE82A /* Zipper+Entry.swift in Sources */,
 				08BD980C1F6AC5A200F9A59A /* WebviewPreviewViewContoller.swift in Sources */,
 				1888D18F202330BB009679AE /* TextManager.swift in Sources */,
+				18507ABA20247E53007ADB17 /* 3DViewer.xcdatamodeld in Sources */,
 				1888D18A20233037009679AE /* PlaneDebugVisualization.swift in Sources */,
 				1835A7CA202A30E200CFE82A /* Data+Serialization.swift in Sources */,
 				1835A7C6202A30E200CFE82A /* Zipper+Reading.swift in Sources */,
@@ -513,6 +517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -566,6 +571,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -581,27 +587,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U59P58LC6V;
+				DEVELOPMENT_TEAM = 63TG84TE66;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/3DViewer",
-					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = 3DViewer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/3DViewer",
-				);
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-Objc",
-					"-lz",
-					"-lstdc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.example;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.3DViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/3DViewer/Assimp $(SRCROOT)/3DViewer/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "3DViewer/3DViewer-Bridging-Header.h";
@@ -617,27 +615,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U59P58LC6V;
+				DEVELOPMENT_TEAM = 63TG84TE66;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/3DViewer",
-					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = 3DViewer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/3DViewer",
-				);
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-Objc",
-					"-lz",
-					"-lstdc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.example;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.3DViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/3DViewer/Assimp $(SRCROOT)/3DViewer/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "3DViewer/3DViewer-Bridging-Header.h";
@@ -668,6 +658,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		18507AB820247E53007ADB17 /* 3DViewer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				18507AB920247E53007ADB17 /* 3DViewer.xcdatamodel */,
+			);
+			currentVersion = 18507AB920247E53007ADB17 /* 3DViewer.xcdatamodel */;
+			path = 3DViewer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 08BD97981F6AB9D500F9A59A /* Project object */;
 }

@@ -19,6 +19,8 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
     
     // MARK: - UI Actions
     
+    
+    
     @IBAction func openAssetAction(_ sender: Any) {
         openAsset()
     }
@@ -88,37 +90,42 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
             
             sceneView.scene?.rootNode.addChildNode(modelContainerNode)
             
-            
         } else {
             
             let assetImporter = AssetImporter()
-            guard let importedScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
-                let modelScene = importedScene.modelScene
-                else { return }
-            modelScene.rootNode.childNodes.forEach { self.modelContainerNode.addChildNode($0) }
-            sceneView.scene?.rootNode.addChildNode(modelContainerNode)
+            if let assimpScene = assetImporter.importScene(filePath,
+                                                           postProcessSteps: [.defaultQuality]) {
             
-            let animationKeys = importedScene.animationKeys()
-            // If multiple animations exist, load the first animation
-            if let numberOfAnimationKeys = animationKeys?.count {
-                if numberOfAnimationKeys > 0 {
-                    var settings = AssetImporterAnimSettings()
-                    settings.repeatCount = 5
-                    
-                    let key = animationKeys![0] as! String
-                    let eventBlock: SCNAnimationEventBlock = { animation, animatedObject, playingBackwards in
-                        print("Animation Event triggered")
-                        return
+                if let modelScene = assimpScene.modelScene {
+                    for childNode in modelScene.rootNode.childNodes {
+                        self.modelContainerNode.addChildNode(childNode)
                     }
-                    let animEvent = SCNAnimationEvent(keyTime: 0.1, block: eventBlock)
-                    let animEvents: [SCNAnimationEvent]  = [animEvent]
-                    settings.animationEvents = animEvents
-                    settings.delegate = self
-                    
-                    if var animation = importedScene.animationScenes.value(forKey: key) as? SCNScene {
-                        sceneView.scene?.rootNode.addAnimationScene(&animation, forKey: key, with: &settings)
+                }
+                
+                sceneView.scene?.rootNode.addChildNode(modelContainerNode)
+                
+                let animationKeys = assimpScene.animationKeys()
+                // If multiple animations exist, load the first animation
+                if let numberOfAnimationKeys = animationKeys?.count {
+                    if numberOfAnimationKeys > 0 {
+                        var settings = AssetImporterAnimSettings()
+                        settings.repeatCount = 5
+                        
+                        let key = animationKeys![0] as! String
+                        let eventBlock: SCNAnimationEventBlock = { animation, animatedObject, playingBackwards in
+                            print("Animation Event triggered")
+                            return
+                        }
+                        let animEvent = SCNAnimationEvent(keyTime: 0.1, block: eventBlock)
+                        let animEvents: [SCNAnimationEvent]  = [animEvent]
+                        settings.animationEvents = animEvents
+                        settings.delegate = self
+                        
+                        if var animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
+                            sceneView.scene?.rootNode.addAnimationScene(&animation, forKey: key, with: &settings)
+                        }
+                        
                     }
-                    
                 }
             }
         }
@@ -157,45 +164,7 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
         dialog.canChooseDirectories    = true;
         dialog.canCreateDirectories    = true;
         dialog.allowsMultipleSelection = false;
-        dialog.allowedFileTypes        = ["dae",
-                                          "fbx",
-                                          "obj",
-                                          "scn",
-                                          "md3",
-                                          "zgl",
-                                          "xgl",
-                                          "wrl",
-                                          "stl",
-                                          "smd",
-                                          "raw",
-                                          "q3s",
-                                          "q3o",
-                                          "ply",
-                                          "xml",
-                                          "mesh",
-                                          "off",
-                                          "nff",
-                                          "m3sd",
-                                          "md5anim",
-                                          "md5mesh",
-                                          "md2",
-                                          "irr",
-                                          "ifc",
-                                          "dxf",
-                                          "cob",
-                                          "bvh",
-                                          "b3d",
-                                          "ac",
-                                          "blend",
-                                          "hmp",
-                                          "3ds",
-                                          "3d",
-                                          "x",
-                                          "ter",
-                                          "max",
-                                          "ms3d",
-                                          "mdl",
-                                          "ase"];
+        dialog.allowedFileTypes        = ["dae", "fbx", "obj", "scn", "md3", "zgl", "xgl", "wrl", "stl", "smd", "raw", "q3s", "q3o", "ply", "xml", "mesh", "off", "nff", "m3sd", "md5anim", "md5mesh", "md2", "irr", "ifc", "dxf", "cob", "bvh", "b3d", "ac", "blend", "hmp", "3ds", "3d", "x", "ter", "max", "ms3d", "mdl", "ase"];
         
         if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             let result = dialog.url // Pathname of the file

@@ -13,7 +13,6 @@
 		181434062031ADFB0015C540 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181434042031ADFB0015C540 /* Main.storyboard */; };
 		1814340F2031B1AF0015C540 /* BlurredWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814340E2031B1AF0015C540 /* BlurredWindow.swift */; };
 		181434112031B1BF0015C540 /* BlurredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181434102031B1BF0015C540 /* BlurredView.swift */; };
-		181434182031B5BB0015C540 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181434172031B5BB0015C540 /* SceneKit.framework */; };
 		18E1C50E20331B0800FB1328 /* AssetImportKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E1C50C20331B0200FB1328 /* AssetImportKit.framework */; };
 		18E1C50F20331B0800FB1328 /* AssetImportKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18E1C50C20331B0200FB1328 /* AssetImportKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -53,7 +52,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E1C50E20331B0800FB1328 /* AssetImportKit.framework in Frameworks */,
-				181434182031B5BB0015C540 /* SceneKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +319,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = SceneKitAssetImport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -329,7 +328,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.SceneKitAssetImport.SceneKitAssetImport;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.SceneKitAssetImport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SceneKitAssetImport/SceneKitAssetImport-Bridging-Header.h";
@@ -351,6 +350,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = SceneKitAssetImport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -359,7 +359,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.SceneKitAssetImport.SceneKitAssetImport;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eugenebokhan.SceneKitAssetImport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SceneKitAssetImport/SceneKitAssetImport-Bridging-Header.h";

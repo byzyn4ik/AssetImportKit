@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-@available(iOS, deprecated: 9.0)
 extension FileListViewController {
     
     // MARK: - UITableViewDataSource, UITableViewDelegate

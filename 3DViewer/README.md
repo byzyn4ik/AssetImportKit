@@ -33,12 +33,12 @@ In this app you're going to use the [`URLSession`](https://developer.apple.com/d
 
 **4.** Browsing local files with the help of the `FileManager`.
 
-**5.** Loading a model file directly into an `SCNScene` from a device's internal `URL`. You're going to do it with the help of `AssetImportKit` - framework for loading uncompressed models.
+**5.** Loading a model file directly into an `SCNAssimpScene` from a device's internal `URL`. You're going to do it with the help of [`AssimpKit`](https://github.com/dmsurti/AssimpKit) which is a great framework for loading uncompressed models.
 
 
 ## Native approach:
 
-It is also possible to use to use a downloaded `.dae` and `.obj` file and load it at runtime without `AssetImportKit`.
+It is also possible to use to use a downloaded `.dae` and `.obj` file and load it at runtime without `AssimpKit`.
 
 To load `.obj` you need to use [`MDLAsset`](https://developer.apple.com/documentation/modelio/mdlasset) from Apple's [`ModelIO`](https://developer.apple.com/documentation/modelio) which was introduced at WWDC 2015. The steps are following:
 

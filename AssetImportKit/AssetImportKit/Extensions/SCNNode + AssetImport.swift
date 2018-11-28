@@ -6,14 +6,11 @@
 //  Copyright © 2018 Eugene Bokhan. All rights reserved.
 //
 
-import Foundation
 import SceneKit
 
 /**
- A scenekit SCNNode extension which imitates the SCNAnimatable protocol.
+ A scenekit SCNNode category which imitates the SCNAnimatable protocol.
  */
-@available(iOS, deprecated: 9.0)
-@available(OSX, deprecated: 10.13)
 public extension SCNNode {
     
     // MARK: - SCNAnimatable Clone
@@ -43,9 +40,7 @@ public extension SCNNode {
                 }
                 animation.speed = settings.speed
                 animation.autoreverses = settings.autoreverses
-                #if os(OSX)
-                animation.fillMode = settings.fillMode!
-                #endif
+                animation.fillMode = CAMediaTimingFillMode(rawValue: settings.fillMode)
                 // Animation attributes
                 animation.isRemovedOnCompletion = settings.isRemovedOnCompletion
                 animation.timingFunction = settings.timingFunction

@@ -12,8 +12,6 @@ import SceneKit
 import SceneKit.ModelIO
 import AssetImportKit
 
-@available(iOS, deprecated: 9.0)
-@available(OSX, deprecated: 10.13)
 class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
 
     // MARK: - UI Elements
@@ -130,12 +128,16 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
             } else {
                 
                 let assetImporter = AssetImporter()
-                guard let importedScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
-                    let modelScene = importedScene.modelScene
-                    else { return }
-                modelScene.rootNode.childNodes.forEach { self.modelContainerNode.addChildNode($0) }
+                if let assimpScene = assetImporter.importScene(filePath,
+                                                               postProcessSteps: [.defaultQuality]) {
                     
-                    let animationKeys = importedScene.animationKeys()
+                    if let modelScene = assimpScene.modelScene {
+                        for childNode in modelScene.rootNode.childNodes {
+                            self.modelContainerNode.addChildNode(childNode)
+                        }
+                    }
+                    
+                    let animationKeys = assimpScene.animationKeys()
                     // If multiple animations exist, load the first animation
                     if let numberOfAnimationKeys = animationKeys?.count {
                         if numberOfAnimationKeys > 0 {
@@ -152,11 +154,12 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
                             settings.animationEvents = animEvents
                             settings.delegate = self
                             
-                            if var animation = importedScene.animationScenes.value(forKey: key) as? SCNScene {
+                            if var animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
                                 self.modelContainerNode.addAnimationScene(&animation, forKey: key, with: &settings)
                             }
                             
                         }
+                    }
                 }
             }
         }
