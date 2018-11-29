@@ -800,13 +800,13 @@ public struct AssetImporter {
      @param aiMaterial The assimp material
      @param material The scenekit material.
      */
-    public func applyMultiplyProperty(for aiMaterial: inout aiMaterial, with material: SCNMaterial) {
+    public func applyMultiplyProperty(for aiMaterial: UnsafePointer<aiMaterial>, with material: SCNMaterial) {
         
         var color = aiColor4D()
         color.r = 0.0
         color.g = 0.0
         color.b = 0.0
-        let  matColor = aiGetMaterialColor(&aiMaterial,
+        let  matColor = aiGetMaterialColor(aiMaterial,
                                           AI_MATKEY_COLOR_TRANSPARENT.pKey,
                                           AI_MATKEY_COLOR_TRANSPARENT.type,
                                           AI_MATKEY_COLOR_TRANSPARENT.index,
@@ -856,60 +856,42 @@ public struct AssetImporter {
                 let aiMesh = aiMeshPointer.pointee
                 if let aiMaterialPointer = aiScene.mMaterials[Int(aiMesh.mMaterialIndex)] {
                     
-                    var aiMaterial = aiMaterialPointer.pointee
+                    var aiMaterial = aiMaterialPointer
                     let material = SCNMaterial()
                     var nameTempVar = aiString()
-                    aiGetMaterialString(&aiMaterial, AI_MATKEY_NAME.pKey, AI_MATKEY_NAME.type, AI_MATKEY_NAME.type, &nameTempVar)
+                    aiGetMaterialString(aiMaterial, AI_MATKEY_NAME.pKey, AI_MATKEY_NAME.type, AI_MATKEY_NAME.type, &nameTempVar)
                     let materialName = nameTempVar.stringValue()
                     print("Material name is \(materialName)")
                     material.name = materialName
                     
-                    let textureTypes = [aiTextureType_DIFFUSE,
-                                        aiTextureType_SPECULAR,
-                                        aiTextureType_AMBIENT,
-                                        aiTextureType_EMISSIVE,
-                                        aiTextureType_REFLECTION,
-                                        aiTextureType_OPACITY,
-                                        aiTextureType_NORMALS,
-                                        aiTextureType_HEIGHT,
-                                        aiTextureType_DISPLACEMENT,
-                                        aiTextureType_SHININESS]
+                    let textureTypes = [(value: aiTextureType_DIFFUSE, description: "Diffuse"),
+                                        (value: aiTextureType_SPECULAR, description: "Specular"),
+                                        (value: aiTextureType_AMBIENT, description: "Ambient"),
+                                        (value: aiTextureType_EMISSIVE, description: "Emissive"),
+                                        (value: aiTextureType_REFLECTION, description: "Reflection"),
+                                        (value: aiTextureType_OPACITY, description: "Opacity"),
+                                        (value: aiTextureType_NORMALS, description: "Normals"),
+                                        (value: aiTextureType_HEIGHT, description: "Height"),
+                                        (value: aiTextureType_DISPLACEMENT, description: "Displacement"),
+                                        (value: aiTextureType_SHININESS, description: "Shininess")]
                     
-                    let textureTypeNames = ["0": "Diffuse",
-                                            "1": "Specular",
-                                            "2": "Ambient",
-                                            "3": "Emissive",
-                                            "4": "Reflection",
-                                            "5": "Opacity",
-                                            "6": "Normals",
-                                            "7": "Height",
-                                            "8": "Displacement",
-                                            "9": "Shininess"]
-                    
-                    for i in 0 ..< textureTypes.count {
-                        
-                        if let textureTypeName = textureTypeNames["\(i)"] {
-                            
-                            print("Loading texture type : \(textureTypeName)")
-                            print("Texture type: \(textureTypes[i])")
-                            print("Texture type raw value: \(textureTypes[i].rawValue)")
-                            let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
-                                                          textureType: textureTypes[i],
-                                                          in: aiScene,
-                                                          atPath: path as NSString,
-                                                          imageCache: imageCache)
-                            makeMaterialProperty(for: material, with: textureInfo)
-//                            textureInfo.releaseContents()
-                            
-                        }
+                    for textureType in textureTypes {
+                        print("Loading texture type : \(textureType.description)")
+                        let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
+                                                      textureType: textureType.value,
+                                                      in: aiScene,
+                                                      atPath: path as NSString,
+                                                      imageCache: imageCache)
+                        makeMaterialProperty(for: material,
+                                             with: textureInfo)
                     }
                     print("Loading multiply color")
-                    self.applyMultiplyProperty(for: &aiMaterial, with: material)
+                    applyMultiplyProperty(for: aiMaterial, with: material)
                     
                     print("Loading blend mode")
                     var blendMode: Int32 = 0
                     var max: UInt32 = 0
-                    aiGetMaterialIntegerArray(&aiMaterial,
+                    aiGetMaterialIntegerArray(aiMaterial,
                                               AI_MATKEY_BLEND_FUNC.pKey,
                                               AI_MATKEY_BLEND_FUNC.type,
                                               AI_MATKEY_BLEND_FUNC.index,
@@ -926,7 +908,7 @@ public struct AssetImporter {
                     
                     print("Loading cull/double sided mode")
                     var cullModeRawValue: Int32 = 0
-                    aiGetMaterialIntegerArray(&aiMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
+                    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
                     if let cullMode = SCNCullMode(rawValue: SCNCullMode.RawValue(cullModeRawValue)) {
                          material.cullMode = cullMode
                     } else {
@@ -935,7 +917,7 @@ public struct AssetImporter {
                     
                     print("Loading shininess")
                     var shininess: Int32 = 0
-                    aiGetMaterialIntegerArray(&aiMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
+                    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
                     
                     print("shininess: \(shininess)")
                     material.shininess = CGFloat(shininess)
@@ -948,7 +930,7 @@ public struct AssetImporter {
                      USE AI_MATKEY_SHADING_MODEL to get the shading mode.
                      */
                     var lightingModelRawValue: Int32 = 0
-                    aiGetMaterialIntegerArray(&aiMaterial, AI_MATKEY_SHADING_MODEL.pKey, AI_MATKEY_SHADING_MODEL.type, AI_MATKEY_SHADING_MODEL.index, &lightingModelRawValue, &max)
+                    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_SHADING_MODEL.pKey, AI_MATKEY_SHADING_MODEL.type, AI_MATKEY_SHADING_MODEL.index, &lightingModelRawValue, &max)
                     
                     var lightingModel: SCNMaterial.LightingModel
                     if lightingModelRawValue == 4 {
@@ -1014,7 +996,7 @@ public struct AssetImporter {
                                              imageCache: imageCache)
             if scnMaterials.count > 0 {
                 scnGeometry.materials = scnMaterials
-                scnGeometry.firstMaterial = scnMaterials[0]
+                scnGeometry.firstMaterial = scnMaterials.first
             }
             return scnGeometry
             
