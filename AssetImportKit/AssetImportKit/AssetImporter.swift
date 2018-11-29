@@ -862,99 +862,99 @@ public struct AssetImporter {
                               imageCache: AssimpImageCache) -> [SCNMaterial] {
         var scnMaterials = Array(repeatElement(SCNMaterial(),
                                                count: Int(aiNode.mNumMeshes)))
+        let submeshes = Array(UnsafeBufferPointer(start: aiScene.mMeshes,
+                                                  count: Int(aiNode.mNumMeshes))).map { $0!.pointee }
+        let materials = Array(UnsafeBufferPointer(start: aiScene.mMaterials,
+                                                  count: Int(aiScene.mNumMaterials))).map { $0!.pointee }
+        
         for i in 0 ..< Int(aiNode.mNumMeshes) {
             let meshIndex = Int(aiNode.mMeshes[i])
-            if let aiMeshPointer = aiScene.mMeshes[meshIndex] {
-                let aiMesh = aiMeshPointer.pointee
-                let materialIndex = Int(aiMesh.mMaterialIndex)
-                if let aiMaterialPointer = aiScene.mMaterials[materialIndex] {
-                    var assimpMaterial = aiMaterialPointer.pointee
-                    let scnMaterial = scnMaterials[materialIndex]
-                    print("Material name is \(assimpMaterial.name)")
-                    scnMaterial.name = assimpMaterial.name
-                    
-                    let textureTypes = [(value: aiTextureType_DIFFUSE, description: "Diffuse"),
-                                        (value: aiTextureType_SPECULAR, description: "Specular"),
-                                        (value: aiTextureType_AMBIENT, description: "Ambient"),
-                                        (value: aiTextureType_EMISSIVE, description: "Emissive"),
-                                        (value: aiTextureType_REFLECTION, description: "Reflection"),
-                                        (value: aiTextureType_OPACITY, description: "Opacity"),
-                                        (value: aiTextureType_NORMALS, description: "Normals"),
-                                        (value: aiTextureType_HEIGHT, description: "Height"),
-                                        (value: aiTextureType_DISPLACEMENT, description: "Displacement"),
-                                        (value: aiTextureType_SHININESS, description: "Shininess")]
-                    
-                    for textureType in textureTypes {
-                        print("Loading texture type : \(textureType.description)")
-                        let textureInfo = TextureInfo(meshIndex: meshIndex,
-                                                      textureType: textureType.value,
-                                                      in: aiScene,
-                                                      atPath: path as NSString,
-                                                      imageCache: imageCache)
-                        makeMaterialProperty(for: scnMaterial,
-                                             with: textureInfo)
-                    }
-                    print("Loading multiply color")
-                    applyMultiplyProperty(for: &assimpMaterial,
-                                          with: scnMaterial)
-                    
-                    print("Loading blend mode")
-                    var blendMode: Int32 = 0
-                    var max: UInt32 = 0
-                    aiGetMaterialIntegerArray(&assimpMaterial,
-                                              AI_MATKEY_BLEND_FUNC.pKey,
-                                              AI_MATKEY_BLEND_FUNC.type,
-                                              AI_MATKEY_BLEND_FUNC.index,
-                                              &blendMode,
-                                              &max)
-                    if blendMode == Int32(aiBlendMode_Default.rawValue) {
-                        print("Using alpha blend mode")
-                        scnMaterial.blendMode = .alpha
-                    }
-                    else if blendMode == Int32(aiBlendMode_Additive.rawValue) {
-                        print("Using add blend mode")
-                        scnMaterial.blendMode = .add
-                    }
-                    
-                    print("Loading cull/double sided mode")
-                    var cullModeRawValue: Int32 = 0
-                    aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
-                    if let cullMode = SCNCullMode(rawValue: SCNCullMode.RawValue(cullModeRawValue)) {
-                         scnMaterial.cullMode = cullMode
-                    } else {
-                        scnMaterial.cullMode = .back
-                    }
-                    
-                    print("Loading shininess")
-                    var shininess: Int32 = 0
-                    aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
-                    
-                    print("shininess: \(shininess)")
-                    scnMaterial.shininess = CGFloat(shininess)
-                    
-                    print("Loading shading model")
-                    /**
-                     FIXME: The shading mode works only on iOS for iPhone.
-                     Does not work on iOS for iPad and OS X.
-                     Hence has been defaulted to Blinn.
-                     USE AI_MATKEY_SHADING_MODEL to get the shading mode.
-                     */
-                    var lightingModelRawValue: Int32 = 0
-                    aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_SHADING_MODEL.pKey, AI_MATKEY_SHADING_MODEL.type, AI_MATKEY_SHADING_MODEL.index, &lightingModelRawValue, &max)
-                    
-                    var lightingModel: SCNMaterial.LightingModel
-                    if lightingModelRawValue == 4 {
-                        lightingModel = .blinn
-                    } else if lightingModelRawValue == 3 {
-                        lightingModel = .phong
-                    } else {
-                        lightingModel = .physicallyBased
-                    }
-                    
-                    scnMaterial.lightingModel = lightingModel
-                    
-                }
+            let aiMesh = submeshes[meshIndex]
+            let materialIndex = Int(aiMesh.mMaterialIndex)
+            var assimpMaterial = materials[materialIndex]
+            let scnMaterial = scnMaterials[materialIndex]
+            print("Material name is \(assimpMaterial.name)")
+            scnMaterial.name = assimpMaterial.name
+            
+            let textureTypes = [(value: aiTextureType_DIFFUSE, description: "Diffuse"),
+                                (value: aiTextureType_SPECULAR, description: "Specular"),
+                                (value: aiTextureType_AMBIENT, description: "Ambient"),
+                                (value: aiTextureType_EMISSIVE, description: "Emissive"),
+                                (value: aiTextureType_REFLECTION, description: "Reflection"),
+                                (value: aiTextureType_OPACITY, description: "Opacity"),
+                                (value: aiTextureType_NORMALS, description: "Normals"),
+                                (value: aiTextureType_HEIGHT, description: "Height"),
+                                (value: aiTextureType_DISPLACEMENT, description: "Displacement"),
+                                (value: aiTextureType_SHININESS, description: "Shininess")]
+            
+            for textureType in textureTypes {
+                print("Loading texture type : \(textureType.description)")
+                let textureInfo = TextureInfo(meshIndex: meshIndex,
+                                              textureType: textureType.value,
+                                              in: aiScene,
+                                              atPath: path as NSString,
+                                              imageCache: imageCache)
+                makeMaterialProperty(for: scnMaterial,
+                                     with: textureInfo)
             }
+            print("Loading multiply color")
+            applyMultiplyProperty(for: &assimpMaterial,
+                                  with: scnMaterial)
+            
+            print("Loading blend mode")
+            var blendMode: Int32 = 0
+            var max: UInt32 = 0
+            aiGetMaterialIntegerArray(&assimpMaterial,
+                                      AI_MATKEY_BLEND_FUNC.pKey,
+                                      AI_MATKEY_BLEND_FUNC.type,
+                                      AI_MATKEY_BLEND_FUNC.index,
+                                      &blendMode,
+                                      &max)
+            if blendMode == Int32(aiBlendMode_Default.rawValue) {
+                print("Using alpha blend mode")
+                scnMaterial.blendMode = .alpha
+            }
+            else if blendMode == Int32(aiBlendMode_Additive.rawValue) {
+                print("Using add blend mode")
+                scnMaterial.blendMode = .add
+            }
+            
+            print("Loading cull/double sided mode")
+            var cullModeRawValue: Int32 = 0
+            aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
+            if let cullMode = SCNCullMode(rawValue: SCNCullMode.RawValue(cullModeRawValue)) {
+                scnMaterial.cullMode = cullMode
+            } else {
+                scnMaterial.cullMode = .back
+            }
+            
+            print("Loading shininess")
+            var shininess: Int32 = 0
+            aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
+            
+            print("shininess: \(shininess)")
+            scnMaterial.shininess = CGFloat(shininess)
+            
+            print("Loading shading model")
+            /**
+             FIXME: The shading mode works only on iOS for iPhone.
+             Does not work on iOS for iPad and OS X.
+             Hence has been defaulted to Blinn.
+             USE AI_MATKEY_SHADING_MODEL to get the shading mode.
+             */
+            var lightingModelRawValue: Int32 = 0
+            aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_SHADING_MODEL.pKey, AI_MATKEY_SHADING_MODEL.type, AI_MATKEY_SHADING_MODEL.index, &lightingModelRawValue, &max)
+            
+            var lightingModel: SCNMaterial.LightingModel
+            if lightingModelRawValue == 4 {
+                lightingModel = .blinn
+            } else if lightingModelRawValue == 3 {
+                lightingModel = .phong
+            } else {
+                lightingModel = .physicallyBased
+            }
+            
+            scnMaterial.lightingModel = lightingModel
         }
         
         return scnMaterials
