@@ -13,11 +13,13 @@ import assimp.scene
 
 #if os(iOS) || os(watchOS) || os(tvOS)
 import UIKit
+public typealias Color = UIColor
 #elseif os(OSX)
 import AppKit
+public typealias Color = NSColor
 #endif
 
-@objc public class TextureInfo: NSObject {
+public struct TextureInfo {
     
     // MARK: - Texture metadata
     
@@ -51,11 +53,7 @@ import AppKit
     /**
      The actual color to be applied to a material property.
      */
-    #if os(iOS) || os(watchOS) || os(tvOS)
-    public var color: UIColor?
-    #elseif os(OSX)
-    public var color: NSColor?
-    #endif
+    public var color: Color?
     
     /**
      A profile that specifies the interpretation of a color to be applied to
@@ -140,8 +138,6 @@ import AppKit
                 atPath path: NSString,
                 imageCache: AssimpImageCache) {
         
-        super.init()
-        
         self.imageSource = nil
         self.imageDataProvider = nil
         self.image = nil
@@ -180,7 +176,7 @@ import AppKit
      @param aiScene The assimp scene.
      @param path The path to the scene file to load.
      */
-    public func checkTextureType(for aiMaterial: UnsafeMutablePointer<aiMaterial>,
+    public mutating func checkTextureType(for aiMaterial: UnsafeMutablePointer<aiMaterial>,
                                  with aiTextureType: aiTextureType,
                                  in aiScene: aiScene,
                                  atPath path: NSString,
@@ -274,7 +270,7 @@ import AppKit
      @param index The index of the texture in assimp scene's textures.
      @param aiScene The assimp scene.
      */
-    public func generateCGImageForEmbeddedTexture(at index: Int, in aiScene: aiScene) {
+    public mutating func generateCGImageForEmbeddedTexture(at index: Int, in aiScene: aiScene) {
         
         print("Generating embedded texture")
         
@@ -310,7 +306,7 @@ import AppKit
      
      @param path The path to the scene file to load.
      */
-    public func generateCGImageForExternalTexture(atPath path: NSString,
+    public mutating func generateCGImageForExternalTexture(atPath path: NSString,
                                                   imageCache: AssimpImageCache) {
         if let cachedImage = imageCache.cachedFileAtPath(path: (path as String)) {
             print("Already generated this texture, using from cache")
@@ -338,7 +334,7 @@ import AppKit
     
     // MARK: - Extract color
     
-    public func extractColor(for aiMaterial: UnsafeMutablePointer<aiMaterial>,
+    public mutating func extractColor(for aiMaterial: UnsafeMutablePointer<aiMaterial>,
                              with aiTextureType: aiTextureType) {
         
         print("Extracting color")
@@ -371,11 +367,7 @@ import AppKit
             let components: [CGFloat] = [CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a)]
             if self.colorSpace != nil {
                 if let cgColor = CGColor(colorSpace: self.colorSpace!, components: components) {
-                    #if os(iOS) || os(watchOS) || os(tvOS)
-                    self.color = UIColor(cgColor: cgColor)
-                    #elseif os(OSX)
-                    self.color = NSColor(cgColor: cgColor)
-                    #endif
+                    self.color = Color(cgColor: cgColor)
                 }
             }
             
@@ -391,7 +383,13 @@ import AppKit
      
      @return Returns either a color or a bitmap image.
      */
-    public func getMaterialPropertyContents() -> Any? {
+    func getMaterialPropertyContents() -> Any? {
+        let contents = getMaterialPropertyContentsInternal()
+        return contents
+    }
+    
+    
+    public func getMaterialPropertyContentsInternal() -> Any? {
         if self.applyEmbeddedTexture || self.applyExternalTexture {
             return self.image
         }
@@ -406,7 +404,7 @@ import AppKit
      
      This method must be called by the client to avoid memory leaks!
      */
-    public func releaseContents() {
+    public mutating func releaseContents() {
         self.imageSource = nil
         self.imageDataProvider = nil
         self.image = nil

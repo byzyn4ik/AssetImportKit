@@ -728,9 +728,10 @@ import assimp.cimport
      @param material The scenekit material.
      @param path The path to the scene file to load.
      */
-    public func makeMaterialProperty(for material: SCNMaterial, with textureInfo: TextureInfo) {
+    public func makeMaterialProperty(for material: SCNMaterial,
+                                     with textureInfo: TextureInfo) {
         
-        switch textureInfo.textureType {
+         switch textureInfo.textureType {
         case aiTextureType_DIFFUSE:
             material.diffuse.contents = textureInfo.getMaterialPropertyContents()
             material.diffuse.mappingChannel = 0
@@ -839,15 +840,22 @@ import assimp.cimport
         color.r = 0.0
         color.g = 0.0
         color.b = 0.0
-        var matColor: Int = -100
-        matColor = Int(aiGetMaterialColor(&aiMaterial, AI_MATKEY_COLOR_TRANSPARENT.pKey, AI_MATKEY_COLOR_TRANSPARENT.type, AI_MATKEY_COLOR_TRANSPARENT.index, &color).rawValue)
-        if Int(aiReturn_SUCCESS.rawValue) == matColor {
+        let  matColor = aiGetMaterialColor(&aiMaterial,
+                                          AI_MATKEY_COLOR_TRANSPARENT.pKey,
+                                          AI_MATKEY_COLOR_TRANSPARENT.type,
+                                          AI_MATKEY_COLOR_TRANSPARENT.index,
+                                          &color).rawValue
+        if aiReturn_SUCCESS.rawValue == matColor {
             
             if color.r != 0 && color.g != 0 && color.b != 0 {
                 
-                let space: CGColorSpace = CGColorSpaceCreateDeviceRGB()
-                let components: [CGFloat] = [CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a)]
-                if let color = CGColor(colorSpace: space, components: components) {
+                let space = CGColorSpaceCreateDeviceRGB()
+                let components: [CGFloat] = [CGFloat(color.r),
+                                             CGFloat(color.g),
+                                             CGFloat(color.b),
+                                             CGFloat(color.a)]
+                if let color = CGColor(colorSpace: space,
+                                       components: components) {
                     #if os(iOS) || os(watchOS) || os(tvOS)
                     material.multiply.contents = UIColor(cgColor: color)
                     #elseif os(OSX)
@@ -890,26 +898,36 @@ import assimp.cimport
                     print("Material name is \(materialName)")
                     material.name = materialName
                     
-                    let textureTypes = [aiTextureType_DIFFUSE,      aiTextureType_SPECULAR,
-                                        aiTextureType_AMBIENT,      aiTextureType_EMISSIVE,
-                                        aiTextureType_REFLECTION,   aiTextureType_OPACITY,
-                                        aiTextureType_NORMALS,      aiTextureType_HEIGHT,
-                                        aiTextureType_DISPLACEMENT, aiTextureType_SHININESS]
+                    let textureTypes = [aiTextureType_DIFFUSE,
+                                        aiTextureType_SPECULAR,
+                                        aiTextureType_AMBIENT,
+                                        aiTextureType_EMISSIVE,
+                                        aiTextureType_REFLECTION,
+                                        aiTextureType_OPACITY,
+                                        aiTextureType_NORMALS,
+                                        aiTextureType_HEIGHT,
+                                        aiTextureType_DISPLACEMENT,
+                                        aiTextureType_SHININESS]
                     
-                    let textureTypeNames: NSDictionary = ["0": "Diffuse", "1": "Specular",
-                                            "2": "Ambient", "3": "Emissive",
-                                            "4": "Reflection", "5": "Opacity",
-                                            "6": "Normals", "7": "Height",
-                                            "8": "Displacement", "9": "Shininess"]
+                    let textureTypeNames = ["0": "Diffuse",
+                                            "1": "Specular",
+                                            "2": "Ambient",
+                                            "3": "Emissive",
+                                            "4": "Reflection",
+                                            "5": "Opacity",
+                                            "6": "Normals",
+                                            "7": "Height",
+                                            "8": "Displacement",
+                                            "9": "Shininess"]
                     
                     for i in 0 ..< textureTypes.count {
                         
-                        if let textureTypeName = textureTypeNames.value(forKey: "\(i)") {
+                        if let textureTypeName = textureTypeNames["\(i)"] {
                             
                             print("Loading texture type : \(textureTypeName)")
                             print("Texture type: \(textureTypes[i])")
                             print("Texture type raw value: \(textureTypes[i].rawValue)")
-                            let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
+                            var textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
                                                           textureType: textureTypes[i],
                                                           in: aiScene,
                                                           atPath: path as NSString,
@@ -925,7 +943,12 @@ import assimp.cimport
                     print("Loading blend mode")
                     var blendMode: Int32 = 0
                     var max: UInt32 = 0
-                    aiGetMaterialIntegerArray(&aiMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &blendMode, &max)
+                    aiGetMaterialIntegerArray(&aiMaterial,
+                                              AI_MATKEY_BLEND_FUNC.pKey,
+                                              AI_MATKEY_BLEND_FUNC.type,
+                                              AI_MATKEY_BLEND_FUNC.index,
+                                              &blendMode,
+                                              &max)
                     if blendMode == Int32(aiBlendMode_Default.rawValue) {
                         print("Using alpha blend mode")
                         material.blendMode = .alpha
