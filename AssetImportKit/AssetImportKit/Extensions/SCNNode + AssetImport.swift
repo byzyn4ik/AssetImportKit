@@ -78,7 +78,7 @@ public extension SCNNode {
      @param animScene The scene object representing the animation.
      */
     
-    public func addAnimationScene(_ animScene: inout  SCNScene, forKey animKey: String, with settings: inout AssetImporterAnimSettings) {
+    public func addAnimationScene(_ animScene:  SCNScene, forKey animKey: String, with settings: AssetImporterAnimSettings) {
         
         let rootAnimNode = animScene.rootNode.findSkeletonRootNode()
         var hasEvents: Bool = settings.animationEvents.count > 0

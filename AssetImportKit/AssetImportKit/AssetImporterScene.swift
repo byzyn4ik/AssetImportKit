@@ -67,7 +67,7 @@ import SceneKit
      @param key The unique scene animation key.
      @return The scene animation object.
      */
-    public func addAnimation(assimpAnimation: AssetImporterAnimation, toScene animScene: inout SCNScene) {
+    public func addAnimation(assimpAnimation: AssetImporterAnimation, toScene animScene: SCNScene) {
         
         if let frameAnims = assimpAnimation.frameAnims {
             
@@ -182,9 +182,9 @@ import SceneKit
                 
                 if let assimpAnim = animations.value(forKey: animSceneKey) as? AssetImporterAnimation {
                     
-                    var animScene = SCNScene()
+                    let animScene = SCNScene()
                     animScene.rootNode.addChildNode(skeletonNode.clone())
-                    addAnimation(assimpAnimation: assimpAnim, toScene: &animScene)
+                    addAnimation(assimpAnimation: assimpAnim, toScene: animScene)
                     animationScenes.setValue(animScene, forKey: animSceneKey)
                     
                 }

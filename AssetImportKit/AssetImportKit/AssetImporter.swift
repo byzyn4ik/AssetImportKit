@@ -120,7 +120,7 @@ import assimp.cimport
         // Access the aiScene instance referenced by aiScenePointer.
         var aiScene = aiScenePointer.pointee
         // Now we can access the file's contents.
-        let scene = self.makeSCNScene(fromAssimpScene: &aiScene, atPath: pFile)
+        let scene = self.makeSCNScene(fromAssimpScene: aiScene, atPath: pFile)
         // We're done. Release all resources associated with this import.
         aiReleaseImport(&aiScene)
         // Retutrn result
@@ -140,12 +140,12 @@ import assimp.cimport
      @param path The path to the scene file to load.
      @return A new scene object.
      */
-    public func makeSCNScene(fromAssimpScene aiScene: inout aiScene, atPath path: String) -> AssetImporterScene {
+    public func makeSCNScene(fromAssimpScene aiScene: aiScene, atPath path: String) -> AssetImporterScene {
         
         print("Make an SCNScene")
         
         let aiRootNode = aiScene.mRootNode.pointee
-        var scene = AssetImporterScene()
+        let scene = AssetImporterScene()
         /*
          ---------------------------------------------------------------------
          Assign geometry, materials, lights and cameras to the node
@@ -153,7 +153,7 @@ import assimp.cimport
          */
         let imageCache = AssimpImageCache()
         let scnRootNode = makeSCNNode(fromAssimpNode: aiRootNode,
-                                      in: &aiScene,
+                                      in: aiScene,
                                       atPath: path,
                                       imageCache: imageCache)
         scene.rootNode.addChildNode(scnRootNode)
@@ -162,9 +162,9 @@ import assimp.cimport
          Animations and skinning
          ---------------------------------------------------------------------
          */
-        buildSkeletonDatabase(for: &scene)
-        makeSkinner(forAssimpNode: aiRootNode, in: aiScene, scnScene: &scene)
-        createAnimations(from: aiScene, with: &scene, atPath: path)
+        buildSkeletonDatabase(for: scene)
+        makeSkinner(forAssimpNode: aiRootNode, in: aiScene, scnScene: scene)
+        createAnimations(from: aiScene, with: scene, atPath: path)
         /*
          ---------------------------------------------------------------------
          Make SCNScene for model and animations
@@ -191,7 +191,7 @@ import assimp.cimport
      @return A new scene node.
      */
     public func makeSCNNode(fromAssimpNode aiNode: aiNode,
-                            in aiScene: inout aiScene,
+                            in aiScene: aiScene,
                             atPath path: String,
                             imageCache: AssimpImageCache) -> SCNNode {
         
@@ -213,7 +213,7 @@ import assimp.cimport
         print("nVertices : \(nVertices)")
         if nVertices > 0 {
             if let nodeGeometry = makeSCNGeometry(fromAssimpNode: aiNode,
-                                                  in: &aiScene,
+                                                  in: aiScene,
                                                   withVertices: nVertices,
                                                   atPath: path,
                                                   imageCache: imageCache) {
@@ -262,7 +262,7 @@ import assimp.cimport
             
             if let aiChildNode = aiNode.mChildren[Int(i)]?.pointee {
                 let childNode = makeSCNNode(fromAssimpNode: aiChildNode,
-                                            in: &aiScene, atPath: path,
+                                            in: aiScene, atPath: path,
                                             imageCache: imageCache)
                 node.addChildNode(childNode)
             }
@@ -728,7 +728,7 @@ import assimp.cimport
      @param material The scenekit material.
      @param path The path to the scene file to load.
      */
-    public func makeMaterialProperty(for material: inout SCNMaterial, with textureInfo: TextureInfo) {
+    public func makeMaterialProperty(for material: SCNMaterial, with textureInfo: TextureInfo) {
         
         switch textureInfo.textureType {
         case aiTextureType_DIFFUSE:
@@ -833,7 +833,7 @@ import assimp.cimport
      @param aiMaterial The assimp material
      @param material The scenekit material.
      */
-    public func applyMultiplyProperty(for aiMaterial: inout aiMaterial, with material: inout SCNMaterial) {
+    public func applyMultiplyProperty(for aiMaterial: inout aiMaterial, with material: SCNMaterial) {
         
         var color = aiColor4D()
         color.r = 0.0
@@ -869,7 +869,7 @@ import assimp.cimport
      @return An array of scenekit materials.
      */
     public func makeMaterials(for aiNode: aiNode,
-                              in aiScene: inout aiScene,
+                              in aiScene: aiScene,
                               atPath path: String,
                               imageCache: AssimpImageCache) -> [SCNMaterial] {
         
@@ -883,7 +883,7 @@ import assimp.cimport
                 if let aiMaterialPointer = aiScene.mMaterials[Int(aiMesh.mMaterialIndex)] {
                     
                     var aiMaterial = aiMaterialPointer.pointee
-                    var material = SCNMaterial()
+                    let material = SCNMaterial()
                     var nameTempVar = aiString()
                     aiGetMaterialString(&aiMaterial, AI_MATKEY_NAME.pKey, AI_MATKEY_NAME.type, AI_MATKEY_NAME.type, &nameTempVar)
                     let materialName = nameTempVar.stringValue()
@@ -911,16 +911,16 @@ import assimp.cimport
                             print("Texture type raw value: \(textureTypes[i].rawValue)")
                             let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
                                                           textureType: textureTypes[i],
-                                                          in: &aiScene,
+                                                          in: aiScene,
                                                           atPath: path as NSString,
                                                           imageCache: imageCache)
-                            self.makeMaterialProperty(for: &material, with: textureInfo)
+                            self.makeMaterialProperty(for: material, with: textureInfo)
                             textureInfo.releaseContents()
                             
                         }
                     }
                     print("Loading multiply color")
-                    self.applyMultiplyProperty(for: &aiMaterial, with: &material)
+                    self.applyMultiplyProperty(for: &aiMaterial, with: material)
                     
                     print("Loading blend mode")
                     var blendMode: Int32 = 0
@@ -991,7 +991,7 @@ import assimp.cimport
      @return A new geometry.
      */
     public func makeSCNGeometry(fromAssimpNode aiNode: aiNode,
-                                in aiScene: inout aiScene,
+                                in aiScene: aiScene,
                                 withVertices nVertices: Int,
                                 atPath path: String,
                                 imageCache: AssimpImageCache) -> SCNGeometry? {
@@ -1020,7 +1020,7 @@ import assimp.cimport
             }
             
             let scnMaterials = makeMaterials(for: aiNode,
-                                             in: &aiScene,
+                                             in: aiScene,
                                              atPath: path,
                                              imageCache: imageCache)
             if scnMaterials.count > 0 {
@@ -1720,7 +1720,7 @@ import assimp.cimport
      
      @param scene The scenekit scene.
      */
-    public func buildSkeletonDatabase(for scene: inout AssetImporterScene) {
+    public func buildSkeletonDatabase(for scene: AssetImporterScene) {
         
         uniqueBoneNames = boneNames
         
@@ -1750,7 +1750,7 @@ import assimp.cimport
      @param aiScene The assimp scene.
      @param scene The scenekit scene.
      */
-    public func makeSkinner(forAssimpNode aiNode: aiNode, in aiScene: aiScene, scnScene scene: inout AssetImporterScene) {
+    public func makeSkinner(forAssimpNode aiNode: aiNode, in aiScene: aiScene, scnScene scene: AssetImporterScene) {
         
         let nBones: Int = findNumBones(in: aiNode, in: aiScene)
         let aiNodeName = aiNode.mName
@@ -1780,7 +1780,7 @@ import assimp.cimport
         }
         for i in 0 ..< aiNode.mNumChildren {
             if let aiChildNode = aiNode.mChildren[Int(i)]?.pointee {
-                makeSkinner(forAssimpNode: aiChildNode, in: aiScene, scnScene: &scene)
+                makeSkinner(forAssimpNode: aiChildNode, in: aiScene, scnScene: scene)
             }
         }
     }
@@ -1808,7 +1808,7 @@ import assimp.cimport
      @param scene The scenekit scene.
      @param path The path to the scene file to load.
      */
-    public func createAnimations(from aiScene: aiScene, with scene: inout AssetImporterScene, atPath path: String) {
+    public func createAnimations(from aiScene: aiScene, with scene: AssetImporterScene, atPath path: String) {
         
         print("Number of animations in scene: \(aiScene.mNumAnimations)")
         for i in 0 ..< aiScene.mNumAnimations {

@@ -108,7 +108,7 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
                 // If multiple animations exist, load the first animation
                 if let numberOfAnimationKeys = animationKeys?.count {
                     if numberOfAnimationKeys > 0 {
-                        var settings = AssetImporterAnimSettings()
+                        let settings = AssetImporterAnimSettings()
                         settings.repeatCount = 5
                         
                         let key = animationKeys![0] as! String
@@ -121,8 +121,8 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
                         settings.animationEvents = animEvents
                         settings.delegate = self
                         
-                        if var animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
-                            sceneView.scene?.rootNode.addAnimationScene(&animation, forKey: key, with: &settings)
+                        if let animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
+                            sceneView.scene?.rootNode.addAnimationScene(animation, forKey: key, with: settings)
                         }
                         
                     }

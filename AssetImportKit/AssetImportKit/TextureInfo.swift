@@ -136,7 +136,7 @@ import AppKit
      */
     public init(meshIndex aiMeshIndex: Int,
                 textureType aiTextureType: aiTextureType,
-                in aiScene: inout aiScene,
+                in aiScene: aiScene,
                 atPath path: NSString,
                 imageCache: AssimpImageCache) {
         
@@ -162,7 +162,7 @@ import AppKit
             }
             checkTextureType(for: aiMaterial!,
                              with: aiTextureType,
-                             in: &aiScene, atPath: path,
+                             in: aiScene, atPath: path,
                              imageCache: imageCache)
             
         }
@@ -182,7 +182,7 @@ import AppKit
      */
     public func checkTextureType(for aiMaterial: UnsafeMutablePointer<aiMaterial>,
                                  with aiTextureType: aiTextureType,
-                                 in aiScene: inout aiScene,
+                                 in aiScene: aiScene,
                                  atPath path: NSString,
                                  imageCache: AssimpImageCache) {
         
