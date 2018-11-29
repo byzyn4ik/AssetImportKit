@@ -860,7 +860,8 @@ public struct AssetImporter {
                               in aiScene: aiScene,
                               atPath path: String,
                               imageCache: AssimpImageCache) -> [SCNMaterial] {
-        var scnMaterials: [SCNMaterial] = []
+        var scnMaterials = Array(repeatElement(SCNMaterial(),
+                                               count: Int(aiNode.mNumMeshes)))
         for i in 0 ..< Int(aiNode.mNumMeshes) {
             let meshIndex = Int(aiNode.mMeshes[i])
             if let aiMeshPointer = aiScene.mMeshes[meshIndex] {
@@ -868,9 +869,9 @@ public struct AssetImporter {
                 let materialIndex = Int(aiMesh.mMaterialIndex)
                 if let aiMaterialPointer = aiScene.mMaterials[materialIndex] {
                     var assimpMaterial = aiMaterialPointer.pointee
-                    let material = SCNMaterial()
+                    let scnMaterial = scnMaterials[materialIndex]
                     print("Material name is \(assimpMaterial.name)")
-                    material.name = assimpMaterial.name
+                    scnMaterial.name = assimpMaterial.name
                     
                     let textureTypes = [(value: aiTextureType_DIFFUSE, description: "Diffuse"),
                                         (value: aiTextureType_SPECULAR, description: "Specular"),
@@ -890,12 +891,12 @@ public struct AssetImporter {
                                                       in: aiScene,
                                                       atPath: path as NSString,
                                                       imageCache: imageCache)
-                        makeMaterialProperty(for: material,
+                        makeMaterialProperty(for: scnMaterial,
                                              with: textureInfo)
                     }
                     print("Loading multiply color")
                     applyMultiplyProperty(for: &assimpMaterial,
-                                          with: material)
+                                          with: scnMaterial)
                     
                     print("Loading blend mode")
                     var blendMode: Int32 = 0
@@ -908,20 +909,20 @@ public struct AssetImporter {
                                               &max)
                     if blendMode == Int32(aiBlendMode_Default.rawValue) {
                         print("Using alpha blend mode")
-                        material.blendMode = .alpha
+                        scnMaterial.blendMode = .alpha
                     }
                     else if blendMode == Int32(aiBlendMode_Additive.rawValue) {
                         print("Using add blend mode")
-                        material.blendMode = .add
+                        scnMaterial.blendMode = .add
                     }
                     
                     print("Loading cull/double sided mode")
                     var cullModeRawValue: Int32 = 0
                     aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
                     if let cullMode = SCNCullMode(rawValue: SCNCullMode.RawValue(cullModeRawValue)) {
-                         material.cullMode = cullMode
+                         scnMaterial.cullMode = cullMode
                     } else {
-                        material.cullMode = .back
+                        scnMaterial.cullMode = .back
                     }
                     
                     print("Loading shininess")
@@ -929,7 +930,7 @@ public struct AssetImporter {
                     aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
                     
                     print("shininess: \(shininess)")
-                    material.shininess = CGFloat(shininess)
+                    scnMaterial.shininess = CGFloat(shininess)
                     
                     print("Loading shading model")
                     /**
@@ -950,9 +951,7 @@ public struct AssetImporter {
                         lightingModel = .physicallyBased
                     }
                     
-                    material.lightingModel = lightingModel
-
-                    scnMaterials.append(material)
+                    scnMaterial.lightingModel = lightingModel
                     
                 }
             }
