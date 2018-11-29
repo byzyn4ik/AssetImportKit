@@ -694,118 +694,7 @@ public struct AssetImporter {
     
     // MARK: - Make scenekit materials
     
-    /**
-     @name Make scenekit materials
-     */
     
-    /**
-     Updates a scenekit material property with the texture file path or the color
-     if no texture is specifed.
-     
-     @param aiMaterial The assimp material.
-     @param textureInfo The metadata of the texture.
-     @param material The scenekit material.
-     @param path The path to the scene file to load.
-     */
-    public func makeMaterialProperty(for material: SCNMaterial,
-                                     with textureInfo: TextureInfo) {
-        
-         switch textureInfo.textureType {
-        case aiTextureType_DIFFUSE:
-            material.diffuse.contents = textureInfo.getMaterialPropertyContents()
-            material.diffuse.mappingChannel = 0
-            material.diffuse.wrapS = .repeat
-            material.diffuse.wrapT = .repeat
-            material.diffuse.intensity = 1
-            material.diffuse.mipFilter = .linear
-            material.diffuse.magnificationFilter = .linear
-            material.diffuse.minificationFilter = .linear
-        case aiTextureType_SPECULAR:
-            material.specular.contents = textureInfo.getMaterialPropertyContents()
-            material.specular.mappingChannel = 0
-            material.specular.wrapS = .repeat
-            material.specular.wrapT = .repeat
-            material.specular.intensity = 1
-            material.specular.mipFilter = .linear
-            material.specular.magnificationFilter = .linear
-            material.specular.minificationFilter = .linear
-        case aiTextureType_AMBIENT:
-            material.ambient.contents = textureInfo.getMaterialPropertyContents()
-            material.ambient.mappingChannel = 0
-            material.ambient.wrapS = .repeat
-            material.ambient.wrapT = .repeat
-            material.ambient.intensity = 1
-            material.ambient.mipFilter = .linear
-            material.ambient.magnificationFilter = .linear
-            material.ambient.minificationFilter = .linear
-        case aiTextureType_REFLECTION:
-            material.reflective.contents = textureInfo.getMaterialPropertyContents()
-            material.reflective.mappingChannel = 0
-            material.reflective.wrapS = .repeat
-            material.reflective.wrapT = .repeat
-            material.reflective.intensity = 1
-            material.reflective.mipFilter = .linear
-            material.reflective.magnificationFilter = .linear
-            material.reflective.minificationFilter = .linear
-        case aiTextureType_EMISSIVE:
-            material.emission.contents = textureInfo.getMaterialPropertyContents()
-            material.emission.mappingChannel = 0
-            material.emission.wrapS = .repeat
-            material.emission.wrapT = .repeat
-            material.emission.intensity = 1
-            material.emission.mipFilter = .linear
-            material.emission.magnificationFilter = .linear
-            material.emission.minificationFilter = .linear
-        case aiTextureType_OPACITY:
-            material.transparent.contents = textureInfo.getMaterialPropertyContents()
-            material.transparent.mappingChannel = 0
-            material.transparent.wrapS = .repeat
-            material.transparent.wrapT = .repeat
-            material.transparent.intensity = 1
-            material.transparent.mipFilter = .linear
-            material.transparent.magnificationFilter = .linear
-            material.transparent.minificationFilter = .linear
-        case aiTextureType_NORMALS:
-            material.normal.contents = textureInfo.getMaterialPropertyContents()
-            material.normal.mappingChannel = 0
-            material.normal.wrapS = .repeat
-            material.normal.wrapT = .repeat
-            material.normal.intensity = 1
-            material.normal.mipFilter = .linear
-            material.normal.magnificationFilter = .linear
-            material.normal.minificationFilter = .linear
-        case aiTextureType_HEIGHT:
-            material.normal.contents = textureInfo.getMaterialPropertyContents()
-            material.normal.mappingChannel = 0
-            material.normal.wrapS = .repeat
-            material.normal.wrapT = .repeat
-            material.normal.intensity = 1
-            material.normal.mipFilter = .linear
-            material.normal.magnificationFilter = .linear
-            material.normal.minificationFilter = .linear
-        case aiTextureType_DISPLACEMENT:
-            material.normal.contents = textureInfo.getMaterialPropertyContents()
-            material.normal.mappingChannel = 0
-            material.normal.wrapS = .repeat
-            material.normal.wrapT = .repeat
-            material.normal.intensity = 1
-            material.normal.mipFilter = .linear
-            material.normal.magnificationFilter = .linear
-            material.normal.minificationFilter = .linear
-        case aiTextureType_LIGHTMAP:
-            material.ambientOcclusion.contents = textureInfo.getMaterialPropertyContents()
-            material.ambientOcclusion.mappingChannel = 0
-            material.ambientOcclusion.wrapS = .repeat
-            material.ambientOcclusion.wrapT = .repeat
-            material.ambientOcclusion.intensity = 1
-            material.ambientOcclusion.mipFilter = .linear
-            material.ambientOcclusion.magnificationFilter = .linear
-            material.ambientOcclusion.minificationFilter = .linear
-        default:
-            break
-        }
-        
-    }
     
     /**
      Updates a scenekit material's multiply property
@@ -860,51 +749,27 @@ public struct AssetImporter {
                               in aiScene: aiScene,
                               atPath path: String,
                               imageCache: AssimpImageCache) -> [SCNMaterial] {
-        var scnMaterials = Array(repeatElement(SCNMaterial(),
-                                               count: Int(aiNode.mNumMeshes)))
-        let submeshes = Array(UnsafeBufferPointer(start: aiScene.mMeshes,
-                                                  count: Int(aiNode.mNumMeshes))).map { $0!.pointee }
-        let materials = Array(UnsafeBufferPointer(start: aiScene.mMaterials,
-                                                  count: Int(aiScene.mNumMaterials))).map { $0!.pointee }
+        var scnMaterials: [SCNMaterial] = []
         
-        for i in 0 ..< Int(aiNode.mNumMeshes) {
-            let meshIndex = Int(aiNode.mMeshes[i])
-            let aiMesh = submeshes[meshIndex]
-            let materialIndex = Int(aiMesh.mMaterialIndex)
-            var assimpMaterial = materials[materialIndex]
-            let scnMaterial = scnMaterials[materialIndex]
-            print("Material name is \(assimpMaterial.name)")
-            scnMaterial.name = assimpMaterial.name
+        let nodeAIMaterials = aiNode.getMaterials(from: aiScene)
+        for var aiMaterial in nodeAIMaterials {
+            let scnMaterial = SCNMaterial()
+            print("Material name is \(aiMaterial.name)")
+            scnMaterial.name = aiMaterial.name
             
-            let textureTypes = [(value: aiTextureType_DIFFUSE, description: "Diffuse"),
-                                (value: aiTextureType_SPECULAR, description: "Specular"),
-                                (value: aiTextureType_AMBIENT, description: "Ambient"),
-                                (value: aiTextureType_EMISSIVE, description: "Emissive"),
-                                (value: aiTextureType_REFLECTION, description: "Reflection"),
-                                (value: aiTextureType_OPACITY, description: "Opacity"),
-                                (value: aiTextureType_NORMALS, description: "Normals"),
-                                (value: aiTextureType_HEIGHT, description: "Height"),
-                                (value: aiTextureType_DISPLACEMENT, description: "Displacement"),
-                                (value: aiTextureType_SHININESS, description: "Shininess")]
+            scnMaterial.loadContents(from: &aiMaterial,
+                                     aiScene: aiScene,
+                                     path: path,
+                                     imageCache: imageCache)
             
-            for textureType in textureTypes {
-                print("Loading texture type : \(textureType.description)")
-                let textureInfo = TextureInfo(meshIndex: meshIndex,
-                                              textureType: textureType.value,
-                                              in: aiScene,
-                                              atPath: path as NSString,
-                                              imageCache: imageCache)
-                makeMaterialProperty(for: scnMaterial,
-                                     with: textureInfo)
-            }
             print("Loading multiply color")
-            applyMultiplyProperty(for: &assimpMaterial,
+            applyMultiplyProperty(for: &aiMaterial,
                                   with: scnMaterial)
             
             print("Loading blend mode")
             var blendMode: Int32 = 0
             var max: UInt32 = 0
-            aiGetMaterialIntegerArray(&assimpMaterial,
+            aiGetMaterialIntegerArray(&aiMaterial,
                                       AI_MATKEY_BLEND_FUNC.pKey,
                                       AI_MATKEY_BLEND_FUNC.type,
                                       AI_MATKEY_BLEND_FUNC.index,
@@ -921,8 +786,13 @@ public struct AssetImporter {
             
             print("Loading cull/double sided mode")
             var cullModeRawValue: Int32 = 0
-            aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
-            if let cullMode = SCNCullMode(rawValue: SCNCullMode.RawValue(cullModeRawValue)) {
+            aiGetMaterialIntegerArray(&aiMaterial,
+                                      AI_MATKEY_TWOSIDED.pKey,
+                                      AI_MATKEY_TWOSIDED.type,
+                                      AI_MATKEY_TWOSIDED.index,
+                                      &cullModeRawValue,
+                                      &max)
+            if let cullMode = SCNCullMode(rawValue: Int(cullModeRawValue)) {
                 scnMaterial.cullMode = cullMode
             } else {
                 scnMaterial.cullMode = .back
@@ -930,7 +800,12 @@ public struct AssetImporter {
             
             print("Loading shininess")
             var shininess: Int32 = 0
-            aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
+            aiGetMaterialIntegerArray(&aiMaterial,
+                                      AI_MATKEY_BLEND_FUNC.pKey,
+                                      AI_MATKEY_BLEND_FUNC.type,
+                                      AI_MATKEY_BLEND_FUNC.index,
+                                      &shininess,
+                                      &max)
             
             print("shininess: \(shininess)")
             scnMaterial.shininess = CGFloat(shininess)
@@ -943,7 +818,12 @@ public struct AssetImporter {
              USE AI_MATKEY_SHADING_MODEL to get the shading mode.
              */
             var lightingModelRawValue: Int32 = 0
-            aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_SHADING_MODEL.pKey, AI_MATKEY_SHADING_MODEL.type, AI_MATKEY_SHADING_MODEL.index, &lightingModelRawValue, &max)
+            aiGetMaterialIntegerArray(&aiMaterial,
+                                      AI_MATKEY_SHADING_MODEL.pKey,
+                                      AI_MATKEY_SHADING_MODEL.type,
+                                      AI_MATKEY_SHADING_MODEL.index,
+                                      &lightingModelRawValue,
+                                      &max)
             
             var lightingModel: SCNMaterial.LightingModel
             if lightingModelRawValue == 4 {
@@ -955,7 +835,17 @@ public struct AssetImporter {
             }
             
             scnMaterial.lightingModel = lightingModel
+            
+            scnMaterials.append(scnMaterial)
         }
+        
+        
+//        for i in 0 ..< nodeMeshesCount {
+//            let meshIndex = Int(aiNode.mMeshes[i])
+//            let aiMesh = sceneMeshes[meshIndex]
+//            var assimpMaterial = aiMesh.getMaterial(from: aiScene)
+//
+//        }
         
         return scnMaterials
     }

@@ -33,7 +33,7 @@ public struct TextureInfo {
     /**
      The material name which is the owner of this texture.
      */
-    public var materialName: NSString?
+    public var materialName: String = ""
     
     // MARK: - Texture color and resources
     
@@ -132,7 +132,7 @@ public struct TextureInfo {
      @param path The path to the scene file to load.
      @return A new texture info.
      */
-    public init(meshIndex aiMeshIndex: Int,
+    public init(aiMaterial: UnsafeMutablePointer<aiMaterial>,
                 textureType aiTextureType: aiTextureType,
                 in aiScene: aiScene,
                 atPath path: NSString,
@@ -144,24 +144,14 @@ public struct TextureInfo {
         self.colorSpace = nil
         self.color = nil
         
-        if let aiMeshPointer = aiScene.mMeshes[aiMeshIndex] {
-            
-            let aiMesh = aiMeshPointer.pointee
-            let aiMaterial = aiScene.mMaterials[Int(aiMesh.mMaterialIndex)]
-            self.textureType = aiTextureType
-            var name = aiString()
-            aiGetMaterialString(aiMaterial, AI_MATKEY_NAME.pKey, AI_MATKEY_NAME.type, AI_MATKEY_NAME.index, &name)
-            let nameString = name.stringValue()
-            self.materialName = nameString as NSString
-            if let materialName = self.materialName {
-                print(" Material name is \(materialName)")
-            }
-            checkTextureType(for: aiMaterial!,
-                             with: aiTextureType,
-                             in: aiScene, atPath: path,
-                             imageCache: imageCache)
-            
-        }
+        self.textureType = aiTextureType
+        self.materialName = aiMaterial.pointee.name
+        
+        checkTextureType(for: aiMaterial,
+                         with: aiTextureType,
+                         in: aiScene,
+                         atPath: path,
+                         imageCache: imageCache)
     }
     
     
@@ -233,7 +223,8 @@ public struct TextureInfo {
                         if let cachedImage = imageCache.cachedFileAtPath(path: texFilePath as String) {
                             self.image = cachedImage
                         } else {
-                            self.generateCGImageForEmbeddedTexture(at: embeddedTextureIndex, in: aiScene)
+                            self.generateCGImageForEmbeddedTexture(at: embeddedTextureIndex,
+                                                                   in: aiScene)
                             if let image = self.image {
                                 imageCache.storeImage(image: image, toPath: texFilePath as String)
                             }
