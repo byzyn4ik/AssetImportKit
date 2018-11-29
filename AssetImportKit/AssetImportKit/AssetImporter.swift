@@ -605,7 +605,11 @@ public struct AssetImporter {
      @param nFaces The number of faces in the geometry of the mesh.
      @return A new geometry element object.
      */
-    public func makeIndicesGeometryElement(forMeshIndex aiMeshIndex: Int, in aiNode: aiNode, in aiScene: aiScene, withIndexOffset indexOffset: Int16, nFaces: Int) -> SCNGeometryElement? {
+    public func makeIndicesGeometryElement(forMeshIndex aiMeshIndex: Int,
+                                           in aiNode: aiNode,
+                                           in aiScene: aiScene,
+                                           withIndexOffset indexOffset: Int16,
+                                           nFaces: Int) -> SCNGeometryElement? {
         
         var indicesCounter: Int = 0
         let nIndices = findNumIndices(inMesh: aiMeshIndex, in: aiScene)
@@ -638,9 +642,13 @@ public struct AssetImporter {
         }
         
         let dataLength = nIndices * MemoryLayout<CShort>.size
-        let indicesData = NSData(bytes: scnIndices, length: dataLength) as Data
+        let indicesData = NSData(bytes: scnIndices,
+                                 length: dataLength) as Data
         let bytesPerIndex = MemoryLayout<CShort>.size
-        let indices = SCNGeometryElement(data: indicesData, primitiveType: .triangles, primitiveCount: nFaces, bytesPerIndex: bytesPerIndex)
+        let indices = SCNGeometryElement(data: indicesData,
+                                         primitiveType: .triangles,
+                                         primitiveCount: nFaces,
+                                         bytesPerIndex: bytesPerIndex)
         
         scnIndices.deallocate()
         
@@ -655,7 +663,8 @@ public struct AssetImporter {
      @param aiScene The assimp scene.
      @return An array of geometry elements.
      */
-    public func makeGeometryElementsForNode(_ aiNode: aiNode, in aiScene: aiScene) -> [SCNGeometryElement] {
+    public func makeGeometryElementsForNode(_ aiNode: aiNode,
+                                            in aiScene: aiScene) -> [SCNGeometryElement] {
         
         var scnGeometryElements: [SCNGeometryElement] = []
         var indexOffset: Int = 0
@@ -667,7 +676,11 @@ public struct AssetImporter {
                 let aiMesh = aiMeshPointer.pointee
                 let indexOffsetInt16Var = NSNumber(value: indexOffset).int16Value
                 let nFacesIntVar = NSNumber(value: aiMesh.mNumFaces).intValue
-                let indices = makeIndicesGeometryElement(forMeshIndex: Int(aiMeshIndex), in: aiNode, in: aiScene, withIndexOffset: indexOffsetInt16Var, nFaces: nFacesIntVar)
+                let indices = makeIndicesGeometryElement(forMeshIndex: Int(aiMeshIndex),
+                                                         in: aiNode,
+                                                         in: aiScene,
+                                                         withIndexOffset: indexOffsetInt16Var,
+                                                         nFaces: nFacesIntVar)
                 if indices != nil {
                     scnGeometryElements.append(indices ?? SCNGeometryElement())
                 }
@@ -800,7 +813,8 @@ public struct AssetImporter {
      @param aiMaterial The assimp material
      @param material The scenekit material.
      */
-    public func applyMultiplyProperty(for aiMaterial: UnsafePointer<aiMaterial>, with material: SCNMaterial) {
+    public func applyMultiplyProperty(for aiMaterial: UnsafePointer<aiMaterial>,
+                                      with material: SCNMaterial) {
         
         var color = aiColor4D()
         color.r = 0.0
@@ -846,23 +860,17 @@ public struct AssetImporter {
                               in aiScene: aiScene,
                               atPath path: String,
                               imageCache: AssimpImageCache) -> [SCNMaterial] {
-        
         var scnMaterials: [SCNMaterial] = []
-        for i in 0 ..< aiNode.mNumMeshes {
-            
-            let aiMeshIndex = aiNode.mMeshes[Int(i)]
-            if let aiMeshPointer = aiScene.mMeshes[Int(aiMeshIndex)] {
-                
+        for i in 0 ..< Int(aiNode.mNumMeshes) {
+            let meshIndex = Int(aiNode.mMeshes[i])
+            if let aiMeshPointer = aiScene.mMeshes[meshIndex] {
                 let aiMesh = aiMeshPointer.pointee
-                if let aiMaterialPointer = aiScene.mMaterials[Int(aiMesh.mMaterialIndex)] {
-                    
-                    var aiMaterial = aiMaterialPointer
+                let materialIndex = Int(aiMesh.mMaterialIndex)
+                if let aiMaterialPointer = aiScene.mMaterials[materialIndex] {
+                    var assimpMaterial = aiMaterialPointer.pointee
                     let material = SCNMaterial()
-                    var nameTempVar = aiString()
-                    aiGetMaterialString(aiMaterial, AI_MATKEY_NAME.pKey, AI_MATKEY_NAME.type, AI_MATKEY_NAME.type, &nameTempVar)
-                    let materialName = nameTempVar.stringValue()
-                    print("Material name is \(materialName)")
-                    material.name = materialName
+                    print("Material name is \(assimpMaterial.name)")
+                    material.name = assimpMaterial.name
                     
                     let textureTypes = [(value: aiTextureType_DIFFUSE, description: "Diffuse"),
                                         (value: aiTextureType_SPECULAR, description: "Specular"),
@@ -877,7 +885,7 @@ public struct AssetImporter {
                     
                     for textureType in textureTypes {
                         print("Loading texture type : \(textureType.description)")
-                        let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
+                        let textureInfo = TextureInfo(meshIndex: meshIndex,
                                                       textureType: textureType.value,
                                                       in: aiScene,
                                                       atPath: path as NSString,
@@ -886,12 +894,13 @@ public struct AssetImporter {
                                              with: textureInfo)
                     }
                     print("Loading multiply color")
-                    applyMultiplyProperty(for: aiMaterial, with: material)
+                    applyMultiplyProperty(for: &assimpMaterial,
+                                          with: material)
                     
                     print("Loading blend mode")
                     var blendMode: Int32 = 0
                     var max: UInt32 = 0
-                    aiGetMaterialIntegerArray(aiMaterial,
+                    aiGetMaterialIntegerArray(&assimpMaterial,
                                               AI_MATKEY_BLEND_FUNC.pKey,
                                               AI_MATKEY_BLEND_FUNC.type,
                                               AI_MATKEY_BLEND_FUNC.index,
@@ -908,7 +917,7 @@ public struct AssetImporter {
                     
                     print("Loading cull/double sided mode")
                     var cullModeRawValue: Int32 = 0
-                    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
+                    aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_TWOSIDED.pKey, AI_MATKEY_TWOSIDED.type, AI_MATKEY_TWOSIDED.index, &cullModeRawValue, &max)
                     if let cullMode = SCNCullMode(rawValue: SCNCullMode.RawValue(cullModeRawValue)) {
                          material.cullMode = cullMode
                     } else {
@@ -917,7 +926,7 @@ public struct AssetImporter {
                     
                     print("Loading shininess")
                     var shininess: Int32 = 0
-                    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
+                    aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_BLEND_FUNC.pKey, AI_MATKEY_BLEND_FUNC.type, AI_MATKEY_BLEND_FUNC.index, &shininess, &max)
                     
                     print("shininess: \(shininess)")
                     material.shininess = CGFloat(shininess)
@@ -930,7 +939,7 @@ public struct AssetImporter {
                      USE AI_MATKEY_SHADING_MODEL to get the shading mode.
                      */
                     var lightingModelRawValue: Int32 = 0
-                    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_SHADING_MODEL.pKey, AI_MATKEY_SHADING_MODEL.type, AI_MATKEY_SHADING_MODEL.index, &lightingModelRawValue, &max)
+                    aiGetMaterialIntegerArray(&assimpMaterial, AI_MATKEY_SHADING_MODEL.pKey, AI_MATKEY_SHADING_MODEL.type, AI_MATKEY_SHADING_MODEL.index, &lightingModelRawValue, &max)
                     
                     var lightingModel: SCNMaterial.LightingModel
                     if lightingModelRawValue == 4 {
