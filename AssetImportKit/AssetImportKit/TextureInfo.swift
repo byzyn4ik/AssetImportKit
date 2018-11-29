@@ -134,7 +134,11 @@ import AppKit
      @param path The path to the scene file to load.
      @return A new texture info.
      */
-    public init(meshIndex aiMeshIndex: Int, textureType aiTextureType: aiTextureType, in aiScene: inout aiScene, atPath path: NSString) {
+    public init(meshIndex aiMeshIndex: Int,
+                textureType aiTextureType: aiTextureType,
+                in aiScene: inout aiScene,
+                atPath path: NSString,
+                imageCache: AssimpImageCache) {
         
         super.init()
         
@@ -156,7 +160,10 @@ import AppKit
             if let materialName = self.materialName {
                 print(" Material name is \(materialName)")
             }
-            checkTextureType(for: aiMaterial!, with: aiTextureType, in: &aiScene, atPath: path)
+            checkTextureType(for: aiMaterial!,
+                             with: aiTextureType,
+                             in: &aiScene, atPath: path,
+                             imageCache: imageCache)
             
         }
     }
@@ -173,7 +180,11 @@ import AppKit
      @param aiScene The assimp scene.
      @param path The path to the scene file to load.
      */
-    public func checkTextureType(for aiMaterial: UnsafeMutablePointer<aiMaterial>, with aiTextureType: aiTextureType, in aiScene: inout aiScene, atPath path: NSString) {
+    public func checkTextureType(for aiMaterial: UnsafeMutablePointer<aiMaterial>,
+                                 with aiTextureType: aiTextureType,
+                                 in aiScene: inout aiScene,
+                                 atPath path: NSString,
+                                 imageCache: AssimpImageCache) {
         
         let nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType)
         
@@ -206,17 +217,31 @@ import AppKit
                     self.applyColor = true
                     self.extractColor(for: aiMaterial, with: aiTextureType)
                     
-                } else if (texFileName.hasPrefix("*")) && aiScene.mNumTextures > 0 {
+                } else if texFileName.count > 0  && aiScene.mNumTextures > 0 {
+                
+                self.applyEmbeddedTexture = true
                     
-                    if let embeddedTextureIndex = Int((texFilePath.substring(from: 1))) {
-                        
-                        self.applyEmbeddedTexture = true
-                        self.embeddedTextureIndex = embeddedTextureIndex
+                    if (texFileName.hasPrefix("*")) {
+                        if let embeddedTextureIndex = Int((texFilePath.substring(from: 1))) {
+                            self.embeddedTextureIndex = embeddedTextureIndex
+                        }
+                    }
+                    if let embeddedTextureIndex = self.embeddedTextureIndex {
+                        if embeddedTextureIndex >= Int(aiScene.mNumTextures) {
+                            print("ERROR: Embedded texture index: \(embeddedTextureIndex) is out of bounds (0..\((aiScene.mNumTextures - 1))")
+                            self.embeddedTextureIndex = Int(aiScene.mNumTextures) - 1;
+                        }
                         
                         print("Embedded texture index: \(embeddedTextureIndex)")
                         
-                        self.generateCGImageForEmbeddedTexture(at: embeddedTextureIndex, in: aiScene)
-                        
+                        if let cachedImage = imageCache.cachedFileAtPath(path: texFilePath as String) {
+                            self.image = cachedImage
+                        } else {
+                            self.generateCGImageForEmbeddedTexture(at: embeddedTextureIndex, in: aiScene)
+                            if let image = self.image {
+                                imageCache.storeImage(image: image, toPath: texFilePath as String)
+                            }
+                        }
                     }
                 } else {
                     
@@ -230,7 +255,8 @@ import AppKit
                         
                         print("tex path is \(externalTexturePath)")
                         
-                        self.generateCGImageForExternalTexture(atPath: externalTexturePath)
+                        self.generateCGImageForExternalTexture(atPath: externalTexturePath,
+                                                               imageCache: imageCache)
                     }
                 }
                 
@@ -263,13 +289,13 @@ import AppKit
             let format = tupleOfInt8sToString(aiTexture.achFormatHint)
             if format == "png" {
                 
-                print(" Created png embedded texture")
+                print("Created png embedded texture")
                 
                 self.image = CGImage.init(pngDataProviderSource: self.imageDataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             }
             if format == "jpg" {
                 
-                print(" Created jpg embedded texture")
+                print("Created jpg embedded texture")
                 
                 self.image = CGImage.init(jpegDataProviderSource: self.imageDataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             }
@@ -284,22 +310,36 @@ import AppKit
      
      @param path The path to the scene file to load.
      */
-    public func generateCGImageForExternalTexture(atPath path: NSString) {
-        
-        print(" Generating external texture ")
-        
-        let imageURL = NSURL.fileURL(withPath: path as String)
-        self.imageSource = CGImageSourceCreateWithURL(imageURL as CFURL, nil)
-        if self.imageSource != nil {
-            self.image = CGImageSourceCreateImageAtIndex(self.imageSource!, 0, nil)
+    public func generateCGImageForExternalTexture(atPath path: NSString,
+                                                  imageCache: AssimpImageCache) {
+        if let cachedImage = imageCache.cachedFileAtPath(path: (path as String)) {
+            print("Already generated this texture, using from cache")
+            self.image = cachedImage
+        } else {
+            print("Generating external texture")
+            let imageURL = NSURL.fileURL(withPath: path as String)
+            if let imageSource = CGImageSourceCreateWithURL(imageURL as CFURL,
+                                                            nil) {
+                self.imageSource = imageSource
+                self.image = CGImageSourceCreateImageAtIndex(imageSource,
+                                                             0,
+                                                             nil)
+            } else {
+                print("ERROR: Unable to find \(imageURL.lastPathComponent) at \(imageURL.deletingLastPathComponent())")
+            }
         }
         
+        if let image = self.image {
+            imageCache.storeImage(image: image,
+                                  toPath: (path as String))
+        }
     }
     
     
     // MARK: - Extract color
     
-    public func extractColor(for aiMaterial: UnsafeMutablePointer<aiMaterial>, with aiTextureType: aiTextureType) {
+    public func extractColor(for aiMaterial: UnsafeMutablePointer<aiMaterial>,
+                             with aiTextureType: aiTextureType) {
         
         print("Extracting color")
         

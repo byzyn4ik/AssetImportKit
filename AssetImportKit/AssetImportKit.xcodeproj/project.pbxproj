@@ -33,6 +33,8 @@
 		188F213221AEDEC900C5A661 /* libassimp-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188F213021AEDEC900C5A661 /* libassimp-macOS.a */; };
 		188F213521AEDF0100C5A661 /* libIrrXML-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188F213321AEDF0000C5A661 /* libIrrXML-iOS.a */; };
 		188F213621AEDF0100C5A661 /* libassimp-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188F213421AEDF0100C5A661 /* libassimp-iOS.a */; };
+		18C8459121AF38CB009649CD /* AssimpImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459021AF38CB009649CD /* AssimpImageCache.swift */; };
+		18C8459221AF38CB009649CD /* AssimpImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459021AF38CB009649CD /* AssimpImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,7 @@
 		188F213021AEDEC900C5A661 /* libassimp-macOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-macOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/macOS/libassimp-macOS.a"; sourceTree = "<group>"; };
 		188F213321AEDF0000C5A661 /* libIrrXML-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-iOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libIrrXML-iOS.a"; sourceTree = "<group>"; };
 		188F213421AEDF0100C5A661 /* libassimp-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-iOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libassimp-iOS.a"; sourceTree = "<group>"; };
+		18C8459021AF38CB009649CD /* AssimpImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssimpImageCache.swift; sourceTree = "<group>"; };
 		18E6978E21ADD01C00A6AC59 /* libzlibstatic-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlibstatic-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libzlibstatic-fat.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +117,7 @@
 			children = (
 				1829E77B202FEFEC008B9DE7 /* AssetImportKit.h */,
 				1829E807202FF0F5008B9DE7 /* AssetImporter.swift */,
+				18C8459021AF38CB009649CD /* AssimpImageCache.swift */,
 				1829E809202FF0F5008B9DE7 /* AssetImporterAnimation.swift */,
 				1829E806202FF0F5008B9DE7 /* AssetImporterAnimSettings.swift */,
 				1829E80B202FF0F6008B9DE7 /* AssetImporterScene.swift */,
@@ -279,6 +283,7 @@
 				1829E812202FF0F6008B9DE7 /* AssetImporterAnimation.swift in Sources */,
 				1829E813202FF0F6008B9DE7 /* Utilities.swift in Sources */,
 				1829E814202FF0F6008B9DE7 /* AssetImporterScene.swift in Sources */,
+				18C8459121AF38CB009649CD /* AssimpImageCache.swift in Sources */,
 				1829E804202FF069008B9DE7 /* Material.swift in Sources */,
 				1829E810202FF0F6008B9DE7 /* AssetImporter.swift in Sources */,
 				1829E816202FF0F6008B9DE7 /* SCNNode + AssetImport.swift in Sources */,
@@ -296,6 +301,7 @@
 				1850D2BA2030C371006F5972 /* AssetImporterAnimation.swift in Sources */,
 				1850D2BB2030C371006F5972 /* Utilities.swift in Sources */,
 				1850D2BC2030C371006F5972 /* AssetImporterScene.swift in Sources */,
+				18C8459221AF38CB009649CD /* AssimpImageCache.swift in Sources */,
 				1850D2BF2030C371006F5972 /* Material.swift in Sources */,
 				1850D2C12030C371006F5972 /* AssetImporter.swift in Sources */,
 				1850D2C22030C371006F5972 /* SCNNode + AssetImport.swift in Sources */,

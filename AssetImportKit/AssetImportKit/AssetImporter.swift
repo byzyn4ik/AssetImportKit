@@ -151,7 +151,11 @@ import assimp.cimport
          Assign geometry, materials, lights and cameras to the node
          ---------------------------------------------------------------------
          */
-        let scnRootNode = makeSCNNode(fromAssimpNode: aiRootNode, in: &aiScene, atPath: path)
+        let imageCache = AssimpImageCache()
+        let scnRootNode = makeSCNNode(fromAssimpNode: aiRootNode,
+                                      in: &aiScene,
+                                      atPath: path,
+                                      imageCache: imageCache)
         scene.rootNode.addChildNode(scnRootNode)
         /*
          ---------------------------------------------------------------------
@@ -186,7 +190,10 @@ import assimp.cimport
      @param path The path to the scene file to load.
      @return A new scene node.
      */
-    public func makeSCNNode(fromAssimpNode aiNode: aiNode, in aiScene: inout aiScene, atPath path: String) -> SCNNode {
+    public func makeSCNNode(fromAssimpNode aiNode: aiNode,
+                            in aiScene: inout aiScene,
+                            atPath path: String,
+                            imageCache: AssimpImageCache) -> SCNNode {
         
         let node = SCNNode()
         /*
@@ -205,7 +212,11 @@ import assimp.cimport
         let nVertices = findNumVertices(in: aiNode, in: aiScene)
         print("nVertices : \(nVertices)")
         if nVertices > 0 {
-            if let nodeGeometry = makeSCNGeometry(fromAssimpNode: aiNode, in: &aiScene, withVertices: nVertices, atPath: path) {
+            if let nodeGeometry = makeSCNGeometry(fromAssimpNode: aiNode,
+                                                  in: &aiScene,
+                                                  withVertices: nVertices,
+                                                  atPath: path,
+                                                  imageCache: imageCache) {
                 node.geometry = nodeGeometry
             }
         }
@@ -250,7 +261,9 @@ import assimp.cimport
         for i in 0 ..< aiNode.mNumChildren {
             
             if let aiChildNode = aiNode.mChildren[Int(i)]?.pointee {
-                let childNode = makeSCNNode(fromAssimpNode: aiChildNode, in: &aiScene, atPath: path)
+                let childNode = makeSCNNode(fromAssimpNode: aiChildNode,
+                                            in: &aiScene, atPath: path,
+                                            imageCache: imageCache)
                 node.addChildNode(childNode)
             }
             
@@ -855,7 +868,10 @@ import assimp.cimport
      @param path The path to the scene file to load.
      @return An array of scenekit materials.
      */
-    public func makeMaterials(for aiNode: aiNode, in aiScene: inout aiScene, atPath path: String) -> [SCNMaterial] {
+    public func makeMaterials(for aiNode: aiNode,
+                              in aiScene: inout aiScene,
+                              atPath path: String,
+                              imageCache: AssimpImageCache) -> [SCNMaterial] {
         
         var scnMaterials: [SCNMaterial] = []
         for i in 0 ..< aiNode.mNumMeshes {
@@ -893,7 +909,11 @@ import assimp.cimport
                             print("Loading texture type : \(textureTypeName)")
                             print("Texture type: \(textureTypes[i])")
                             print("Texture type raw value: \(textureTypes[i].rawValue)")
-                            let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex), textureType: textureTypes[i], in: &aiScene, atPath: path as NSString)
+                            let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
+                                                          textureType: textureTypes[i],
+                                                          in: &aiScene,
+                                                          atPath: path as NSString,
+                                                          imageCache: imageCache)
                             self.makeMaterialProperty(for: &material, with: textureInfo)
                             textureInfo.releaseContents()
                             
@@ -970,7 +990,11 @@ import assimp.cimport
      @param path The path to the scene file to load.
      @return A new geometry.
      */
-    public func makeSCNGeometry(fromAssimpNode aiNode: aiNode, in aiScene: inout aiScene, withVertices nVertices: Int, atPath path: String) -> SCNGeometry? {
+    public func makeSCNGeometry(fromAssimpNode aiNode: aiNode,
+                                in aiScene: inout aiScene,
+                                withVertices nVertices: Int,
+                                atPath path: String,
+                                imageCache: AssimpImageCache) -> SCNGeometry? {
         
         // make SCNGeometry with sources, elements and materials
         let scnGeometrySources = makeGeometrySources(for: aiNode, in: aiScene, withVertices: nVertices)
@@ -991,10 +1015,14 @@ import assimp.cimport
                 }
             } else {
                 let scnGeometryElements = makeGeometryElementsForNode(aiNode, in: aiScene)
-                scnGeometry = SCNGeometry(sources: scnGeometrySources, elements: scnGeometryElements)
+                scnGeometry = SCNGeometry(sources: scnGeometrySources,
+                                          elements: scnGeometryElements)
             }
             
-            let scnMaterials = makeMaterials(for: aiNode, in: &aiScene, atPath: path)
+            let scnMaterials = makeMaterials(for: aiNode,
+                                             in: &aiScene,
+                                             atPath: path,
+                                             imageCache: imageCache)
             if scnMaterials.count > 0 {
                 scnGeometry.materials = scnMaterials
                 scnGeometry.firstMaterial = scnMaterials[0]
