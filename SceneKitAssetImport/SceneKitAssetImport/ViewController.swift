@@ -92,10 +92,9 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
             
         } else {
             
-            let assetImporter = AssetImporter()
-            if let assimpScene = assetImporter.importScene(filePath,
-                                                           postProcessSteps: [.defaultQuality]) {
-            
+            do {
+                let assimpScene = try SCNScene.assimpScene(filePath: filePath,
+                                                            postProcessSteps: [.defaultQuality])
                 if let modelScene = assimpScene.modelScene {
                     for childNode in modelScene.rootNode.childNodes {
                         self.modelContainerNode.addChildNode(childNode)
@@ -127,6 +126,8 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
                         
                     }
                 }
+            } catch {
+                print(error.localizedDescription)
             }
         }
         

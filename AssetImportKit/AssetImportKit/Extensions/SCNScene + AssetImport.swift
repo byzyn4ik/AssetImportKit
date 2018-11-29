@@ -8,6 +8,10 @@
 
 import SceneKit
 
+enum SceneLoadingErrors: Error {
+    case noFileExists
+}
+
 /**
  A scenekit SCNScene category to import scenes using the assimp library.
  */
@@ -63,30 +67,19 @@ public extension SCNScene {
      
      @param name The name of a scene file in the app bundle’s resources directory.
      @param postProcessFlags The flags for all possible post processing steps.
-     @return A new scene object, or nil if no scene could be loaded.
-     */
-    public class func assimpSceneNamed(_ name: String, postProcessSteps: PostProcessSteps) -> AssetImporterScene {
-        return assimpSceneNamed(name, postProcessSteps: postProcessSteps, error: nil)
-    }
-    
-    /**
-     Loads a scene from a file with the specified name in the app’s main bundle.
-     
-     @param name The name of a scene file in the app bundle’s resources directory.
-     @param postProcessFlags The flags for all possible post processing steps.
      @param error Scene loading error.
      @return A new scene object, or nil if no scene could be loaded.
      */
-    public class func assimpSceneNamed(_ name: String, postProcessSteps: PostProcessSteps, error: Error?) -> AssetImporterScene {
-        
-        let assimpImporter = AssetImporter()
-        if let file = Bundle.main.path(forResource: name, ofType: nil),
-            let scene = assimpImporter.importScene(file, postProcessSteps: postProcessSteps) {
+    public class func assimpScene(filePath: String,
+                                  postProcessSteps: PostProcessSteps) throws -> AssetImporterScene {
+        do {
+            var assimpImporter = AssetImporter()
+            let scene = try assimpImporter.importScene(filePath: filePath,
+                                                       postProcessSteps: postProcessSteps)
             return scene
-        } else {
-            return AssetImporterScene()
+        } catch {
+            throw error
         }
-        
     }
     
     /**
@@ -96,27 +89,14 @@ public extension SCNScene {
      @param postProcessFlags The flags for all possible post processing steps.
      @return A new scene object, or nil if no scene could be loaded.
      */
-    public class func assimpScene(with url: URL, postProcessSteps: PostProcessSteps) -> AssetImporterScene {
-        return assimpScene(with: url, postProcessSteps: postProcessSteps, error: nil)
-    }
-    
-    /**
-     Loads a scene from the specified NSString URL.
-     
-     @param url The NSString URL to the scene file to load.
-     @param postProcessFlags The flags for all possible post processing steps.
-     @param error Scene loading error.
-     @return A new scene object, or nil if no scene could be loaded.
-     */
-    public class func assimpScene(with url: URL, postProcessSteps: PostProcessSteps, error: Error?) -> AssetImporterScene {
-        
-        let assimpImporter = AssetImporter()
-        if let scene = assimpImporter.importScene(url.path, postProcessSteps: postProcessSteps) {
+    public class func assimpScene(with url: URL,
+                                  postProcessSteps: PostProcessSteps) throws -> AssetImporterScene {
+        do {
+            let scene = try assimpScene(with: url, postProcessSteps: postProcessSteps)
             return scene
-        } else {
-            return AssetImporterScene()
+        } catch {
+            throw error
         }
-        
     }
     
 }

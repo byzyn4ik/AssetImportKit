@@ -16,7 +16,7 @@ import assimp.cimport
  An importer that imports the files with formats supported by Assimp and
  converts the assimp scene graph into a scenekit scene graph.
  */
-@objc public class AssetImporter: NSObject {
+public struct AssetImporter {
     
     // MARK: - Bone data
     
@@ -54,21 +54,6 @@ import assimp.cimport
      */
     public var skeleton = SCNNode()
     
-    // MARK: - Creating an importer
-    
-    /**
-     @name Creating an importer
-     */
-    
-    /**
-     Creates an importer to import files supported by AssetImporterKit.
-     
-     @return A new importer.
-     */
-    public override init() {
-        super.init()
-    }
-    
     // MARK: - Loading a scene
     
     /**
@@ -80,47 +65,28 @@ import assimp.cimport
      
      @param filePath The path to the scene file to load.
      @param postProcessFlags The flags for all possible post processing steps.
-     @return A new scene object, or nil if no scene could be loaded.
-     */
-    public func importScene(_ filePath: String, postProcessSteps: PostProcessSteps) -> AssetImporterScene? {
-        return importScene(filePath, postProcessSteps: postProcessSteps, error: nil)
-    }
-    
-    /**
-     Loads a scene from the specified file path.
-     
-     @param filePath The path to the scene file to load.
-     @param postProcessFlags The flags for all possible post processing steps.
      @param error Scene import error.
      @return A new scene object, or nil if no scene could be loaded.
      */
-    public func importScene(_ filePath: String, postProcessSteps: PostProcessSteps, error: Error?) -> AssetImporterScene? {
+    public mutating func importScene(filePath: String,
+                                     postProcessSteps: PostProcessSteps) throws -> AssetImporterScene {
         
         // Start the import on the given file with some example postprocessing
         // Usually - if speed is not the most important aspect for you - you'll t
         // probably to request more postprocessing than we do in this example.
-        let pFile = filePath
-        
-        guard let aiScenePointer = aiImportFile(pFile , UInt32(postProcessSteps.rawValue)) else {
-            
+        guard let aiScenePointer = aiImportFile(filePath ,
+                                                UInt32(postProcessSteps.rawValue)) else {
             // The pointer has a renference to nil if the import failed.
             let errorString = tupleOfInt8sToString(aiGetErrorString().pointee)
             print(" Scene importing failed for filePath \(filePath)")
             print(" Scene importing failed with error \(String(describing: errorString))")
-            
-            // Return error
-            if error != nil {
-                _ = NSError(domain: "AssimpImporter", code: -1, userInfo: [NSLocalizedDescriptionKey : errorString])
-            }
-            
-            return nil
-            
+            throw NSError(domain: "AssimpImporter", code: -1,
+                          userInfo: [NSLocalizedDescriptionKey : errorString]) as Error
         }
-        
         // Access the aiScene instance referenced by aiScenePointer.
         var aiScene = aiScenePointer.pointee
         // Now we can access the file's contents.
-        let scene = self.makeSCNScene(fromAssimpScene: aiScene, atPath: pFile)
+        let scene = makeSCNScene(fromAssimpScene: aiScene, atPath: filePath)
         // We're done. Release all resources associated with this import.
         aiReleaseImport(&aiScene)
         // Retutrn result
@@ -140,7 +106,7 @@ import assimp.cimport
      @param path The path to the scene file to load.
      @return A new scene object.
      */
-    public func makeSCNScene(fromAssimpScene aiScene: aiScene, atPath path: String) -> AssetImporterScene {
+    public mutating func makeSCNScene(fromAssimpScene aiScene: aiScene, atPath path: String) -> AssetImporterScene {
         
         print("Make an SCNScene")
         
@@ -190,7 +156,7 @@ import assimp.cimport
      @param path The path to the scene file to load.
      @return A new scene node.
      */
-    public func makeSCNNode(fromAssimpNode aiNode: aiNode,
+    public mutating func makeSCNNode(fromAssimpNode aiNode: aiNode,
                             in aiScene: aiScene,
                             atPath path: String,
                             imageCache: AssimpImageCache) -> SCNNode {
@@ -927,13 +893,13 @@ import assimp.cimport
                             print("Loading texture type : \(textureTypeName)")
                             print("Texture type: \(textureTypes[i])")
                             print("Texture type raw value: \(textureTypes[i].rawValue)")
-                            var textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
+                            let textureInfo = TextureInfo(meshIndex: Int(aiMeshIndex),
                                                           textureType: textureTypes[i],
                                                           in: aiScene,
                                                           atPath: path as NSString,
                                                           imageCache: imageCache)
-                            self.makeMaterialProperty(for: material, with: textureInfo)
-                            textureInfo.releaseContents()
+                            makeMaterialProperty(for: material, with: textureInfo)
+//                            textureInfo.releaseContents()
                             
                         }
                     }
@@ -1743,7 +1709,7 @@ import assimp.cimport
      
      @param scene The scenekit scene.
      */
-    public func buildSkeletonDatabase(for scene: AssetImporterScene) {
+    public mutating func buildSkeletonDatabase(for scene: AssetImporterScene) {
         
         uniqueBoneNames = boneNames
         
