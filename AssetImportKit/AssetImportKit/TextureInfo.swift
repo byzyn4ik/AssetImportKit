@@ -13,10 +13,8 @@ import assimp.scene
 
 #if os(iOS) || os(watchOS) || os(tvOS)
 import UIKit
-public typealias Color = UIColor
 #elseif os(OSX)
 import AppKit
-public typealias Color = NSColor
 #endif
 
 public struct TextureInfo {

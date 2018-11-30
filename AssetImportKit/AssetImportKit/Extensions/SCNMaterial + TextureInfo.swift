@@ -11,10 +11,10 @@ import assimp.types
 
 extension SCNMaterial {
     
-    func loadContents(from aiMaterial: UnsafeMutablePointer<aiMaterial>,
-                               aiScene: aiScene,
-                               path: String,
-                               imageCache: AssimpImageCache) {
+    func loadContentsProperties(from aiMaterial: UnsafeMutablePointer<aiMaterial>,
+                                aiScene: aiScene,
+                                path: String,
+                                imageCache: AssimpImageCache) {
         let textureTypeTuple = [(value: aiTextureType_DIFFUSE,
                                  description: "Diffuse"),
                                 (value: aiTextureType_SPECULAR,

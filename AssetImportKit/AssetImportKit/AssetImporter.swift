@@ -725,11 +725,7 @@ public struct AssetImporter {
                                              CGFloat(color.a)]
                 if let color = CGColor(colorSpace: space,
                                        components: components) {
-                    #if os(iOS) || os(watchOS) || os(tvOS)
-                    material.multiply.contents = UIColor(cgColor: color)
-                    #elseif os(OSX)
-                    material.multiply.contents = NSColor(cgColor: color)
-                    #endif
+                    material.multiply.contents = Color(cgColor: color)
                 }
  
             }
@@ -750,102 +746,22 @@ public struct AssetImporter {
                               atPath path: String,
                               imageCache: AssimpImageCache) -> [SCNMaterial] {
         var scnMaterials: [SCNMaterial] = []
-        
         let nodeAIMaterials = aiNode.getMaterials(from: aiScene)
         for var aiMaterial in nodeAIMaterials {
-            let scnMaterial = SCNMaterial()
             print("Material name is \(aiMaterial.name)")
+            let scnMaterial = SCNMaterial()
             scnMaterial.name = aiMaterial.name
-            
-            scnMaterial.loadContents(from: &aiMaterial,
-                                     aiScene: aiScene,
-                                     path: path,
-                                     imageCache: imageCache)
-            
-            print("Loading multiply color")
-            applyMultiplyProperty(for: &aiMaterial,
-                                  with: scnMaterial)
-            
-            print("Loading blend mode")
-            var blendMode: Int32 = 0
-            var max: UInt32 = 0
-            aiGetMaterialIntegerArray(&aiMaterial,
-                                      AI_MATKEY_BLEND_FUNC.pKey,
-                                      AI_MATKEY_BLEND_FUNC.type,
-                                      AI_MATKEY_BLEND_FUNC.index,
-                                      &blendMode,
-                                      &max)
-            if blendMode == Int32(aiBlendMode_Default.rawValue) {
-                print("Using alpha blend mode")
-                scnMaterial.blendMode = .alpha
-            }
-            else if blendMode == Int32(aiBlendMode_Additive.rawValue) {
-                print("Using add blend mode")
-                scnMaterial.blendMode = .add
-            }
-            
-            print("Loading cull/double sided mode")
-            var cullModeRawValue: Int32 = 0
-            aiGetMaterialIntegerArray(&aiMaterial,
-                                      AI_MATKEY_TWOSIDED.pKey,
-                                      AI_MATKEY_TWOSIDED.type,
-                                      AI_MATKEY_TWOSIDED.index,
-                                      &cullModeRawValue,
-                                      &max)
-            if let cullMode = SCNCullMode(rawValue: Int(cullModeRawValue)) {
-                scnMaterial.cullMode = cullMode
-            } else {
-                scnMaterial.cullMode = .back
-            }
-            
-            print("Loading shininess")
-            var shininess: Int32 = 0
-            aiGetMaterialIntegerArray(&aiMaterial,
-                                      AI_MATKEY_BLEND_FUNC.pKey,
-                                      AI_MATKEY_BLEND_FUNC.type,
-                                      AI_MATKEY_BLEND_FUNC.index,
-                                      &shininess,
-                                      &max)
-            
-            print("shininess: \(shininess)")
-            scnMaterial.shininess = CGFloat(shininess)
-            
-            print("Loading shading model")
-            /**
-             FIXME: The shading mode works only on iOS for iPhone.
-             Does not work on iOS for iPad and OS X.
-             Hence has been defaulted to Blinn.
-             USE AI_MATKEY_SHADING_MODEL to get the shading mode.
-             */
-            var lightingModelRawValue: Int32 = 0
-            aiGetMaterialIntegerArray(&aiMaterial,
-                                      AI_MATKEY_SHADING_MODEL.pKey,
-                                      AI_MATKEY_SHADING_MODEL.type,
-                                      AI_MATKEY_SHADING_MODEL.index,
-                                      &lightingModelRawValue,
-                                      &max)
-            
-            var lightingModel: SCNMaterial.LightingModel
-            if lightingModelRawValue == 4 {
-                lightingModel = .blinn
-            } else if lightingModelRawValue == 3 {
-                lightingModel = .phong
-            } else {
-                lightingModel = .physicallyBased
-            }
-            
-            scnMaterial.lightingModel = lightingModel
-            
+            scnMaterial.loadContentsProperties(from: &aiMaterial,
+                                               aiScene: aiScene,
+                                               path: path,
+                                               imageCache: imageCache)
+            scnMaterial.loadMultiplyProperty(from: &aiMaterial)
+            scnMaterial.loadBlendModeProperty(from: &aiMaterial)
+            scnMaterial.loadCullModeProperty(from: &aiMaterial)
+            scnMaterial.loadShininessProperty(from: &aiMaterial)
+            scnMaterial.loadLightingModelProperty(from: &aiMaterial)
             scnMaterials.append(scnMaterial)
         }
-        
-        
-//        for i in 0 ..< nodeMeshesCount {
-//            let meshIndex = Int(aiNode.mMeshes[i])
-//            let aiMesh = sceneMeshes[meshIndex]
-//            var assimpMaterial = aiMesh.getMaterial(from: aiScene)
-//
-//        }
         
         return scnMaterials
     }
@@ -929,13 +845,7 @@ public struct AssetImporter {
             let space = CGColorSpaceCreateDeviceRGB()
             let components: [CGFloat] = [CGFloat(aiColor.r), CGFloat(aiColor.g), CGFloat(aiColor.b), 1.0]
             if let cgColor = CGColor(colorSpace: space, components: components) {
-                #if os(iOS) || os(watchOS) || os(tvOS)
                 light.color = cgColor
-                #elseif os(OSX)
-                if let nsColor = NSColor(cgColor: cgColor) {
-                    light.color = nsColor
-                }
-                #endif
             }
             
         }
@@ -961,13 +871,7 @@ public struct AssetImporter {
             let space = CGColorSpaceCreateDeviceRGB()
             let components: [CGFloat] = [CGFloat(aiColor.r), CGFloat(aiColor.g), CGFloat(aiColor.b), 1.0]
             if let cgColor = CGColor(colorSpace: space, components: components) {
-                #if os(iOS) || os(watchOS) || os(tvOS)
                 light.color = cgColor
-                #elseif os(OSX)
-                if let nsColor = NSColor(cgColor: cgColor) {
-                    light.color = nsColor
-                }
-                #endif
             }
             
         }
@@ -998,13 +902,7 @@ public struct AssetImporter {
             let space = CGColorSpaceCreateDeviceRGB()
             let components: [CGFloat] = [CGFloat(aiColor.r), CGFloat(aiColor.g), CGFloat(aiColor.b), 1.0]
             if let cgColor = CGColor(colorSpace: space, components: components) {
-                #if os(iOS) || os(watchOS) || os(tvOS)
                 light.color = cgColor
-                #elseif os(OSX)
-                if let nsColor = NSColor(cgColor: cgColor) {
-                    light.color = nsColor
-                }
-                #endif
             }
             
         }

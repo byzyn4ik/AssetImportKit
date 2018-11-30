@@ -37,6 +37,26 @@
 		18C8459221AF38CB009649CD /* AssimpImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459021AF38CB009649CD /* AssimpImageCache.swift */; };
 		18C8459421B044BA009649CD /* aiMaterial + Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459321B044BA009649CD /* aiMaterial + Name.swift */; };
 		18C8459521B044BA009649CD /* aiMaterial + Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459321B044BA009649CD /* aiMaterial + Name.swift */; };
+		18C8459D21B064EC009649CD /* aiNode + getMeshes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459C21B064EC009649CD /* aiNode + getMeshes.swift */; };
+		18C8459E21B064EC009649CD /* aiNode + getMeshes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459C21B064EC009649CD /* aiNode + getMeshes.swift */; };
+		18C845A021B0650F009649CD /* aiNode + getMaterials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459F21B0650F009649CD /* aiNode + getMaterials.swift */; };
+		18C845A121B0650F009649CD /* aiNode + getMaterials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C8459F21B0650F009649CD /* aiNode + getMaterials.swift */; };
+		18C845A321B0656D009649CD /* aiMesh + getMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845A221B0656D009649CD /* aiMesh + getMaterial.swift */; };
+		18C845A421B0656D009649CD /* aiMesh + getMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845A221B0656D009649CD /* aiMesh + getMaterial.swift */; };
+		18C845A621B06DFA009649CD /* SCNMaterial + TextureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845A521B06DFA009649CD /* SCNMaterial + TextureInfo.swift */; };
+		18C845A721B06DFA009649CD /* SCNMaterial + TextureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845A521B06DFA009649CD /* SCNMaterial + TextureInfo.swift */; };
+		18C845A921B11734009649CD /* SCNMaterial + Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845A821B11734009649CD /* SCNMaterial + Multiply.swift */; };
+		18C845AA21B11734009649CD /* SCNMaterial + Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845A821B11734009649CD /* SCNMaterial + Multiply.swift */; };
+		18C845AC21B117B1009649CD /* Color Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845AB21B117B1009649CD /* Color Typealias.swift */; };
+		18C845AD21B117B1009649CD /* Color Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845AB21B117B1009649CD /* Color Typealias.swift */; };
+		18C845B021B11B53009649CD /* SCNMaterial + BlendMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845AF21B11B53009649CD /* SCNMaterial + BlendMode.swift */; };
+		18C845B121B11B53009649CD /* SCNMaterial + BlendMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845AF21B11B53009649CD /* SCNMaterial + BlendMode.swift */; };
+		18C845B321B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845B221B11C64009649CD /* SCNMaterial + CullMode.swift */; };
+		18C845B421B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845B221B11C64009649CD /* SCNMaterial + CullMode.swift */; };
+		18C845B621B11FE4009649CD /* SCNMaterial + Shininess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845B521B11FE4009649CD /* SCNMaterial + Shininess.swift */; };
+		18C845B721B11FE4009649CD /* SCNMaterial + Shininess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845B521B11FE4009649CD /* SCNMaterial + Shininess.swift */; };
+		18C845B921B1205B009649CD /* SCNMaterial + LightningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845B821B1205B009649CD /* SCNMaterial + LightningModel.swift */; };
+		18C845BA21B1205B009649CD /* SCNMaterial + LightningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845B821B1205B009649CD /* SCNMaterial + LightningModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +92,16 @@
 		188F213421AEDF0100C5A661 /* libassimp-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-iOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libassimp-iOS.a"; sourceTree = "<group>"; };
 		18C8459021AF38CB009649CD /* AssimpImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssimpImageCache.swift; sourceTree = "<group>"; };
 		18C8459321B044BA009649CD /* aiMaterial + Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiMaterial + Name.swift"; sourceTree = "<group>"; };
+		18C8459C21B064EC009649CD /* aiNode + getMeshes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + getMeshes.swift"; sourceTree = "<group>"; };
+		18C8459F21B0650F009649CD /* aiNode + getMaterials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + getMaterials.swift"; sourceTree = "<group>"; };
+		18C845A221B0656D009649CD /* aiMesh + getMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiMesh + getMaterial.swift"; sourceTree = "<group>"; };
+		18C845A521B06DFA009649CD /* SCNMaterial + TextureInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial + TextureInfo.swift"; sourceTree = "<group>"; };
+		18C845A821B11734009649CD /* SCNMaterial + Multiply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial + Multiply.swift"; sourceTree = "<group>"; };
+		18C845AB21B117B1009649CD /* Color Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color Typealias.swift"; sourceTree = "<group>"; };
+		18C845AF21B11B53009649CD /* SCNMaterial + BlendMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial + BlendMode.swift"; sourceTree = "<group>"; };
+		18C845B221B11C64009649CD /* SCNMaterial + CullMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial + CullMode.swift"; sourceTree = "<group>"; };
+		18C845B521B11FE4009649CD /* SCNMaterial + Shininess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial + Shininess.swift"; sourceTree = "<group>"; };
+		18C845B821B1205B009649CD /* SCNMaterial + LightningModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial + LightningModel.swift"; sourceTree = "<group>"; };
 		18E6978E21ADD01C00A6AC59 /* libzlibstatic-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlibstatic-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libzlibstatic-fat.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +158,7 @@
 				188CDBDA21ADD7D600EC794D /* Postprocessing.swift.swift */,
 				1829E808202FF0F5008B9DE7 /* TextureInfo.swift */,
 				1829E80A202FF0F6008B9DE7 /* Utilities.swift */,
+				18C845AE21B1184B009649CD /* Typealiases */,
 				1829E80C202FF0F6008B9DE7 /* Extensions */,
 				1829E7C8202FF069008B9DE7 /* module.modulemap */,
 				1829E77C202FEFEC008B9DE7 /* AssetImportKit-iOS-Info.plist */,
@@ -142,6 +173,15 @@
 				1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */,
 				1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */,
 				18C8459321B044BA009649CD /* aiMaterial + Name.swift */,
+				18C845A221B0656D009649CD /* aiMesh + getMaterial.swift */,
+				18C8459C21B064EC009649CD /* aiNode + getMeshes.swift */,
+				18C8459F21B0650F009649CD /* aiNode + getMaterials.swift */,
+				18C845A521B06DFA009649CD /* SCNMaterial + TextureInfo.swift */,
+				18C845A821B11734009649CD /* SCNMaterial + Multiply.swift */,
+				18C845AF21B11B53009649CD /* SCNMaterial + BlendMode.swift */,
+				18C845B221B11C64009649CD /* SCNMaterial + CullMode.swift */,
+				18C845B521B11FE4009649CD /* SCNMaterial + Shininess.swift */,
+				18C845B821B1205B009649CD /* SCNMaterial + LightningModel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -166,6 +206,14 @@
 				1864F99D21ADB6E700D4EDC4 /* libassimp-fat.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18C845AE21B1184B009649CD /* Typealiases */ = {
+			isa = PBXGroup;
+			children = (
+				18C845AB21B117B1009649CD /* Color Typealias.swift */,
+			);
+			path = Typealiases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,11 +332,21 @@
 				1829E80F202FF0F6008B9DE7 /* AssetImporterAnimSettings.swift in Sources */,
 				188CDBDB21ADD7D600EC794D /* Postprocessing.swift.swift in Sources */,
 				18C8459421B044BA009649CD /* aiMaterial + Name.swift in Sources */,
+				18C845A021B0650F009649CD /* aiNode + getMaterials.swift in Sources */,
+				18C845A621B06DFA009649CD /* SCNMaterial + TextureInfo.swift in Sources */,
 				1829E815202FF0F6008B9DE7 /* SCNScene + AssetImport.swift in Sources */,
+				18C845A921B11734009649CD /* SCNMaterial + Multiply.swift in Sources */,
+				18C845A321B0656D009649CD /* aiMesh + getMaterial.swift in Sources */,
+				18C8459D21B064EC009649CD /* aiNode + getMeshes.swift in Sources */,
+				18C845B021B11B53009649CD /* SCNMaterial + BlendMode.swift in Sources */,
 				1829E812202FF0F6008B9DE7 /* AssetImporterAnimation.swift in Sources */,
+				18C845B921B1205B009649CD /* SCNMaterial + LightningModel.swift in Sources */,
+				18C845AC21B117B1009649CD /* Color Typealias.swift in Sources */,
 				1829E813202FF0F6008B9DE7 /* Utilities.swift in Sources */,
+				18C845B321B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */,
 				1829E814202FF0F6008B9DE7 /* AssetImporterScene.swift in Sources */,
 				18C8459121AF38CB009649CD /* AssimpImageCache.swift in Sources */,
+				18C845B621B11FE4009649CD /* SCNMaterial + Shininess.swift in Sources */,
 				1829E804202FF069008B9DE7 /* Material.swift in Sources */,
 				1829E810202FF0F6008B9DE7 /* AssetImporter.swift in Sources */,
 				1829E816202FF0F6008B9DE7 /* SCNNode + AssetImport.swift in Sources */,
@@ -303,11 +361,21 @@
 				1850D2B72030C371006F5972 /* AssetImporterAnimSettings.swift in Sources */,
 				188CDBDC21ADD7D600EC794D /* Postprocessing.swift.swift in Sources */,
 				18C8459521B044BA009649CD /* aiMaterial + Name.swift in Sources */,
+				18C845A121B0650F009649CD /* aiNode + getMaterials.swift in Sources */,
+				18C845A721B06DFA009649CD /* SCNMaterial + TextureInfo.swift in Sources */,
 				1850D2B92030C371006F5972 /* SCNScene + AssetImport.swift in Sources */,
+				18C845AA21B11734009649CD /* SCNMaterial + Multiply.swift in Sources */,
+				18C845A421B0656D009649CD /* aiMesh + getMaterial.swift in Sources */,
+				18C8459E21B064EC009649CD /* aiNode + getMeshes.swift in Sources */,
+				18C845B121B11B53009649CD /* SCNMaterial + BlendMode.swift in Sources */,
 				1850D2BA2030C371006F5972 /* AssetImporterAnimation.swift in Sources */,
+				18C845BA21B1205B009649CD /* SCNMaterial + LightningModel.swift in Sources */,
+				18C845AD21B117B1009649CD /* Color Typealias.swift in Sources */,
 				1850D2BB2030C371006F5972 /* Utilities.swift in Sources */,
+				18C845B421B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */,
 				1850D2BC2030C371006F5972 /* AssetImporterScene.swift in Sources */,
 				18C8459221AF38CB009649CD /* AssimpImageCache.swift in Sources */,
+				18C845B721B11FE4009649CD /* SCNMaterial + Shininess.swift in Sources */,
 				1850D2BF2030C371006F5972 /* Material.swift in Sources */,
 				1850D2C12030C371006F5972 /* AssetImporter.swift in Sources */,
 				1850D2C22030C371006F5972 /* SCNNode + AssetImport.swift in Sources */,
