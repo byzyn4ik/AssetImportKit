@@ -127,21 +127,22 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
                 
             } else {
                 
-                let assetImporter = AssetImporter()
-                if let assimpScene = assetImporter.importScene(filePath,
-                                                               postProcessSteps: [.defaultQuality]) {
-                    
+                do {
+                    let assimpScene = try SCNScene.assimpScene(filePath: filePath,
+                                                               postProcessSteps: [.defaultQuality])
                     if let modelScene = assimpScene.modelScene {
                         for childNode in modelScene.rootNode.childNodes {
                             self.modelContainerNode.addChildNode(childNode)
                         }
                     }
                     
+                    self.sceneView.scene?.rootNode.addChildNode(self.modelContainerNode)
+                    
                     let animationKeys = assimpScene.animationKeys()
                     // If multiple animations exist, load the first animation
                     if let numberOfAnimationKeys = animationKeys?.count {
                         if numberOfAnimationKeys > 0 {
-                            var settings = AssetImporterAnimSettings()
+                            let settings = AssetImporterAnimSettings()
                             settings.repeatCount = 5
                             
                             let key = animationKeys![0] as! String
@@ -154,12 +155,14 @@ class ScenePreviewViewContoller: UIViewController, CAAnimationDelegate {
                             settings.animationEvents = animEvents
                             settings.delegate = self
                             
-                            if var animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
-                                self.modelContainerNode.addAnimationScene(&animation, forKey: key, with: &settings)
+                            if let animation = assimpScene.animationScenes.value(forKey: key) as? SCNScene {
+                                self.sceneView.scene?.rootNode.addAnimationScene(animation, forKey: key, with: settings)
                             }
                             
                         }
                     }
+                } catch {
+                    print(error.localizedDescription)
                 }
             }
         }
