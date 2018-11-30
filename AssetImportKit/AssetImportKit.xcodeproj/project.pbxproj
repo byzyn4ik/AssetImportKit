@@ -176,12 +176,7 @@
 				18C845A221B0656D009649CD /* aiMesh + getMaterial.swift */,
 				18C8459C21B064EC009649CD /* aiNode + getMeshes.swift */,
 				18C8459F21B0650F009649CD /* aiNode + getMaterials.swift */,
-				18C845A521B06DFA009649CD /* SCNMaterial + TextureInfo.swift */,
-				18C845A821B11734009649CD /* SCNMaterial + Multiply.swift */,
-				18C845AF21B11B53009649CD /* SCNMaterial + BlendMode.swift */,
-				18C845B221B11C64009649CD /* SCNMaterial + CullMode.swift */,
-				18C845B521B11FE4009649CD /* SCNMaterial + Shininess.swift */,
-				18C845B821B1205B009649CD /* SCNMaterial + LightningModel.swift */,
+				18C845BB21B15595009649CD /* SCNMaterial */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +209,19 @@
 				18C845AB21B117B1009649CD /* Color Typealias.swift */,
 			);
 			path = Typealiases;
+			sourceTree = "<group>";
+		};
+		18C845BB21B15595009649CD /* SCNMaterial */ = {
+			isa = PBXGroup;
+			children = (
+				18C845A521B06DFA009649CD /* SCNMaterial + TextureInfo.swift */,
+				18C845A821B11734009649CD /* SCNMaterial + Multiply.swift */,
+				18C845AF21B11B53009649CD /* SCNMaterial + BlendMode.swift */,
+				18C845B221B11C64009649CD /* SCNMaterial + CullMode.swift */,
+				18C845B521B11FE4009649CD /* SCNMaterial + Shininess.swift */,
+				18C845B821B1205B009649CD /* SCNMaterial + LightningModel.swift */,
+			);
+			path = SCNMaterial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
