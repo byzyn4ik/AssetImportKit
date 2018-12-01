@@ -423,7 +423,8 @@ public struct AssetImporter {
      @param nVertices The number of vertices in the meshes of the aiNode.
      @return A new geometry source whose semantic property is tangent.
      */
-    public func makeTangentGeometrySource(for aiNode: aiNode, in aiScene: aiScene, withNVertices nVertices: Int) -> SCNGeometrySource {
+    @available(OSX 10.12, iOS 10.0, *)
+    func makeTangentGeometrySource(for aiNode: aiNode, in aiScene: aiScene, withNVertices nVertices: Int) -> SCNGeometrySource {
         
         let scnTangents = UnsafeMutablePointer<Float>.allocate(capacity: nVertices * 3)
         var verticesCounter: Int = 0
@@ -577,7 +578,9 @@ public struct AssetImporter {
         var scnGeometrySources: [SCNGeometrySource] = []
         scnGeometrySources.append(makeVertexGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
         scnGeometrySources.append(makeNormalGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
-        scnGeometrySources.append(makeTangentGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
+        if #available(OSX 10.12, iOS 10.0, *) {
+            scnGeometrySources.append(makeTangentGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
+        }
         scnGeometrySources.append(makeTextureGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices))
         if let colorGeometrySource = makeColorGeometrySource(for: aiNode, in: aiScene, withNVertices: nVertices) as SCNGeometrySource? {
             scnGeometrySources.append(colorGeometrySource)
@@ -827,7 +830,11 @@ public struct AssetImporter {
                 if (nodeName == cameraNodeName) {
                     
                     let camera = SCNCamera()
-                    camera.fieldOfView = CGFloat(aiCamera.mHorizontalFOV)
+                    if #available(OSX 10.12, iOS 11.0, *) {
+                        camera.fieldOfView = CGFloat(aiCamera.mHorizontalFOV)
+                    } else {
+                        // Fallback on earlier versions
+                    }
                     camera.zNear = Double(aiCamera.mClipPlaneNear)
                     camera.zFar = Double(aiCamera.mClipPlaneFar)
                     return camera

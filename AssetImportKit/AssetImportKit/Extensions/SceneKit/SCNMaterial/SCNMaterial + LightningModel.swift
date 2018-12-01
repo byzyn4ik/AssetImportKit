@@ -33,7 +33,11 @@ extension SCNMaterial {
         } else if lightingModelRawValue == 3 {
             lightingModel = .phong
         } else {
-            lightingModel = .physicallyBased
+            if #available(OSX 10.12, iOS 10.0, *) {
+                lightingModel = .physicallyBased
+            } else {
+                lightingModel = .phong
+            }
         }
     }
     
