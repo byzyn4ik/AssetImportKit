@@ -757,7 +757,9 @@ public struct AssetImporter {
                                                path: path,
                                                imageCache: imageCache)
             scnMaterial.loadMultiplyProperty(from: &aiMaterial)
-            scnMaterial.loadBlendModeProperty(from: &aiMaterial)
+            if #available(OSX 10.12, iOS 9.0, *) {
+                scnMaterial.loadBlendModeProperty(from: &aiMaterial)
+            }
             scnMaterial.loadCullModeProperty(from: &aiMaterial)
             scnMaterial.loadShininessProperty(from: &aiMaterial)
             scnMaterial.loadLightingModelProperty(from: &aiMaterial)
@@ -830,7 +832,7 @@ public struct AssetImporter {
                 if (nodeName == cameraNodeName) {
                     
                     let camera = SCNCamera()
-                    if #available(OSX 10.12, iOS 11.0, *) {
+                    if #available(OSX 10.13, iOS 11.0, *) {
                         camera.fieldOfView = CGFloat(aiCamera.mHorizontalFOV)
                     } else {
                         // Fallback on earlier versions

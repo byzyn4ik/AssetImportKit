@@ -11,6 +11,7 @@ import assimp.types
 
 extension SCNMaterial {
     
+    @available(OSX 10.12, iOS 9.0, *)
     func loadBlendModeProperty(from aiMaterial: UnsafePointer<aiMaterial>) {
         print("Loading blend mode")
         var blendModeRawValue: Int32 = 0

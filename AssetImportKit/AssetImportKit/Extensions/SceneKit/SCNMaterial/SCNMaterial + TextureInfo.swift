@@ -145,14 +145,18 @@ extension SCNMaterial {
             normal.magnificationFilter = .linear
             normal.minificationFilter = .linear
         case aiTextureType_LIGHTMAP:
-            ambientOcclusion.contents = textureInfo.getMaterialPropertyContents()
-            ambientOcclusion.mappingChannel = 0
-            ambientOcclusion.wrapS = .repeat
-            ambientOcclusion.wrapT = .repeat
-            ambientOcclusion.intensity = 1
-            ambientOcclusion.mipFilter = .linear
-            ambientOcclusion.magnificationFilter = .linear
-            ambientOcclusion.minificationFilter = .linear
+            if #available(OSX 10.12, iOS 9.0, *) {
+                ambientOcclusion.contents = textureInfo.getMaterialPropertyContents()
+                ambientOcclusion.mappingChannel = 0
+                ambientOcclusion.wrapS = .repeat
+                ambientOcclusion.wrapT = .repeat
+                ambientOcclusion.intensity = 1
+                ambientOcclusion.mipFilter = .linear
+                ambientOcclusion.magnificationFilter = .linear
+                ambientOcclusion.minificationFilter = .linear
+            } else {
+               break
+            }
         default:
             break
         }
