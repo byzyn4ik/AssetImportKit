@@ -86,11 +86,11 @@ public struct AssetImporter {
         // Access the aiScene instance referenced by aiScenePointer.
         var aiScene = aiScenePointer.pointee
         // Now we can access the file's contents.
-        let scene = makeSCNScene(fromAssimpScene: aiScene, atPath: filePath)
+        let scnScene = makeSCNScene(fromAssimpScene: aiScene, atPath: filePath)
         // We're done. Release all resources associated with this import.
         aiReleaseImport(&aiScene)
         // Retutrn result
-        return scene
+        return scnScene
     }
     
     // MARK: - Make scenekit scene
@@ -111,7 +111,7 @@ public struct AssetImporter {
         print("Make an SCNScene")
         
         let aiRootNode = aiScene.mRootNode.pointee
-        let scene = AssetImporterScene()
+        let assetImporterScene = AssetImporterScene()
         /*
          ---------------------------------------------------------------------
          Assign geometry, materials, lights and cameras to the node
@@ -122,24 +122,24 @@ public struct AssetImporter {
                                       in: aiScene,
                                       atPath: path,
                                       imageCache: imageCache)
-        scene.rootNode.addChildNode(scnRootNode)
+        assetImporterScene.rootNode.addChildNode(scnRootNode)
         /*
          ---------------------------------------------------------------------
          Animations and skinning
          ---------------------------------------------------------------------
          */
-        buildSkeletonDatabase(for: scene)
-        makeSkinner(forAssimpNode: aiRootNode, in: aiScene, scnScene: scene)
-        createAnimations(from: aiScene, with: scene, atPath: path)
+        buildSkeletonDatabase(for: assetImporterScene)
+        makeSkinner(forAssimpNode: aiRootNode, in: aiScene, scnScene: assetImporterScene)
+        createAnimations(from: aiScene, with: assetImporterScene, atPath: path)
         /*
          ---------------------------------------------------------------------
          Make SCNScene for model and animations
          ---------------------------------------------------------------------
          */
-        scene.makeModelScene()
-        scene.makeAnimationScenes()
+        assetImporterScene.makeModelScene()
+        assetImporterScene.makeAnimationScenes()
         
-        return scene
+        return assetImporterScene
     }
     
     // MARK: - Make scenekit node
@@ -203,22 +203,20 @@ public struct AssetImporter {
          Get bone names & bone transforms
          ---------------------------------------------------------------------
          */
-        boneNames.append(contentsOf: getBoneNames(forAssimpNode: aiNode, in: aiScene))
-        boneTransforms.addEntries(from: getBoneTransforms(forAssimpNode: aiNode, in: aiScene) as! [AnyHashable : Any])
+        boneNames.append(contentsOf: getBoneNames(forAssimpNode: aiNode,
+                                                  in: aiScene))
+        boneTransforms.addEntries(from: getBoneTransforms(forAssimpNode: aiNode,
+                                                          in: aiScene) as! [AnyHashable : Any])
         /*
          ---------------------------------------------------------------------
          Transform
          ---------------------------------------------------------------------
          */
         let aiNodeMatrix  = aiNode.mTransformation
-        let glkNodeMatrix = GLKMatrix4Make(aiNodeMatrix.a1, aiNodeMatrix.b1,
-                                           aiNodeMatrix.c1, aiNodeMatrix.d1,
-                                           aiNodeMatrix.a2, aiNodeMatrix.b2,
-                                           aiNodeMatrix.c2, aiNodeMatrix.d2,
-                                           aiNodeMatrix.a3, aiNodeMatrix.b3,
-                                           aiNodeMatrix.c3, aiNodeMatrix.d3,
-                                           aiNodeMatrix.a4, aiNodeMatrix.b4,
-                                           aiNodeMatrix.c4, aiNodeMatrix.d4)
+        let glkNodeMatrix = GLKMatrix4Make(aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
+                                           aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
+                                           aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
+                                           aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4)
         let scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix)
         node.transform = scnMatrix
         
@@ -979,11 +977,11 @@ public struct AssetImporter {
      @param boneNames The array of bone names.
      @return An array of scenekit bone nodes.
      */
-    public func findBoneNodes(in scene: SCNScene, forBones boneNames: [String]) -> [SCNNode] {
+    public func findBoneNodes(in scnScene: SCNScene, forBones boneNames: [String]) -> [SCNNode] {
         
         var boneNodes: [SCNNode] = []
         for boneName in boneNames {
-            if let boneNode = scene.rootNode.childNode(withName: boneName, recursively: true) {
+            if let boneNode = scnScene.rootNode.childNode(withName: boneName, recursively: true) {
                 boneNodes.append(boneNode)
             }
         }
@@ -999,7 +997,7 @@ public struct AssetImporter {
      */
     public func findSkeletonNode(fromBoneNodes boneNodes: [SCNNode]) -> SCNNode {
         
-        var resultNode: SCNNode = SCNNode()
+        var resultNode = SCNNode()
         let nodeDepths = NSMutableDictionary()
         var minDepth = -1
         for boneNode in boneNodes {

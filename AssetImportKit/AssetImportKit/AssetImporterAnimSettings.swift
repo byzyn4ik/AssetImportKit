@@ -12,7 +12,7 @@ import SceneKit
  SCNAssimpAnimSettings provides support for CAMediaTiming protocol, animation
  attributes and animating scenekit content.
  */
-@objc public class AssetImporterAnimSettings: NSObject {
+public struct AssetImporterAnimSettings {
     
     // MARK: - CAMediaTiming
     
@@ -23,12 +23,12 @@ import SceneKit
      Specifies the begin time of the receiver in relation to its parent object, if
      applicable.
      */
-    public var beginTime = CFTimeInterval()
+    public var beginTime: CFTimeInterval = 0
     
     /**
      Specifies an additional time offset in active local time.
      */
-    public var timeOffset = CFTimeInterval()
+    public var timeOffset: CFTimeInterval = 0
     
     /**
      Determines the number of times the animation will repeat.
@@ -38,29 +38,29 @@ import SceneKit
     /**
      Determines how many seconds the animation will repeat for.
      */
-    public var repeatDuration = CFTimeInterval()
+    public var repeatDuration: CFTimeInterval = 0
     
     /**
      Specifies the basic duration of the animation, in seconds.
      */
-    public var duration = CFTimeInterval()
+    public var duration: CFTimeInterval = 0
     
     /**
      Specifies how time is mapped to receiver’s time space from the parent time
      space.
      */
-    public var speed: Float = 0.0
+    public var speed: Float = 1.0
     
     /**
      Determines if the receiver plays in the reverse upon completion.
      */
-    public var autoreverses = false
+    public var autoreverses: Bool = false
     
     /**
      Determines if the receiver’s presentation is frozen or removed once its active
      duration has completed.
      */
-    public var fillMode = ""
+    public var fillMode: CAMediaTimingFillMode = .removed
     
     // MARK: - Animation attributes
     
@@ -71,12 +71,12 @@ import SceneKit
      Determines if the animation is removed from the target layer’s animations upon
      completion.
      */
-    public var isRemovedOnCompletion = false
+    public var isRemovedOnCompletion: Bool = false
     
     /**
      An optional timing function defining the pacing of the animation.
      */
-    public var timingFunction: CAMediaTimingFunction?
+    public var timingFunction: CAMediaTimingFunction? = nil
     
     // MARK: - Getting and setting the delegate
     /**
@@ -96,7 +96,7 @@ import SceneKit
      For animations attached to SceneKit objects, a Boolean value that determines
      whether the animation is evaluated using the scene time or the system time.
      */
-    public var usesSceneTimeBase = false
+    public var usesSceneTimeBase: Bool = false
     
     // MARK: - Fading Between SceneKit Animations
     
@@ -132,24 +132,6 @@ import SceneKit
      @return A settings object with the default values.
      */
     
-    public override init() {
-        
-        super.init()
-        
-        beginTime = 0
-        timeOffset = 0
-        repeatCount = 0
-        repeatDuration = 0
-        duration = 0
-        speed = 1.0
-        autoreverses = false
-        fillMode = CAMediaTimingFillMode.removed.rawValue
-        isRemovedOnCompletion = true
-        timingFunction = nil
-        usesSceneTimeBase = false
-        fadeInDuration = 0
-        fadeOutDuration = 0
-        
-    }
+    public init() {}
 }
 

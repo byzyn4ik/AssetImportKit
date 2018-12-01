@@ -81,17 +81,7 @@
 		1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode + AssetImport.swift"; sourceTree = "<group>"; };
 		1850D2FA2030C371006F5972 /* AssetImportKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssetImportKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1850D2FB2030C371006F5972 /* AssetImportKit-macOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AssetImportKit-macOS-Info.plist"; path = "/Users/eugenebokhan/Code/Github/eugenebokhan/AssetImportKit/AssetImportKit/AssetImportKit/AssetImportKit-macOS-Info.plist"; sourceTree = "<absolute>"; };
-		1864F99D21ADB6E700D4EDC4 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libassimp-fat.a"; sourceTree = "<group>"; };
-		1864F9A921ADC87F00D4EDC4 /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libIrrXML-fat.a"; sourceTree = "<group>"; };
-		1864F9AE21ADCB7C00D4EDC4 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = AssetImportKit/Dependencies/Assimp/lib/libIrrXML.a; sourceTree = "<group>"; };
-		1864F9AF21ADCB7D00D4EDC4 /* libzlibstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlibstatic.a; path = AssetImportKit/Dependencies/Assimp/lib/libzlibstatic.a; sourceTree = "<group>"; };
-		188CDBD821ADD6A400EC794D /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = AssetImportKit/Dependencies/Assimp/lib/libassimp.a; sourceTree = "<group>"; };
 		188CDBDA21ADD7D600EC794D /* Postprocessing.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postprocessing.swift.swift; sourceTree = "<group>"; };
-		188F212521AEDA4F00C5A661 /* libassimp 2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp 2.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libassimp 2.a"; sourceTree = "<group>"; };
-		188F212721AEDB6200C5A661 /* libassimp-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-ios.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libassimp-ios.a"; sourceTree = "<group>"; };
-		188F212921AEDD0F00C5A661 /* libassimp-universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-universal.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libassimp-universal.a"; sourceTree = "<group>"; };
-		188F212B21AEDE1400C5A661 /* libassimp-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-ios.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libassimp-ios.a"; sourceTree = "<group>"; };
-		188F212C21AEDE1400C5A661 /* libIrrXML-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-ios.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libIrrXML-ios.a"; sourceTree = "<group>"; };
 		188F212F21AEDEC900C5A661 /* libIrrXML-macOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-macOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/macOS/libIrrXML-macOS.a"; sourceTree = "<group>"; };
 		188F213021AEDEC900C5A661 /* libassimp-macOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-macOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/macOS/libassimp-macOS.a"; sourceTree = "<group>"; };
 		188F213321AEDF0000C5A661 /* libIrrXML-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-iOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libIrrXML-iOS.a"; sourceTree = "<group>"; };
@@ -111,7 +101,6 @@
 		18C845CD21B16EAC009649CD /* aiString + String Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiString + String Value.swift"; sourceTree = "<group>"; };
 		18C845D121B177E1009649CD /* SCNNode + Get Light For Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode + Get Light For Node.swift"; sourceTree = "<group>"; };
 		18C845D421B17828009649CD /* SCNLight + aiLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNLight + aiLight.swift"; sourceTree = "<group>"; };
-		18E6978E21ADD01C00A6AC59 /* libzlibstatic-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlibstatic-fat.a"; path = "AssetImportKit/Dependencies/Assimp/lib/libzlibstatic-fat.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,17 +181,6 @@
 				188F213321AEDF0000C5A661 /* libIrrXML-iOS.a */,
 				188F213021AEDEC900C5A661 /* libassimp-macOS.a */,
 				188F212F21AEDEC900C5A661 /* libIrrXML-macOS.a */,
-				188F212B21AEDE1400C5A661 /* libassimp-ios.a */,
-				188F212C21AEDE1400C5A661 /* libIrrXML-ios.a */,
-				188F212921AEDD0F00C5A661 /* libassimp-universal.a */,
-				188F212721AEDB6200C5A661 /* libassimp-ios.a */,
-				188F212521AEDA4F00C5A661 /* libassimp 2.a */,
-				188CDBD821ADD6A400EC794D /* libassimp.a */,
-				18E6978E21ADD01C00A6AC59 /* libzlibstatic-fat.a */,
-				1864F9AE21ADCB7C00D4EDC4 /* libIrrXML.a */,
-				1864F9AF21ADCB7D00D4EDC4 /* libzlibstatic.a */,
-				1864F9A921ADC87F00D4EDC4 /* libIrrXML-fat.a */,
-				1864F99D21ADB6E700D4EDC4 /* libassimp-fat.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -40,7 +40,7 @@ public extension SCNNode {
                 }
                 animation.speed = settings.speed
                 animation.autoreverses = settings.autoreverses
-                animation.fillMode = CAMediaTimingFillMode(rawValue: settings.fillMode)
+                animation.fillMode = settings.fillMode
                 // Animation attributes
                 animation.isRemovedOnCompletion = settings.isRemovedOnCompletion
                 animation.timingFunction = settings.timingFunction
