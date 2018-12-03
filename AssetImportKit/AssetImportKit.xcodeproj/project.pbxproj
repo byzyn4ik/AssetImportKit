@@ -17,6 +17,16 @@
 		1829E814202FF0F6008B9DE7 /* AssetImporterScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80B202FF0F6008B9DE7 /* AssetImporterScene.swift */; };
 		1829E815202FF0F6008B9DE7 /* SCNScene + AssetImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */; };
 		1829E816202FF0F6008B9DE7 /* SCNNode + AssetImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */; };
+		183E822221B2B6960068B2BF /* aiNode + getNumberOfVertices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822121B2B6960068B2BF /* aiNode + getNumberOfVertices.swift */; };
+		183E822321B2B6960068B2BF /* aiNode + getNumberOfVertices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822121B2B6960068B2BF /* aiNode + getNumberOfVertices.swift */; };
+		183E822521B2BD120068B2BF /* aiNode + getNumberOfBones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822421B2BD120068B2BF /* aiNode + getNumberOfBones.swift */; };
+		183E822621B2BD120068B2BF /* aiNode + getNumberOfBones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822421B2BD120068B2BF /* aiNode + getNumberOfBones.swift */; };
+		183E822821B2BF910068B2BF /* aiNode + findMaximumWeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822721B2BF910068B2BF /* aiNode + findMaximumWeights.swift */; };
+		183E822921B2BF910068B2BF /* aiNode + findMaximumWeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822721B2BF910068B2BF /* aiNode + findMaximumWeights.swift */; };
+		183E822B21B3C98E0068B2BF /* aiMesh + getBondes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822A21B3C98E0068B2BF /* aiMesh + getBondes.swift */; };
+		183E822C21B3C98E0068B2BF /* aiMesh + getBondes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822A21B3C98E0068B2BF /* aiMesh + getBondes.swift */; };
+		183E822E21B3D0700068B2BF /* aiBone + getWeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822D21B3D0700068B2BF /* aiBone + getWeights.swift */; };
+		183E822F21B3D0700068B2BF /* aiBone + getWeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E822D21B3D0700068B2BF /* aiBone + getWeights.swift */; };
 		1850D2B32030C371006F5972 /* TextureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E808202FF0F5008B9DE7 /* TextureInfo.swift */; };
 		1850D2B72030C371006F5972 /* AssetImporterAnimSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E806202FF0F5008B9DE7 /* AssetImporterAnimSettings.swift */; };
 		1850D2B92030C371006F5972 /* SCNScene + AssetImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */; };
@@ -63,6 +73,30 @@
 		18C845D321B177E1009649CD /* SCNNode + Get Light For Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845D121B177E1009649CD /* SCNNode + Get Light For Node.swift */; };
 		18C845D521B17828009649CD /* SCNLight + aiLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845D421B17828009649CD /* SCNLight + aiLight.swift */; };
 		18C845D621B17828009649CD /* SCNLight + aiLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845D421B17828009649CD /* SCNLight + aiLight.swift */; };
+		18F8C2B021B3D6F600D5A434 /* aiNode + getChildNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2AF21B3D6F600D5A434 /* aiNode + getChildNodes.swift */; };
+		18F8C2B121B3D6FB00D5A434 /* aiNode + getChildNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2AF21B3D6F600D5A434 /* aiNode + getChildNodes.swift */; };
+		18F8C2B321B3D96D00D5A434 /* aiScene + getMeshes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2B221B3D96D00D5A434 /* aiScene + getMeshes.swift */; };
+		18F8C2B421B3D96D00D5A434 /* aiScene + getMeshes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2B221B3D96D00D5A434 /* aiScene + getMeshes.swift */; };
+		18F8C2B721B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2B621B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift */; };
+		18F8C2B821B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2B621B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift */; };
+		18F8C2BA21B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2B921B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift */; };
+		18F8C2BB21B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2B921B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift */; };
+		18F8C2BE21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2BD21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift */; };
+		18F8C2BF21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2BD21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift */; };
+		18F8C2C421B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2C321B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift */; };
+		18F8C2C521B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2C321B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift */; };
+		18F8C2C721B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2C621B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift */; };
+		18F8C2C821B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2C621B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift */; };
+		18F8C2CA21B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2C921B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift */; };
+		18F8C2CB21B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2C921B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift */; };
+		18F8C2CD21B3F01100D5A434 /* aiNode + makeGeometrySources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2CC21B3F01100D5A434 /* aiNode + makeGeometrySources.swift */; };
+		18F8C2CE21B3F01100D5A434 /* aiNode + makeGeometrySources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2CC21B3F01100D5A434 /* aiNode + makeGeometrySources.swift */; };
+		18F8C2D021B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2CF21B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift */; };
+		18F8C2D121B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2CF21B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift */; };
+		18F8C2D421B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2D321B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift */; };
+		18F8C2D521B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2D321B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift */; };
+		18F8C2D721B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2D621B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift */; };
+		18F8C2D821B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2D621B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +113,11 @@
 		1829E80B202FF0F6008B9DE7 /* AssetImporterScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetImporterScene.swift; sourceTree = "<group>"; };
 		1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNScene + AssetImport.swift"; sourceTree = "<group>"; };
 		1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode + AssetImport.swift"; sourceTree = "<group>"; };
+		183E822121B2B6960068B2BF /* aiNode + getNumberOfVertices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + getNumberOfVertices.swift"; sourceTree = "<group>"; };
+		183E822421B2BD120068B2BF /* aiNode + getNumberOfBones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + getNumberOfBones.swift"; sourceTree = "<group>"; };
+		183E822721B2BF910068B2BF /* aiNode + findMaximumWeights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + findMaximumWeights.swift"; sourceTree = "<group>"; };
+		183E822A21B3C98E0068B2BF /* aiMesh + getBondes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiMesh + getBondes.swift"; sourceTree = "<group>"; };
+		183E822D21B3D0700068B2BF /* aiBone + getWeights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiBone + getWeights.swift"; sourceTree = "<group>"; };
 		1850D2FA2030C371006F5972 /* AssetImportKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssetImportKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1850D2FB2030C371006F5972 /* AssetImportKit-macOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AssetImportKit-macOS-Info.plist"; path = "/Users/eugenebokhan/Code/Github/eugenebokhan/AssetImportKit/AssetImportKit/AssetImportKit/AssetImportKit-macOS-Info.plist"; sourceTree = "<absolute>"; };
 		188CDBDA21ADD7D600EC794D /* Postprocessing.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postprocessing.swift.swift; sourceTree = "<group>"; };
@@ -101,6 +140,18 @@
 		18C845CD21B16EAC009649CD /* aiString + String Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiString + String Value.swift"; sourceTree = "<group>"; };
 		18C845D121B177E1009649CD /* SCNNode + Get Light For Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode + Get Light For Node.swift"; sourceTree = "<group>"; };
 		18C845D421B17828009649CD /* SCNLight + aiLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNLight + aiLight.swift"; sourceTree = "<group>"; };
+		18F8C2AF21B3D6F600D5A434 /* aiNode + getChildNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + getChildNodes.swift"; sourceTree = "<group>"; };
+		18F8C2B221B3D96D00D5A434 /* aiScene + getMeshes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiScene + getMeshes.swift"; sourceTree = "<group>"; };
+		18F8C2B621B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiScene + getNumberOfIndeces.swift"; sourceTree = "<group>"; };
+		18F8C2B921B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + makeVertexGeometrySource.swift"; sourceTree = "<group>"; };
+		18F8C2BD21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + makeNormalGeometrySource.swift"; sourceTree = "<group>"; };
+		18F8C2C321B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + makeTangentGeometrySource.swift"; sourceTree = "<group>"; };
+		18F8C2C621B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + makeTextureGeometrySource.swift"; sourceTree = "<group>"; };
+		18F8C2C921B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + makeColorGeometrySource.swift"; sourceTree = "<group>"; };
+		18F8C2CC21B3F01100D5A434 /* aiNode + makeGeometrySources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + makeGeometrySources.swift"; sourceTree = "<group>"; };
+		18F8C2CF21B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + makeGeometryElementsForNode.swift"; sourceTree = "<group>"; };
+		18F8C2D321B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiMesh + getNumberOfFaceIndeces.swift"; sourceTree = "<group>"; };
+		18F8C2D621B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiMesh + makeIndicesGeometryElement.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +236,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		183E823021B3D1DB0068B2BF /* aiBone */ = {
+			isa = PBXGroup;
+			children = (
+				183E822D21B3D0700068B2BF /* aiBone + getWeights.swift */,
+			);
+			path = aiBone;
+			sourceTree = "<group>";
+		};
 		18C845AE21B1184B009649CD /* Typealiases */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +270,12 @@
 			children = (
 				18C8459C21B064EC009649CD /* aiNode + getMeshes.swift */,
 				18C8459F21B0650F009649CD /* aiNode + getMaterials.swift */,
+				183E822121B2B6960068B2BF /* aiNode + getNumberOfVertices.swift */,
+				183E822421B2BD120068B2BF /* aiNode + getNumberOfBones.swift */,
+				183E822721B2BF910068B2BF /* aiNode + findMaximumWeights.swift */,
+				18F8C2AF21B3D6F600D5A434 /* aiNode + getChildNodes.swift */,
+				18F8C2D221B3FF6800D5A434 /* aiNode + GeometryElements */,
+				18F8C2BC21B3E0AF00D5A434 /* aiNode + SCNGeometrySource */,
 			);
 			path = aiNode;
 			sourceTree = "<group>";
@@ -246,7 +311,10 @@
 		18C845C021B1561E009649CD /* aiMesh */ = {
 			isa = PBXGroup;
 			children = (
+				18F8C2D921B4093E00D5A434 /* aiMesh + SCNGeometryElement */,
 				18C845A221B0656D009649CD /* aiMesh + getMaterial.swift */,
+				183E822A21B3C98E0068B2BF /* aiMesh + getBondes.swift */,
+				18F8C2D321B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift */,
 			);
 			path = aiMesh;
 			sourceTree = "<group>";
@@ -262,6 +330,8 @@
 		18C845C221B1562B009649CD /* assimp */ = {
 			isa = PBXGroup;
 			children = (
+				18F8C2B521B3DA4200D5A434 /* aiScene */,
+				183E823021B3D1DB0068B2BF /* aiBone */,
 				18C845D021B16EDE009649CD /* aiString */,
 				18C845C121B15626009649CD /* aiMaterial */,
 				18C845C021B1561E009649CD /* aiMesh */,
@@ -284,6 +354,44 @@
 				18C845CD21B16EAC009649CD /* aiString + String Value.swift */,
 			);
 			path = aiString;
+			sourceTree = "<group>";
+		};
+		18F8C2B521B3DA4200D5A434 /* aiScene */ = {
+			isa = PBXGroup;
+			children = (
+				18F8C2B221B3D96D00D5A434 /* aiScene + getMeshes.swift */,
+				18F8C2B621B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift */,
+			);
+			path = aiScene;
+			sourceTree = "<group>";
+		};
+		18F8C2BC21B3E0AF00D5A434 /* aiNode + SCNGeometrySource */ = {
+			isa = PBXGroup;
+			children = (
+				18F8C2B921B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift */,
+				18F8C2BD21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift */,
+				18F8C2C321B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift */,
+				18F8C2C621B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift */,
+				18F8C2C921B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift */,
+				18F8C2CC21B3F01100D5A434 /* aiNode + makeGeometrySources.swift */,
+			);
+			path = "aiNode + SCNGeometrySource";
+			sourceTree = "<group>";
+		};
+		18F8C2D221B3FF6800D5A434 /* aiNode + GeometryElements */ = {
+			isa = PBXGroup;
+			children = (
+				18F8C2CF21B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift */,
+			);
+			path = "aiNode + GeometryElements";
+			sourceTree = "<group>";
+		};
+		18F8C2D921B4093E00D5A434 /* aiMesh + SCNGeometryElement */ = {
+			isa = PBXGroup;
+			children = (
+				18F8C2D621B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift */,
+			);
+			path = "aiMesh + SCNGeometryElement";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,10 +506,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F8C2B021B3D6F600D5A434 /* aiNode + getChildNodes.swift in Sources */,
 				1829E811202FF0F6008B9DE7 /* TextureInfo.swift in Sources */,
+				18F8C2C421B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift in Sources */,
+				18F8C2D421B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift in Sources */,
 				1829E80F202FF0F6008B9DE7 /* AssetImporterAnimSettings.swift in Sources */,
 				188CDBDB21ADD7D600EC794D /* Postprocessing.swift.swift in Sources */,
 				18C8459421B044BA009649CD /* aiMaterial + Name.swift in Sources */,
+				18F8C2BE21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift in Sources */,
+				183E822B21B3C98E0068B2BF /* aiMesh + getBondes.swift in Sources */,
+				18F8C2D721B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift in Sources */,
 				18C845A021B0650F009649CD /* aiNode + getMaterials.swift in Sources */,
 				18C845A621B06DFA009649CD /* SCNMaterial + TextureInfo.swift in Sources */,
 				1829E815202FF0F6008B9DE7 /* SCNScene + AssetImport.swift in Sources */,
@@ -411,15 +525,26 @@
 				18C8459D21B064EC009649CD /* aiNode + getMeshes.swift in Sources */,
 				18C845B021B11B53009649CD /* SCNMaterial + BlendMode.swift in Sources */,
 				1829E812202FF0F6008B9DE7 /* AssetImporterAnimation.swift in Sources */,
+				18F8C2B321B3D96D00D5A434 /* aiScene + getMeshes.swift in Sources */,
 				18C845B921B1205B009649CD /* SCNMaterial + LightningModel.swift in Sources */,
 				18C845AC21B117B1009649CD /* Color Typealias.swift in Sources */,
+				18F8C2D021B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift in Sources */,
+				18F8C2C721B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift in Sources */,
+				183E822821B2BF910068B2BF /* aiNode + findMaximumWeights.swift in Sources */,
+				18F8C2CA21B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift in Sources */,
 				1829E813202FF0F6008B9DE7 /* Utilities.swift in Sources */,
 				18C845B321B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */,
+				183E822221B2B6960068B2BF /* aiNode + getNumberOfVertices.swift in Sources */,
 				1829E814202FF0F6008B9DE7 /* AssetImporterScene.swift in Sources */,
+				18F8C2B721B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift in Sources */,
+				18F8C2CD21B3F01100D5A434 /* aiNode + makeGeometrySources.swift in Sources */,
 				18C8459121AF38CB009649CD /* AssimpImageCache.swift in Sources */,
+				183E822E21B3D0700068B2BF /* aiBone + getWeights.swift in Sources */,
 				18C845B621B11FE4009649CD /* SCNMaterial + Shininess.swift in Sources */,
 				18C845D221B177E1009649CD /* SCNNode + Get Light For Node.swift in Sources */,
+				183E822521B2BD120068B2BF /* aiNode + getNumberOfBones.swift in Sources */,
 				18C845D521B17828009649CD /* SCNLight + aiLight.swift in Sources */,
+				18F8C2BA21B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift in Sources */,
 				1829E804202FF069008B9DE7 /* Material.swift in Sources */,
 				1829E810202FF0F6008B9DE7 /* AssetImporter.swift in Sources */,
 				1829E816202FF0F6008B9DE7 /* SCNNode + AssetImport.swift in Sources */,
@@ -430,10 +555,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F8C2B121B3D6FB00D5A434 /* aiNode + getChildNodes.swift in Sources */,
 				1850D2B32030C371006F5972 /* TextureInfo.swift in Sources */,
+				18F8C2C521B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift in Sources */,
+				18F8C2D521B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift in Sources */,
 				1850D2B72030C371006F5972 /* AssetImporterAnimSettings.swift in Sources */,
 				188CDBDC21ADD7D600EC794D /* Postprocessing.swift.swift in Sources */,
 				18C8459521B044BA009649CD /* aiMaterial + Name.swift in Sources */,
+				18F8C2BF21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift in Sources */,
+				183E822C21B3C98E0068B2BF /* aiMesh + getBondes.swift in Sources */,
+				18F8C2D821B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift in Sources */,
 				18C845A121B0650F009649CD /* aiNode + getMaterials.swift in Sources */,
 				18C845A721B06DFA009649CD /* SCNMaterial + TextureInfo.swift in Sources */,
 				1850D2B92030C371006F5972 /* SCNScene + AssetImport.swift in Sources */,
@@ -443,15 +574,26 @@
 				18C8459E21B064EC009649CD /* aiNode + getMeshes.swift in Sources */,
 				18C845B121B11B53009649CD /* SCNMaterial + BlendMode.swift in Sources */,
 				1850D2BA2030C371006F5972 /* AssetImporterAnimation.swift in Sources */,
+				18F8C2B421B3D96D00D5A434 /* aiScene + getMeshes.swift in Sources */,
 				18C845BA21B1205B009649CD /* SCNMaterial + LightningModel.swift in Sources */,
 				18C845AD21B117B1009649CD /* Color Typealias.swift in Sources */,
+				18F8C2D121B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift in Sources */,
+				18F8C2C821B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift in Sources */,
+				183E822921B2BF910068B2BF /* aiNode + findMaximumWeights.swift in Sources */,
+				18F8C2CB21B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift in Sources */,
 				1850D2BB2030C371006F5972 /* Utilities.swift in Sources */,
 				18C845B421B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */,
+				183E822321B2B6960068B2BF /* aiNode + getNumberOfVertices.swift in Sources */,
 				1850D2BC2030C371006F5972 /* AssetImporterScene.swift in Sources */,
+				18F8C2B821B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift in Sources */,
+				18F8C2CE21B3F01100D5A434 /* aiNode + makeGeometrySources.swift in Sources */,
 				18C8459221AF38CB009649CD /* AssimpImageCache.swift in Sources */,
+				183E822F21B3D0700068B2BF /* aiBone + getWeights.swift in Sources */,
 				18C845B721B11FE4009649CD /* SCNMaterial + Shininess.swift in Sources */,
 				18C845D321B177E1009649CD /* SCNNode + Get Light For Node.swift in Sources */,
+				183E822621B2BD120068B2BF /* aiNode + getNumberOfBones.swift in Sources */,
 				18C845D621B17828009649CD /* SCNLight + aiLight.swift in Sources */,
+				18F8C2BB21B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift in Sources */,
 				1850D2BF2030C371006F5972 /* Material.swift in Sources */,
 				1850D2C12030C371006F5972 /* AssetImporter.swift in Sources */,
 				1850D2C22030C371006F5972 /* SCNNode + AssetImport.swift in Sources */,
