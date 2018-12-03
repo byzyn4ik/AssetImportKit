@@ -58,16 +58,15 @@ import SceneKit
     
     // MARK: - Add, fetch SCNAssimpAnimation animations
     
-    /**
-     @name Add, fetch SCNAssimpAnimation animations
-     */
-    /**
-     Return the SCNAssimpAnimation object for the specified animation key.
-     
-     @param key The unique scene animation key.
-     @return The scene animation object.
-     */
-    public func addAnimation(assimpAnimation: AssetImporterAnimation, toScene animScene: SCNScene) {
+    
+    /// Add, fetch SCNAssimpAnimation animations
+    /// Return the SCNAssimpAnimation object for the specified animation key.
+    ///
+    /// - Parameters:
+    ///     - assimpAnimation: scene to fetch animations from.
+    ///     - animScene: scene to write animtaions to.
+    func addAnimation(assimpAnimation: AssetImporterAnimation,
+                             to animScene: SCNScene) {
         
         if let frameAnims = assimpAnimation.frameAnims {
             
@@ -175,18 +174,15 @@ import SceneKit
      editor and the asset pipeline.
      */
     public func makeAnimationScenes() {
-        
         for animSceneKey in self.animations.allKeys {
-            
             if let animSceneKey = animSceneKey as? String {
-                
                 if let assimpAnim = animations.value(forKey: animSceneKey) as? AssetImporterAnimation {
-                    
                     let animScene = SCNScene()
                     animScene.rootNode.addChildNode(skeletonNode.clone())
-                    addAnimation(assimpAnimation: assimpAnim, toScene: animScene)
-                    animationScenes.setValue(animScene, forKey: animSceneKey)
-                    
+                    addAnimation(assimpAnimation: assimpAnim,
+                                 to: animScene)
+                    animationScenes.setValue(animScene,
+                                             forKey: animSceneKey)
                 }
             }
         }
