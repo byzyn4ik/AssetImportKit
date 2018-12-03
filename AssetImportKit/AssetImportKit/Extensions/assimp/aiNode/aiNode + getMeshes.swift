@@ -10,11 +10,8 @@ import assimp.scene
 
 extension aiNode {
     
-    func getMeshes(from scene: aiScene) -> [aiMesh] {
-        let sceneMeshesCount = Int(scene.mNumMeshes)
-        let sceneMeshes = Array(UnsafeBufferPointer(start: scene.mMeshes,
-                                                    count: sceneMeshesCount)).map { $0!.pointee }
-        
+    func getMeshes(from aiScene: aiScene) -> [aiMesh] {
+        let sceneMeshes = aiScene.getMeshes()
         let nodeMeshesCount = Int(mNumMeshes)
         var nodeMeshes = Array(repeating: aiMesh(),
                                count: nodeMeshesCount)
@@ -24,7 +21,6 @@ extension aiNode {
             nodeMeshes[i] = aiMesh
         }
         return nodeMeshes
-        
     }
     
 }
