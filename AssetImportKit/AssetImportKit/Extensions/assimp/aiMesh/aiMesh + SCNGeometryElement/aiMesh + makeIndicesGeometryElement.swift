@@ -36,9 +36,9 @@ extension aiMesh {
                                                         count: indecesCount))
             faceIndeces.forEach {
                 // "Thread 1: Fatal error: Not enough bits to represent a signed value" fix.
-                let indexOffset = Int64(indexOffset)
-                let aiFace = Int64($0)
-                let sumResult = Int16(indexOffset + aiFace)
+                let indexOffset = NSNumber(value: indexOffset).int64Value
+                let aiFace = NSNumber(value: $0).int64Value
+                let sumResult = NSNumber(value: indexOffset + aiFace).int16Value
                 
                 scnIndices[indicesCounter] = sumResult
                 indicesCounter += 1
