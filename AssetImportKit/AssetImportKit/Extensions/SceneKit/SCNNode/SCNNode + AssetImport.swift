@@ -15,21 +15,18 @@ public extension SCNNode {
     
     // MARK: - SCNAnimatable Clone
     
-    /**
-     @name SCNAnimatable Clone
-     */
-    /**
-     Adds the animation at the given node subtree to the corresponding node subtree
-     in the scene.
-     
-     @param animNode The node and it's subtree which has a CAAnimation.
-     */
-    public func addAnimation(from animNode: SCNNode, forKey animKey: String, with settings: AssetImporterAnimSettings, hasEvents: inout Bool, hasDelegate: inout Bool) {
-        
-        for nodeAnimKey: String in animNode.animationKeys {
-            
+    /// Adds the animation at the given node subtree to the corresponding node subtree
+    /// in the scene.
+    ///
+    /// - Parameters:
+    ///   - animNode: The node and it's subtree which has a CAAnimation.
+    public func addAnimation(from animNode: SCNNode,
+                             forKey animKey: String,
+                             with settings: AssetImporterAnimSettings,
+                             hasEvents: inout Bool,
+                             hasDelegate: inout Bool) {
+        for nodeAnimKey in animNode.animationKeys {
             if let animation = animNode.animation(forKey: nodeAnimKey) {
-                
                 // CAMediaTiming
                 animation.beginTime = settings.beginTime
                 animation.timeOffset = settings.timeOffset
