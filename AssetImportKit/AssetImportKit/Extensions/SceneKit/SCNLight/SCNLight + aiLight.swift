@@ -71,55 +71,49 @@ extension SCNLight {
                 color = cgColor
             }
         }
-    }
-    if aiLight.mAttenuationQuadratic != 0 {
-        attenuationFalloffExponent = 2
-    } else if aiLight.mAttenuationLinear != 0 {
-        attenuationFalloffExponent = 1
-    }
-}
-
-/**
- Creates a scenekit spot light from an assimp spot light.
- 
- @param aiLight The assimp spot light.
- @return A new scenekit spot light.
- */
-private func applySpotLightProperties(from aiLight: aiLight) {
-    type = .spot
-    let aiColor = aiLight.mColorSpecular
-    if aiColor.r != 0
-        && aiColor.g != 0
-        && aiColor.b != 0 {
-        print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
-        let space = CGColorSpaceCreateDeviceRGB()
-        let components: [CGFloat] = [CGFloat(aiColor.r),
-                                     CGFloat(aiColor.g),
-                                     CGFloat(aiColor.b),
-                                     1.0]
-        if let cgColor = CGColor(colorSpace: space,
-                                 components: components) {
-            color = cgColor
+        if aiLight.mAttenuationQuadratic != 0 {
+            attenuationFalloffExponent = 2
+        } else if aiLight.mAttenuationLinear != 0 {
+            attenuationFalloffExponent = 1
         }
     }
-    if aiLight.mAttenuationQuadratic != 0 {
-        attenuationFalloffExponent = 2.0
-    }
-    else if aiLight.mAttenuationLinear != 0 {
-        attenuationFalloffExponent = 1.0
-    }
-    attenuationStartDistance = 0
-    attenuationEndDistance = 0
-    spotInnerAngle = CGFloat(aiLight.mAngleInnerCone)
-    spotOuterAngle = CGFloat(aiLight.mAngleOuterCone)
-}
     
-    /**
-     Creates a scenekit ambient light from an assimp spot light.
-     
-     @param aiLight The assimp spot light.
-     @return A new scenekit spot light.
-     */
+    /// Creates a scenekit spot light from an assimp spot light.
+    ///
+    /// - Parameter aiLight: The assimp spot light.
+    private func applySpotLightProperties(from aiLight: aiLight) {
+        type = .spot
+        let aiColor = aiLight.mColorSpecular
+        if aiColor.r != 0
+            && aiColor.g != 0
+            && aiColor.b != 0 {
+            print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
+            let space = CGColorSpaceCreateDeviceRGB()
+            let components: [CGFloat] = [CGFloat(aiColor.r),
+                                         CGFloat(aiColor.g),
+                                         CGFloat(aiColor.b),
+                                         1.0]
+            if let cgColor = CGColor(colorSpace: space,
+                                     components: components) {
+                color = cgColor
+            }
+        }
+        if aiLight.mAttenuationQuadratic != 0 {
+            attenuationFalloffExponent = 2.0
+        }
+        else if aiLight.mAttenuationLinear != 0 {
+            attenuationFalloffExponent = 1.0
+        }
+        attenuationStartDistance = 0
+        attenuationEndDistance = 0
+        spotInnerAngle = CGFloat(aiLight.mAngleInnerCone)
+        spotOuterAngle = CGFloat(aiLight.mAngleOuterCone)
+    }
+    
+    
+    /// Creates a scenekit ambient light from an assimp spot light.
+    ///
+    /// - Parameter aiLight: The assimp spot light.
     private func applyAmbientLightProperties(from aiLight: aiLight) {
         type = .ambient
         let aiColor = aiLight.mColorAmbient
