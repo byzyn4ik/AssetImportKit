@@ -115,35 +115,43 @@ public extension SCNNode {
             }
         }
         for child: SCNNode in animNode.childNodes {
-            removeAnimation(at: child, forKey: animKey, fadeOutDuration: 0.0, withSuffixes: suffixes)
+            removeAnimation(at: child,
+                            forKey: animKey,
+                            fadeOutDuration: 0.0,
+                            withSuffixes: suffixes)
         }
-        
     }
     
-    /**
-     Removes the animation attached to the object with the specified key.
-     
-     @param animKey A string identifying an attached animation to remove.
-     */
+    /// Removes the animation attached to the object with the specified key.
+    ///
+    /// - Parameter animKey: A string identifying an attached animation to remove.
     public func removeAnimationScene(forKey animKey: String) {
         let suffixes = [".transform.translation-", ".transform.quaternion-", ".transform.scale-"]
-        removeAnimation(at: self, forKey: animKey, fadeOutDuration: 0.0, withSuffixes: suffixes)
+        removeAnimation(at: self,
+                        forKey: animKey,
+                        fadeOutDuration: 0.0,
+                        withSuffixes: suffixes)
     }
     
-    /**
-     Removes the animation attached to the object with the specified key, smoothly
-     transitioning out of the animation’s effect.
-     
-     @param animKey A string identifying an attached animation to remove.
-     @param fadeOutDuration The duration for transitioning out of the animation’s
-     effect before it is removed
-     */
-    public func removeAnimationScene(forKey animKey: String, fadeOutDuration: CGFloat) {
+    /// Removes the animation attached to the object with the specified key, smoothly
+    /// transitioning out of the animation’s effect.
+    ///
+    /// - Parameters:
+    ///   - animKey: A string identifying an attached animation to remove.
+    ///   - fadeOutDuration: The duration for transitioning out of the animation’s
+    /// effect before it is removed
+    public func removeAnimationScene(forKey animKey: String,
+                                     fadeOutDuration: CGFloat) {
         let suffixes = [".transform.translation-", ".transform.quaternion-", ".transform.scale-"]
-        removeAnimation(at: self, forKey: animKey, fadeOutDuration: fadeOutDuration, withSuffixes: suffixes)
+        removeAnimation(at: self,
+                        forKey: animKey,
+                        fadeOutDuration: fadeOutDuration,
+                        withSuffixes: suffixes)
     }
-    
-    public func pauseAnimation(at animNode: SCNNode, forKey animKey: String, withSuffixes suffixes: [String]) {
+
+    public func pauseAnimation(at animNode: SCNNode,
+                               forKey animKey: String,
+                               withSuffixes suffixes: [String]) {
         
         if animNode.name != nil {
             let keyPrefix: String = "/node-" + (animNode.name ?? "")
