@@ -18,8 +18,8 @@ extension aiMesh {
     ///   - indexOffset: The total number of indices for the previous meshes.
     ///   - numberOfFaces: The number of faces in the geometry of the mesh.
     /// - Returns: A new geometry element object.
-    public func makeIndicesGeometryElement(with indexOffset: Int,
-                                           numberOfFaces: Int) -> SCNGeometryElement? {
+    func makeIndicesGeometryElement(with indexOffset: Int,
+                                    numberOfFaces: Int) -> SCNGeometryElement? {
         var indicesCounter: Int = 0
         let nIndices = getNumberOfFaceIndeces()
         let scnIndices = UnsafeMutablePointer<CShort>.allocate(capacity: nIndices)
@@ -56,5 +56,5 @@ extension aiMesh {
         return indices
     }
     
-
+    
 }
