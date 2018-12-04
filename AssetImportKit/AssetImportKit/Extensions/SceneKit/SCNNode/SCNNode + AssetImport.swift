@@ -192,24 +192,27 @@ public extension SCNNode {
             }
         }
         for child: SCNNode in animNode.childNodes {
-            resumeAnimation(at: child, forKey: animKey, withSuffixes: suffixes)
+            resumeAnimation(at: child,
+                            forKey: animKey,
+                            withSuffixes: suffixes)
         }
         
     }
     
-    /**
-     Resumes a previously paused animation attached to the object with the specified
-     key.
-     
-     @param animKey A string identifying an attached animation.
-     */
+    /// Resumes a previously paused animation attached to the object with the specified
+    /// key.
+    ///
+    /// - Parameter animKey: A string identifying an attached animation.
     public func resumeAnimationScene(forKey animKey: String) {
         let suffixes = [".transform.translation-", ".transform.quaternion-", ".transform.scale-"]
-        resumeAnimation(at: self, forKey: animKey, withSuffixes: suffixes)
+        resumeAnimation(at: self,
+                        forKey: animKey,
+                        withSuffixes: suffixes)
     }
     
-    public func isAnimationForScenePaused(at animNode: SCNNode, forKey animKey: String, withSuffixes suffixes: [String]) -> Bool {
-        
+    public func isAnimationForScenePaused(at animNode: SCNNode,
+                                          forKey animKey: String,
+                                          withSuffixes suffixes: [String]) -> Bool {
         var paused = false
         if animNode.name != nil {
             let keyPrefix: String = "/node-" + (animNode.name ?? "")
