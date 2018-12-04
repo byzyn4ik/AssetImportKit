@@ -28,28 +28,26 @@ extension SCNLight {
             break
         }
     }
-
-/**
- Creates a scenekit directional light from an assimp directional light.
- 
- @param aiLight The assimp directional light.
- @return A new scenekit directional light.
- */
-private func applyDirectinalLightProperties(from aiLight: aiLight) {
-    type = .directional
-    let aiColor = aiLight.mColorSpecular
-    if aiColor.r != 0
-        && aiColor.g != 0
-        && aiColor.b != 0 {
-        print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
-        let space = CGColorSpaceCreateDeviceRGB()
-        let components: [CGFloat] = [CGFloat(aiColor.r),
-                                     CGFloat(aiColor.g),
-                                     CGFloat(aiColor.b),
-                                     1.0]
-        if let cgColor = CGColor(colorSpace: space,
-                                 components: components) {
-            color = cgColor
+    
+    /// Creates a scenekit directional light from an assimp directional light.
+    ///
+    /// - Parameter aiLight: The assimp directional light.
+    private func applyDirectinalLightProperties(from aiLight: aiLight) {
+        type = .directional
+        let aiColor = aiLight.mColorSpecular
+        if aiColor.r != 0
+            && aiColor.g != 0
+            && aiColor.b != 0 {
+            print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
+            let space = CGColorSpaceCreateDeviceRGB()
+            let components: [CGFloat] = [CGFloat(aiColor.r),
+                                         CGFloat(aiColor.g),
+                                         CGFloat(aiColor.b),
+                                         1.0]
+            if let cgColor = CGColor(colorSpace: space,
+                                     components: components) {
+                color = cgColor
+            }
         }
     }
 }
