@@ -11,118 +11,107 @@ public struct PostProcessSteps: OptionSet {
     public let rawValue: UInt
     
     // -------------------------------------------------------------------------
-    /** Calculates the tangents and bitangents for the imported meshes.
-     * Does nothing if a mesh does not have normals. You might want this post
-     * processing step to be executed if you plan to use tangent space
-     * calculations such as normal mapping applied to the meshes.
-     */
+    /// Calculates the tangents and bitangents for the imported meshes.
+    /// Does nothing if a mesh does not have normals. You might want this post
+    /// processing step to be executed if you plan to use tangent space
+    /// calculations such as normal mapping applied to the meshes.
     public static let calcTangentSpace = PostProcessSteps(rawValue: 0x1)
     
     // -------------------------------------------------------------------------
-    /** Identifies and joins identical vertex data sets within all imported
-     * meshes. After this step is run, each mesh contains unique vertices,
-     * so a vertex may be used by multiple faces. You usually want
-     * to use this post processing step. If your application deals with
-     * indexed geometry, this step is compulsory or you'll just waste rendering
-     * time. If this flag is <b>not specified</b>, no vertices are referenced by
-     * more than one face and <b>no index buffer is required</b> for rendering.
-     */
+    /// Identifies and joins identical vertex data sets within all imported
+    /// meshes. After this step is run, each mesh contains unique vertices,
+    /// so a vertex may be used by multiple faces. You usually want
+    /// to use this post processing step. If your application deals with
+    /// indexed geometry, this step is compulsory or you'll just waste rendering
+    /// time. If this flag is <b>not specified</b>, no vertices are referenced by
+    /// more than one face and <b>no index buffer is required</b> for rendering.
     public static let joinIdenticalVertices = PostProcessSteps(rawValue: 0x2)
     
     // -------------------------------------------------------------------------
-    /** Converts all the imported data to a left-handed coordinate space.
-     * By default the data is returned in a right-handed coordinate space (which
-     * OpenGL prefers). In this space, +X points to the right,
-     * +Z points towards the viewer, and +Y points upwards. In the DirectX
-     * coordinate space +X points to the right, +Y points upwards, and +Z points
-     * away from the viewer.
-     * You'll probably want to consider this flag if you use Direct3D for
-     * rendering. The AssetImporter_Process_ConvertToLeftHanded flag supersedes this
-     * setting and bundles all conversions typically required for D3D-based
-     * applications.
-     */
+    /// Converts all the imported data to a left-handed coordinate space.
+    /// By default the data is returned in a right-handed coordinate space (which
+    /// OpenGL prefers). In this space, +X points to the right,
+    /// +Z points towards the viewer, and +Y points upwards. In the DirectX
+    /// coordinate space +X points to the right, +Y points upwards, and +Z points
+    /// away from the viewer.
+    /// You'll probably want to consider this flag if you use Direct3D for
+    /// rendering. The AssetImporter_Process_ConvertToLeftHanded flag supersedes this
+    /// setting and bundles all conversions typically required for D3D-based
+    /// applications.
     public static let makeLeftHanded = PostProcessSteps(rawValue: 0x4)
     
     // -------------------------------------------------------------------------
-    /** <hr>Triangulates all faces of all meshes.
-     * By default the imported mesh data might contain faces with more than 3
-     * indices. For rendering you'll usually want all faces to be triangles.
-     * This post processing step splits up faces with more than 3 indices into
-     * triangles. Line and point primitives are *not* modified! If you want
-     * 'triangles only' with no other kinds of primitives, try the following
-     * solution:
-     * <ul>
-     * <li>Specify both AssetImporter_Process_Triangulate and #aiProcess_SortByPType </li>
-     * <li>Ignore all point and line meshes when you process assimp's output</li>
-     * </ul>
-     */
+    /// Triangulates all faces of all meshes.
+    /// By default the imported mesh data might contain faces with more than 3
+    /// indices. For rendering you'll usually want all faces to be triangles.
+    /// This post processing step splits up faces with more than 3 indices into
+    /// triangles. Line and point primitives are *not* modified! If you want
+    /// 'triangles only' with no other kinds of primitives, try the following
+    /// solution: Specify both AssetImporter_Process_Triangulate and #aiProcess_SortByPType
+    /// Ignore all point and line meshes when you process assimp's output
     public static let triangulate = PostProcessSteps(rawValue: 0x8)
     
     // -------------------------------------------------------------------------
-    /** <hr>Removes some parts of the data structure (animations, materials,
-     *  light sources, cameras, textures, vertex components).
-     * The  components to be removed are specified in a separate
-     * importer property, <tt>#AI_CONFIG_PP_RVC_FLAGS</tt>. This is quite useful
-     * if you don't need all parts of the output structure. Vertex colors
-     * are rarely used today for example... Calling this step to remove unneeded
-     * data from the pipeline as early as possible results in increased
-     * performance and a more optimized output data structure.
-     * This step is also useful if you want to force Assimp to recompute
-     * normals or tangents. The corresponding steps don't recompute them if
-     * they're already there (loaded from the source asset). By using this
-     * step you can make sure they are NOT there.
-     * This flag is a poor one, mainly because its purpose is usually
-     * misunderstood. Consider the following case: a 3D model has been exported
-     * from a CAD app, and it has per-face vertex colors. Vertex positions can't be
-     * shared, thus the AssetImporter_Process_JoinIdenticalVertices step fails to
-     * optimize the data because of these nasty little vertex colors.
-     * Most apps don't even process them, so it's all for nothing. By using
-     * this step, unneeded components are excluded as early as possible
-     * thus opening more room for internal optimizations.
-     */
+    /// Removes some parts of the data structure (animations, materials,
+    /// light sources, cameras, textures, vertex components).
+    /// The  components to be removed are specified in a separate
+    /// importer property, <tt>#AI_CONFIG_PP_RVC_FLAGS</tt>. This is quite useful
+    /// if you don't need all parts of the output structure. Vertex colors
+    /// are rarely used today for example... Calling this step to remove unneeded
+    /// data from the pipeline as early as possible results in increased
+    /// performance and a more optimized output data structure.
+    /// This step is also useful if you want to force Assimp to recompute
+    /// normals or tangents. The corresponding steps don't recompute them if
+    /// they're already there (loaded from the source asset). By using this
+    /// step you can make sure they are NOT there.
+    /// This flag is a poor one, mainly because its purpose is usually
+    /// misunderstood. Consider the following case: a 3D model has been exported
+    /// from a CAD app, and it has per-face vertex colors. Vertex positions can't be
+    /// shared, thus the AssetImporter_Process_JoinIdenticalVertices step fails to
+    /// optimize the data because of these nasty little vertex colors.
+    /// Most apps don't even process them, so it's all for nothing. By using
+    /// this step, unneeded components are excluded as early as possible
+    /// thus opening more room for internal optimizations.
     public static let removeComponent = PostProcessSteps(rawValue: 0x10)
     
     // -------------------------------------------------------------------------
-    /** <hr>Generates normals for all faces of all meshes.
-     * This is ignored if normals are already there at the time this flag
-     * is evaluated. Model importers try to load them from the source file, so
-     * they're usually already there. Face normals are shared between all points
-     * of a single face, so a single point can have multiple normals, which
-     * forces the library to duplicate vertices in some cases.
-     * AssetImporter_Process_JoinIdenticalVertices is *senseless* then.
-     * This flag may not be specified together with AssetImporter_Process_GenSmoothNormals.
-     */
+    /// Generates normals for all faces of all meshes.
+    /// This is ignored if normals are already there at the time this flag
+    /// is evaluated. Model importers try to load them from the source file, so
+    /// they're usually already there. Face normals are shared between all points
+    /// of a single face, so a single point can have multiple normals, which
+    /// forces the library to duplicate vertices in some cases.
+    /// AssetImporter_Process_JoinIdenticalVertices is *senseless* then.
+    /// This flag may not be specified together with AssetImporter_Process_GenSmoothNormals.
     public static let genNormals = PostProcessSteps(rawValue: 0x20)
     
     // -------------------------------------------------------------------------
-    /** <hr>Generates smooth normals for all vertices in the mesh.
-     * This is ignored if normals are already there at the time this flag
-     * is evaluated. Model importers try to load them from the source file, so
-     * they're usually already there.
-     * This flag may not be specified together with
-     * AssetImporter_Process_GenNormals. There's a importer property,
-     * <tt>#AI_CONFIG_PP_GSN_MAX_SMOOTHING_ANGLE</tt> which allows you to specify
-     * an angle maximum for the normal smoothing algorithm. Normals exceeding
-     * this limit are not smoothed, resulting in a 'hard' seam between two faces.
-     * Using a decent angle here (e.g. 80 degrees) results in very good visual
-     * appearance.
-     */
+    /// Generates smooth normals for all vertices in the mesh.
+    /// This is ignored if normals are already there at the time this flag
+    /// is evaluated. Model importers try to load them from the source file, so
+    /// they're usually already there.
+    /// This flag may not be specified together with
+    /// AssetImporter_Process_GenNormals. There's a importer property,
+    /// <tt>#AI_CONFIG_PP_GSN_MAX_SMOOTHING_ANGLE</tt> which allows you to specify
+    /// an angle maximum for the normal smoothing algorithm. Normals exceeding
+    /// this limit are not smoothed, resulting in a 'hard' seam between two faces.
+    /// Using a decent angle here (e.g. 80 degrees) results in very good visual
+    /// appearance.
     public static let genSmoothNormals = PostProcessSteps(rawValue: 0x40)
     
     // -------------------------------------------------------------------------
-    /** <hr>Splits large meshes into smaller sub-meshes.
-     * This is quite useful for real-time rendering, where the number of triangles
-     * which can be maximally processed in a single draw-call is limited
-     * by the video driver/hardware. The maximum vertex buffer is usually limited
-     * too. Both requirements can be met with this step: you may specify both a
-     * triangle and vertex limit for a single mesh.
-     * The split limits can (and should!) be set through the
-     * <tt>#AI_CONFIG_PP_SLM_VERTEX_LIMIT</tt> and <tt>#AI_CONFIG_PP_SLM_TRIANGLE_LIMIT</tt>
-     * importer properties. The default values are <tt>#AI_SLM_DEFAULT_MAX_VERTICES</tt> and
-     * <tt>#AI_SLM_DEFAULT_MAX_TRIANGLES</tt>.
-     * Note that splitting is generally a time-consuming task, but only if there's
-     * something to split. The use of this step is recommended for most users.
-     */
+    /// Splits large meshes into smaller sub-meshes.
+    /// This is quite useful for real-time rendering, where the number of triangles
+    /// which can be maximally processed in a single draw-call is limited
+    /// by the video driver/hardware. The maximum vertex buffer is usually limited
+    /// too. Both requirements can be met with this step: you may specify both a
+    /// triangle and vertex limit for a single mesh.
+    /// The split limits can (and should!) be set through the
+    /// #AI_CONFIG_PP_SLM_VERTEX_LIMIT and #AI_CONFIG_PP_SLM_TRIANGLE_LIMIT
+    /// importer properties. The default values are #AI_SLM_DEFAULT_MAX_VERTICES and
+    /// #AI_SLM_DEFAULT_MAX_TRIANGLES.
+    /// Note that splitting is generally a time-consuming task, but only if there's
+    /// something to split. The use of this step is recommended for most users.
     public static let splitLargeMeshes = PostProcessSteps(rawValue: 0x80)
     
     // -------------------------------------------------------------------------
@@ -395,27 +384,25 @@ public struct PostProcessSteps: OptionSet {
     public static let splitByBoneCount = PostProcessSteps(rawValue: 0x2000000)
     
     // -------------------------------------------------------------------------
-    /** <hr>This step removes bones losslessly or according to some threshold.
-     *  In some cases (i.e. formats that require it) exporters are forced to
-     *  assign dummy bone weights to otherwise static meshes assigned to
-     *  animated meshes. Full, weight-based skinning is expensive while
-     *  animating nodes is extremely cheap, so this step is offered to clean up
-     *  the data in that regard.
-     *
-     *  Use <tt>#AI_CONFIG_PP_DB_THRESHOLD</tt> to control this.
-     *  Use <tt>#AI_CONFIG_PP_DB_ALL_OR_NONE</tt> if you want bones removed if
-     *    and only if all bones within the scene qualify for removal.
-     */
+    /// This step removes bones losslessly or according to some threshold.
+    /// In some cases (i.e. formats that require it) exporters are forced to
+    /// assign dummy bone weights to otherwise static meshes assigned to
+    /// animated meshes. Full, weight-based skinning is expensive while
+    /// animating nodes is extremely cheap, so this step is offered to clean up
+    /// the data in that regard.
+    ///
+    /// Use <tt>#AI_CONFIG_PP_DB_THRESHOLD</tt> to control this.
+    /// Use <tt>#AI_CONFIG_PP_DB_ALL_OR_NONE</tt> if you want bones removed if
+    ///   and only if all bones within the scene qualify for removal.
+    ///
     public static let debone = PostProcessSteps(rawValue: 0x4000000)
     
     
     // -----------------------------------------------------------------------------
-    /** defaultQuality
-     *  @brief Default postprocess configuration optimizing the data for real-time
-     *  rendering.
-     *  Contains .process_Triangulate, .process_FlipUVs, .process_SortByPType
-     *  flags.
-     */
+    /// Default postprocess configuration optimizing the data for real-time
+    /// rendering.
+    /// Contains .process_Triangulate, .process_FlipUVs, .process_SortByPType
+    /// flags.
     public static var defaultQuality: PostProcessSteps {
         get {
             return [.triangulate,
@@ -425,20 +412,18 @@ public struct PostProcessSteps: OptionSet {
     }
     
     // -----------------------------------------------------------------------------
-    /** realtimeFast
-     *  @brief Default postprocess configuration optimizing the data for real-time
-     *  rendering.
-     *
-     *  Applications would want to use this preset to load models on end-user PCs,
-     *  maybe for direct use in game.
-     *
-     *  If you don't support UV transformations in your application apply the
-     *  AssetImporter_Process_TransformUVCoords step, too.
-     *  @note Please take the time to read the docs for the steps enabled by this
-     *  preset.
-     *  Some of them offer further configurable properties, while some of them might
-     *   not be of use for you so it might be better to not specify them.
-     */
+    /// Default postprocess configuration optimizing the data for real-time
+    /// rendering.
+    ///
+    /// Applications would want to use this preset to load models on end-user PCs,
+    /// maybe for direct use in game.
+    ///
+    /// If you don't support UV transformations in your application apply the
+    /// AssetImporter_Process_TransformUVCoords step, too.
+    /// @note Please take the time to read the docs for the steps enabled by this
+    /// preset.
+    /// Some of them offer further configurable properties, while some of them might
+    ///  not be of use for you so it might be better to not specify them.
     public static var realtimeFast: PostProcessSteps {
         get {
             return [.calcTangentSpace,
@@ -451,22 +436,20 @@ public struct PostProcessSteps: OptionSet {
     }
     
     // -----------------------------------------------------------------------------
-    /** realtimeQuality
-     *  Default postprocess configuration optimizing the data for real-time
-     *  rendering.
-     *
-     *  Unlike AssetImporter_ProcessPreset_TargetRealtime_Fast, this configuration
-     *  performs some extra optimizations to improve rendering speed and
-     *  to minimize memory usage. It could be a good choice for a level editor
-     *  environment where import speed is not so important.
-     *
-     *  If you don't support UV transformations
-     *  in your application apply the AssetImporter_Process_TransformUVCoords step, too.
-     *  @note Please take the time to read the docs for the steps enabled by this
-     *  preset.
-     *  Some of them offer further configurable properties, while some of them might
-     *  not be of use for you so it might be better to not specify them.
-     */
+    /// Default postprocess configuration optimizing the data for real-time
+    /// rendering.
+    ///
+    /// Unlike AssetImporter_ProcessPreset_TargetRealtime_Fast, this configuration
+    /// performs some extra optimizations to improve rendering speed and
+    /// to minimize memory usage. It could be a good choice for a level editor
+    /// environment where import speed is not so important.
+    ///
+    /// If you don't support UV transformations
+    /// in your application apply the AssetImporter_Process_TransformUVCoords step, too.
+    /// @note Please take the time to read the docs for the steps enabled by this
+    /// preset.
+    /// Some of them offer further configurable properties, while some of them might
+    /// not be of use for you so it might be better to not specify them.
     public static var realtimeQuality: PostProcessSteps {
         get {
             return  [.calcTangentSpace,
@@ -485,22 +468,20 @@ public struct PostProcessSteps: OptionSet {
     
     
     // ------------------------------------------------------------------------------
-    /** realtimeMaxQuality
-     *  Default postprocess configuration optimizing the data for real-time
-     *  rendering.
-     *
-     *  This preset enables almost every optimization step to achieve perfectly
-     *  optimized data. It's your choice for level editor environments where import
-     *  speed is not important.
-     *
-     *  If you're using DirectX, don't forget to combine this value with the
-     *  AssetImporter_Process_ConvertToLeftHanded step. If you don't support UV
-     *  transformations in your application, apply the
-     *  AssetImporter_Process_TransformUVCoords step, too. @note Please take the time to
-     *  read the docs for the steps enabled by this preset. Some of them offer
-     *  further configurable properties, while some of them might not be of use for
-     *  you so it might be better to not specify them.
-     */
+    /// Default postprocess configuration optimizing the data for real-time
+    /// rendering.
+    ///
+    /// This preset enables almost every optimization step to achieve perfectly
+    /// optimized data. It's your choice for level editor environments where import
+    /// speed is not important.
+    ///
+    /// If you're using DirectX, don't forget to combine this value with the
+    /// AssetImporter_Process_ConvertToLeftHanded step. If you don't support UV
+    /// transformations in your application, apply the
+    /// AssetImporter_Process_TransformUVCoords step, too. @note Please take the time to
+    /// read the docs for the steps enabled by this preset. Some of them offer
+    /// further configurable properties, while some of them might not be of use for
+    /// you so it might be better to not specify them.
     public static var realtimeMaxQuality: PostProcessSteps {
         get {
             return [.realtimeQuality,

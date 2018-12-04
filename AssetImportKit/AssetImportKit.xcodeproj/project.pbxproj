@@ -69,10 +69,22 @@
 		18C845BA21B1205B009649CD /* SCNMaterial + LightningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845B821B1205B009649CD /* SCNMaterial + LightningModel.swift */; };
 		18C845CE21B16EAC009649CD /* aiString + String Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845CD21B16EAC009649CD /* aiString + String Value.swift */; };
 		18C845CF21B16EAC009649CD /* aiString + String Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845CD21B16EAC009649CD /* aiString + String Value.swift */; };
-		18C845D221B177E1009649CD /* SCNNode + Get Light For Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845D121B177E1009649CD /* SCNNode + Get Light For Node.swift */; };
-		18C845D321B177E1009649CD /* SCNNode + Get Light For Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845D121B177E1009649CD /* SCNNode + Get Light For Node.swift */; };
 		18C845D521B17828009649CD /* SCNLight + aiLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845D421B17828009649CD /* SCNLight + aiLight.swift */; };
 		18C845D621B17828009649CD /* SCNLight + aiLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C845D421B17828009649CD /* SCNLight + aiLight.swift */; };
+		18F21B1821B58F3100688F99 /* SCNNode + makeSCNCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B1721B58F3100688F99 /* SCNNode + makeSCNCamera.swift */; };
+		18F21B1921B58F3100688F99 /* SCNNode + makeSCNCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B1721B58F3100688F99 /* SCNNode + makeSCNCamera.swift */; };
+		18F21B1B21B58F4500688F99 /* SCNNode + makeSCNLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B1A21B58F4500688F99 /* SCNNode + makeSCNLight.swift */; };
+		18F21B1C21B58F4500688F99 /* SCNNode + makeSCNLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B1A21B58F4500688F99 /* SCNNode + makeSCNLight.swift */; };
+		18F21B2121B5903100688F99 /* aiScene + getCameras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2021B5903100688F99 /* aiScene + getCameras.swift */; };
+		18F21B2221B5903100688F99 /* aiScene + getCameras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2021B5903100688F99 /* aiScene + getCameras.swift */; };
+		18F21B2421B5920900688F99 /* aiNode + getBoneNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2321B5920900688F99 /* aiNode + getBoneNames.swift */; };
+		18F21B2521B5920900688F99 /* aiNode + getBoneNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2321B5920900688F99 /* aiNode + getBoneNames.swift */; };
+		18F21B2721B5940000688F99 /* aiNode + getBoneTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2621B5940000688F99 /* aiNode + getBoneTransforms.swift */; };
+		18F21B2821B5940000688F99 /* aiNode + getBoneTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2621B5940000688F99 /* aiNode + getBoneTransforms.swift */; };
+		18F21B2A21B59BB000688F99 /* SCNNode + findDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2921B59BB000688F99 /* SCNNode + findDepth.swift */; };
+		18F21B2B21B59BB000688F99 /* SCNNode + findDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2921B59BB000688F99 /* SCNNode + findDepth.swift */; };
+		18F21B2D21B59CA200688F99 /* SCNScene + getBoneNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2C21B59CA200688F99 /* SCNScene + getBoneNodes.swift */; };
+		18F21B2E21B59CA200688F99 /* SCNScene + getBoneNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F21B2C21B59CA200688F99 /* SCNScene + getBoneNodes.swift */; };
 		18F8C2B021B3D6F600D5A434 /* aiNode + getChildNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2AF21B3D6F600D5A434 /* aiNode + getChildNodes.swift */; };
 		18F8C2B121B3D6FB00D5A434 /* aiNode + getChildNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2AF21B3D6F600D5A434 /* aiNode + getChildNodes.swift */; };
 		18F8C2B321B3D96D00D5A434 /* aiScene + getMeshes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8C2B221B3D96D00D5A434 /* aiScene + getMeshes.swift */; };
@@ -138,8 +150,14 @@
 		18C845B521B11FE4009649CD /* SCNMaterial + Shininess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial + Shininess.swift"; sourceTree = "<group>"; };
 		18C845B821B1205B009649CD /* SCNMaterial + LightningModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial + LightningModel.swift"; sourceTree = "<group>"; };
 		18C845CD21B16EAC009649CD /* aiString + String Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiString + String Value.swift"; sourceTree = "<group>"; };
-		18C845D121B177E1009649CD /* SCNNode + Get Light For Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode + Get Light For Node.swift"; sourceTree = "<group>"; };
 		18C845D421B17828009649CD /* SCNLight + aiLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNLight + aiLight.swift"; sourceTree = "<group>"; };
+		18F21B1721B58F3100688F99 /* SCNNode + makeSCNCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode + makeSCNCamera.swift"; sourceTree = "<group>"; };
+		18F21B1A21B58F4500688F99 /* SCNNode + makeSCNLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode + makeSCNLight.swift"; sourceTree = "<group>"; };
+		18F21B2021B5903100688F99 /* aiScene + getCameras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiScene + getCameras.swift"; sourceTree = "<group>"; };
+		18F21B2321B5920900688F99 /* aiNode + getBoneNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + getBoneNames.swift"; sourceTree = "<group>"; };
+		18F21B2621B5940000688F99 /* aiNode + getBoneTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + getBoneTransforms.swift"; sourceTree = "<group>"; };
+		18F21B2921B59BB000688F99 /* SCNNode + findDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode + findDepth.swift"; sourceTree = "<group>"; };
+		18F21B2C21B59CA200688F99 /* SCNScene + getBoneNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNScene + getBoneNodes.swift"; sourceTree = "<group>"; };
 		18F8C2AF21B3D6F600D5A434 /* aiNode + getChildNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiNode + getChildNodes.swift"; sourceTree = "<group>"; };
 		18F8C2B221B3D96D00D5A434 /* aiScene + getMeshes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiScene + getMeshes.swift"; sourceTree = "<group>"; };
 		18F8C2B621B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiScene + getNumberOfIndeces.swift"; sourceTree = "<group>"; };
@@ -269,6 +287,8 @@
 			isa = PBXGroup;
 			children = (
 				18C8459C21B064EC009649CD /* aiNode + getMeshes.swift */,
+				18F21B2621B5940000688F99 /* aiNode + getBoneTransforms.swift */,
+				18F21B2321B5920900688F99 /* aiNode + getBoneNames.swift */,
 				18C8459F21B0650F009649CD /* aiNode + getMaterials.swift */,
 				183E822121B2B6960068B2BF /* aiNode + getNumberOfVertices.swift */,
 				183E822421B2BD120068B2BF /* aiNode + getNumberOfBones.swift */,
@@ -284,7 +304,9 @@
 			isa = PBXGroup;
 			children = (
 				1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */,
-				18C845D121B177E1009649CD /* SCNNode + Get Light For Node.swift */,
+				18F21B1A21B58F4500688F99 /* SCNNode + makeSCNLight.swift */,
+				18F21B1721B58F3100688F99 /* SCNNode + makeSCNCamera.swift */,
+				18F21B2921B59BB000688F99 /* SCNNode + findDepth.swift */,
 			);
 			path = SCNNode;
 			sourceTree = "<group>";
@@ -293,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */,
+				18F21B2C21B59CA200688F99 /* SCNScene + getBoneNodes.swift */,
 			);
 			path = SCNScene;
 			sourceTree = "<group>";
@@ -360,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				18F8C2B221B3D96D00D5A434 /* aiScene + getMeshes.swift */,
+				18F21B2021B5903100688F99 /* aiScene + getCameras.swift */,
 				18F8C2B621B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift */,
 			);
 			path = aiScene;
@@ -515,6 +539,8 @@
 				18C8459421B044BA009649CD /* aiMaterial + Name.swift in Sources */,
 				18F8C2BE21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift in Sources */,
 				183E822B21B3C98E0068B2BF /* aiMesh + getBondes.swift in Sources */,
+				18F21B1821B58F3100688F99 /* SCNNode + makeSCNCamera.swift in Sources */,
+				18F21B2421B5920900688F99 /* aiNode + getBoneNames.swift in Sources */,
 				18F8C2D721B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift in Sources */,
 				18C845A021B0650F009649CD /* aiNode + getMaterials.swift in Sources */,
 				18C845A621B06DFA009649CD /* SCNMaterial + TextureInfo.swift in Sources */,
@@ -531,22 +557,26 @@
 				18F8C2D021B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift in Sources */,
 				18F8C2C721B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift in Sources */,
 				183E822821B2BF910068B2BF /* aiNode + findMaximumWeights.swift in Sources */,
+				18F21B2A21B59BB000688F99 /* SCNNode + findDepth.swift in Sources */,
 				18F8C2CA21B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift in Sources */,
 				1829E813202FF0F6008B9DE7 /* Utilities.swift in Sources */,
 				18C845B321B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */,
 				183E822221B2B6960068B2BF /* aiNode + getNumberOfVertices.swift in Sources */,
 				1829E814202FF0F6008B9DE7 /* AssetImporterScene.swift in Sources */,
 				18F8C2B721B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift in Sources */,
+				18F21B2D21B59CA200688F99 /* SCNScene + getBoneNodes.swift in Sources */,
+				18F21B2121B5903100688F99 /* aiScene + getCameras.swift in Sources */,
 				18F8C2CD21B3F01100D5A434 /* aiNode + makeGeometrySources.swift in Sources */,
 				18C8459121AF38CB009649CD /* AssimpImageCache.swift in Sources */,
 				183E822E21B3D0700068B2BF /* aiBone + getWeights.swift in Sources */,
 				18C845B621B11FE4009649CD /* SCNMaterial + Shininess.swift in Sources */,
-				18C845D221B177E1009649CD /* SCNNode + Get Light For Node.swift in Sources */,
 				183E822521B2BD120068B2BF /* aiNode + getNumberOfBones.swift in Sources */,
 				18C845D521B17828009649CD /* SCNLight + aiLight.swift in Sources */,
 				18F8C2BA21B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift in Sources */,
 				1829E804202FF069008B9DE7 /* Material.swift in Sources */,
+				18F21B2721B5940000688F99 /* aiNode + getBoneTransforms.swift in Sources */,
 				1829E810202FF0F6008B9DE7 /* AssetImporter.swift in Sources */,
+				18F21B1B21B58F4500688F99 /* SCNNode + makeSCNLight.swift in Sources */,
 				1829E816202FF0F6008B9DE7 /* SCNNode + AssetImport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -564,6 +594,8 @@
 				18C8459521B044BA009649CD /* aiMaterial + Name.swift in Sources */,
 				18F8C2BF21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift in Sources */,
 				183E822C21B3C98E0068B2BF /* aiMesh + getBondes.swift in Sources */,
+				18F21B1921B58F3100688F99 /* SCNNode + makeSCNCamera.swift in Sources */,
+				18F21B2521B5920900688F99 /* aiNode + getBoneNames.swift in Sources */,
 				18F8C2D821B4091400D5A434 /* aiMesh + makeIndicesGeometryElement.swift in Sources */,
 				18C845A121B0650F009649CD /* aiNode + getMaterials.swift in Sources */,
 				18C845A721B06DFA009649CD /* SCNMaterial + TextureInfo.swift in Sources */,
@@ -580,22 +612,26 @@
 				18F8C2D121B3FF5C00D5A434 /* aiNode + makeGeometryElementsForNode.swift in Sources */,
 				18F8C2C821B3EA9800D5A434 /* aiNode + makeTextureGeometrySource.swift in Sources */,
 				183E822921B2BF910068B2BF /* aiNode + findMaximumWeights.swift in Sources */,
+				18F21B2B21B59BB000688F99 /* SCNNode + findDepth.swift in Sources */,
 				18F8C2CB21B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift in Sources */,
 				1850D2BB2030C371006F5972 /* Utilities.swift in Sources */,
 				18C845B421B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */,
 				183E822321B2B6960068B2BF /* aiNode + getNumberOfVertices.swift in Sources */,
 				1850D2BC2030C371006F5972 /* AssetImporterScene.swift in Sources */,
 				18F8C2B821B3DB1F00D5A434 /* aiScene + getNumberOfIndeces.swift in Sources */,
+				18F21B2E21B59CA200688F99 /* SCNScene + getBoneNodes.swift in Sources */,
+				18F21B2221B5903100688F99 /* aiScene + getCameras.swift in Sources */,
 				18F8C2CE21B3F01100D5A434 /* aiNode + makeGeometrySources.swift in Sources */,
 				18C8459221AF38CB009649CD /* AssimpImageCache.swift in Sources */,
 				183E822F21B3D0700068B2BF /* aiBone + getWeights.swift in Sources */,
 				18C845B721B11FE4009649CD /* SCNMaterial + Shininess.swift in Sources */,
-				18C845D321B177E1009649CD /* SCNNode + Get Light For Node.swift in Sources */,
 				183E822621B2BD120068B2BF /* aiNode + getNumberOfBones.swift in Sources */,
 				18C845D621B17828009649CD /* SCNLight + aiLight.swift in Sources */,
 				18F8C2BB21B3DE2000D5A434 /* aiNode + makeVertexGeometrySource.swift in Sources */,
 				1850D2BF2030C371006F5972 /* Material.swift in Sources */,
+				18F21B2821B5940000688F99 /* aiNode + getBoneTransforms.swift in Sources */,
 				1850D2C12030C371006F5972 /* AssetImporter.swift in Sources */,
+				18F21B1C21B58F4500688F99 /* SCNNode + makeSCNLight.swift in Sources */,
 				1850D2C22030C371006F5972 /* SCNNode + AssetImport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

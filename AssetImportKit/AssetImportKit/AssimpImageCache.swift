@@ -8,7 +8,7 @@
 
 import ImageIO
 
-public class AssimpImageCache: NSObject {
+class AssimpImageCache: NSObject {
     
     var cacheDictionary: [String : CGImage] = [:]
     

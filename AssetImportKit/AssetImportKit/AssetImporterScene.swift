@@ -104,37 +104,27 @@ import SceneKit
         
     }
     
-    /**
-     Return the SCNAssimpAnimation object for the specified animation key.
-     
-     @param key The unique scene animation key.
-     @return The scene animation object.
-     */
+    /// Return the SCNAssimpAnimation object for the specified animation key.
+    ///
+    /// - Parameter key: The unique scene animation key.
+    /// - Returns: The scene animation object.
     public func animationForKey(_ key: String) -> AssetImporterAnimation? {
         return self.animations.value(forKey: key) as? AssetImporterAnimation
     }
     
     // MARK: - Add, fetch scene animations
     
-    /**
-     @name Add, fetch scene animations
-     */
-    
-    /**
-     Return the keys for all the animations in this file.
-     
-     @return The array of animation keys.
-     */
+    /// Return the keys for all the animations in this file.
+    ///
+    /// - Returns: The array of animation keys.
     public func animationKeys() -> [Any]? {
         return animationScenes.allKeys
     }
     
-    /**
-     Return the SCNScene object for the specified animation key.
-     
-     @param key The unique scene animation key.
-     @return The scene animation object.
-     */
+    /// Return the SCNScene object for the specified animation key.
+    ///
+    /// - Parameter key: The unique scene animation key.
+    /// - Returns: The scene animation object.
     public func animationSceneForKey(_ key: String) -> SCNScene? {
         if let result = animationScenes.value(forKey: key) as? SCNScene {
             return result
@@ -145,18 +135,12 @@ import SceneKit
     
     // MARK: - Make SCNScene objects
     
-    /**
-     @name Make SCNScene objects
-     */
-    
-    /**
-     Makes the SCNScene representing the model and the optional skeleton.
-     
-     This transformation to SCNScene allows the client to use the existing SCNScene
-     API. This also makes it trivial to support serialization using the existing
-     SCNScene export API, thereby allowing easy integration in the XCode Scene
-     editor and the asset pipeline.
-     */
+    /// Makes the SCNScene representing the model and the optional skeleton.
+    ///
+    /// This transformation to SCNScene allows the client to use the existing SCNScene
+    /// API. This also makes it trivial to support serialization using the existing
+    /// SCNScene export API, thereby allowing easy integration in the XCode Scene
+    /// editor and the asset pipeline.
     public func makeModelScene() {
         self.modelScene = SCNScene()
         for childNode in self.rootNode.childNodes {
@@ -164,15 +148,13 @@ import SceneKit
         }
     }
     
-    /**
-     Makes an array of SCNScene objects, each SCNScene representing a skeletal
-     animation.
-     
-     This transformation to SCNScene allows the client to use the existing SCNScene
-     API. This also makes it trivial to support serialization using the existing
-     SCNScene export API, thereby allowing easy integration in the XCode Scene
-     editor and the asset pipeline.
-     */
+    /// Makes an array of SCNScene objects, each SCNScene representing a skeletal
+    /// animation.
+    ///
+    /// This transformation to SCNScene allows the client to use the existing SCNScene
+    /// API. This also makes it trivial to support serialization using the existing
+    /// SCNScene export API, thereby allowing easy integration in the XCode Scene
+    /// editor and the asset pipeline.
     public func makeAnimationScenes() {
         for animSceneKey in self.animations.allKeys {
             if let animSceneKey = animSceneKey as? String {
