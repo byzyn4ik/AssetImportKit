@@ -11,16 +11,12 @@ import assimp.scene
 
 extension aiNode {
     
-    /**
-     Creates a scenekit vertex color source from the vertex color information of
-     the specified node.
-     
-     @param aiNode The assimp node.
-     @param aiScene The assimp scene.
-     @param nVertices The number of vertices in the meshes of the node.
-     @return A new color source whose semantic property is vertex color.
-     */
-    public func makeColorGeometrySource(from aiScene: aiScene) -> SCNGeometrySource? {
+    /// Creates a scenekit vertex color source from the vertex color information of
+    /// the specified node.
+    ///
+    /// - Parameter aiScene: The assimp scene.
+    /// - Returns: A new color source whose semantic property is vertex color.
+    func makeColorGeometrySource(from aiScene: aiScene) -> SCNGeometrySource? {
         let numberOfVertices = getNumberOfVertices(in: aiScene)
         let scnColors = UnsafeMutablePointer<Float>.allocate(capacity: numberOfVertices * 3)
         defer { scnColors.deallocate() }
