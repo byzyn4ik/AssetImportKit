@@ -13,7 +13,7 @@ extension aiScene {
     func getMeshes() -> [aiMesh] {
         let meshesCount = Int(mNumMeshes)
         let aiSceneMeshes = Array(UnsafeBufferPointer(start: mMeshes,
-                                                    count: meshesCount)).map { $0!.pointee }
+                                                      count: meshesCount)).map { $0!.pointee }
         return aiSceneMeshes
     }
     
