@@ -35,7 +35,6 @@ extension SCNMaterial {
                                  description: "Displacement"),
                                 (value: aiTextureType_SHININESS,
                                  description: "Shininess")]
-        
         textureTypeTuple.forEach {
             print("Loading texture type : \($0.description)")
             let textureInfo = TextureInfo(aiMaterial: aiMaterial,
@@ -47,21 +46,11 @@ extension SCNMaterial {
         }
     }
     
-    /**
-     @name Make scenekit materials
-     */
-    
-    /**
-     Updates a scenekit material property with the texture file path or the color
-     if no texture is specifed.
-     
-     @param aiMaterial The assimp material.
-     @param textureInfo The metadata of the texture.
-     @param material The scenekit material.
-     @param path The path to the scene file to load.
-     */
+    /// Updates a scenekit material property with the texture file path or the color
+    /// if no texture is specifed.
+    ///
+    /// - Parameter textureInfo: The metadata of the texture.
     private func makePropertyContents(with textureInfo: TextureInfo) {
-        
         switch textureInfo.textureType {
         case aiTextureType_DIFFUSE:
             diffuse.contents = textureInfo.getMaterialPropertyContents()
