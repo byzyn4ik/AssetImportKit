@@ -16,7 +16,7 @@ extension aiNode {
     ///
     /// - Parameter aiScene: The assimp scene.
     /// - Returns: A new geometry source whose semantic property is texcoord.
-    public func makeTextureGeometrySource(from aiScene: aiScene) -> SCNGeometrySource {
+    func makeTextureGeometrySource(from aiScene: aiScene) -> SCNGeometrySource {
         let numberOfVertices = getNumberOfVertices(in: aiScene)
         let scnTextures = UnsafeMutablePointer<Float>.allocate(capacity: numberOfVertices * 3)
         defer { scnTextures.deallocate() }
