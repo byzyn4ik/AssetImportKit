@@ -15,7 +15,7 @@ extension aiNode {
     ///
     /// - Parameter aiScene: The assimp scene.
     /// - Returns: A new geometry source whose semantic property is vertex.
-    public func makeVertexGeometrySource(from aiScene: aiScene) -> SCNGeometrySource {
+    func makeVertexGeometrySource(from aiScene: aiScene) -> SCNGeometrySource {
         let numberOfVertices = getNumberOfVertices(in: aiScene)
         let scnVertices = UnsafeMutablePointer<Float>.allocate(capacity: numberOfVertices * 3)
         defer { scnVertices.deallocate() }
