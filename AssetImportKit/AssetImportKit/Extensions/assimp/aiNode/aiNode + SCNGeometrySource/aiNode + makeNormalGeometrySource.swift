@@ -11,15 +11,11 @@ import assimp.scene
 
 extension aiNode {
     
-    /**
-     Creates a scenekit geometry source from the normals of the specified node.
-     
-     @param aiNode The assimp node.
-     @param aiScene The assimp scene.
-     @param nVertices The number of vertices in the meshes of the aiNode.
-     @return A new geometry source whose semantic property is normal.
-     */
-    public func makeNormalGeometrySource(from aiScene: aiScene) -> SCNGeometrySource {
+    /// Creates a scenekit geometry source from the normals of the specified node.
+    ///
+    /// - Parameter aiScene: The assimp scene.
+    /// - Returns: A new geometry source whose semantic property is normal.
+    func makeNormalGeometrySource(from aiScene: aiScene) -> SCNGeometrySource {
         let numberOfVertices = getNumberOfVertices(in: aiScene)
         let scnNormals = UnsafeMutablePointer<Float>.allocate(capacity: numberOfVertices * 3)
         defer { scnNormals.deallocate() }
