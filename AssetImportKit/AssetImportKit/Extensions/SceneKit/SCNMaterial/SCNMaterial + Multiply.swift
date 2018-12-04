@@ -11,12 +11,9 @@ import assimp.types
 
 extension SCNMaterial {
     
-    /**
-     Updates a scenekit material's multiply property
-     
-     @param aiMaterial The assimp material
-     @param material The scenekit material.
-     */
+    /// Updates a scenekit material's multiply property
+    ///
+    /// - Parameter aiMaterial: The assimp material
     func loadMultiplyProperty(from aiMaterial: UnsafePointer<aiMaterial>) {
         
         print("Loading multiply color")
