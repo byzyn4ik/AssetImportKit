@@ -15,7 +15,7 @@ extension aiNode {
     ///
     /// - Parameter aiScene: The assimp scene.
     /// - Returns: The maximum influences or weights.
-    public func findMaximumWeights(in aiScene: aiScene) -> Int {
+    func findMaximumWeights(in aiScene: aiScene) -> Int {
         var maxWeights: Int = 0
         let aiNodeMeshes = getMeshes(from: aiScene)
         for aiMesh in aiNodeMeshes {
