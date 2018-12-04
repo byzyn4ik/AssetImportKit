@@ -50,29 +50,26 @@ extension SCNLight {
             }
         }
     }
-}
-
-/**
- Creates a scenekit omni light from an assimp omni light.
- 
- @param aiLight The assimp omni light.
- @return A new scenekit omni light.
- */
-private func applyOmniLightProperties(from aiLight: aiLight) {
-    type = .omni
-    let aiColor = aiLight.mColorSpecular
-    if aiColor.r != 0
-        && aiColor.g != 0
-        && aiColor.b != 0 {
-        print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
-        let space = CGColorSpaceCreateDeviceRGB()
-        let components: [CGFloat] = [CGFloat(aiColor.r),
-                                     CGFloat(aiColor.g),
-                                     CGFloat(aiColor.b),
-                                     1.0]
-        if let cgColor = CGColor(colorSpace: space,
-                                 components: components) {
-            color = cgColor
+    
+    /// Creates a scenekit omni light from an assimp omni light.
+    ///
+    /// - Parameter aiLight: The assimp omni light.
+    private func applyOmniLightProperties(from aiLight: aiLight) {
+        type = .omni
+        let aiColor = aiLight.mColorSpecular
+        if aiColor.r != 0
+            && aiColor.g != 0
+            && aiColor.b != 0 {
+            print("Setting color: \(aiColor.r) \(aiColor.g) \(aiColor.b) ")
+            let space = CGColorSpaceCreateDeviceRGB()
+            let components: [CGFloat] = [CGFloat(aiColor.r),
+                                         CGFloat(aiColor.g),
+                                         CGFloat(aiColor.b),
+                                         1.0]
+            if let cgColor = CGColor(colorSpace: space,
+                                     components: components) {
+                color = cgColor
+            }
         }
     }
     if aiLight.mAttenuationQuadratic != 0 {
