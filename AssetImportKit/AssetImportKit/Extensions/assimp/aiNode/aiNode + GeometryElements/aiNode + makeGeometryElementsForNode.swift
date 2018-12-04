@@ -16,7 +16,7 @@ extension aiNode {
     ///
     /// - Parameter aiScene: The assimp node.
     /// - Returns: An array of geometry elements.
-    public func makeGeometryElementsForNode(from aiScene: aiScene) -> [SCNGeometryElement] {
+    func makeGeometryElementsForNode(from aiScene: aiScene) -> [SCNGeometryElement] {
         
         var scnGeometryElements: [SCNGeometryElement] = []
         var indexOffset: Int = 0
