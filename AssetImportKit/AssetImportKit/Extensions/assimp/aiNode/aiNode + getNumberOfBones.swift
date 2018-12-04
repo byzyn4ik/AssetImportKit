@@ -16,7 +16,7 @@ extension aiNode {
     ///     - aiScene: The assimp scene.
     /// - Returns:
     ///     The number of bones.
-    public func getNumberOfBones(in aiScene: aiScene) -> Int {
+    func getNumberOfBones(in aiScene: aiScene) -> Int {
         var numberOfBones: Int = 0
         let aiNodeMeshes = getMeshes(from: aiScene)
         for aiMesh in aiNodeMeshes {
