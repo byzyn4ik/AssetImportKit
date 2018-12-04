@@ -227,51 +227,45 @@ public extension SCNNode {
         }
         else {
             for child: SCNNode in animNode.childNodes {
-                paused = isAnimationForScenePaused(at: child, forKey: animKey, withSuffixes: suffixes)
+                paused = isAnimationForScenePaused(at: child,
+                                                   forKey: animKey,
+                                                   withSuffixes: suffixes)
             }
         }
-        
         return paused
     }
     
-    /**
-     Returns a Boolean value indicating whether the animation attached to the object
-     with the specified key is paused.
-     
-     @param animKey A string identifying an attached animation.
-     @return YES if the specified animation is paused. NO if the animation is
-     running or no animation is attached to the object with that key.
-     */
+    /// Returns a Boolean value indicating whether the animation attached to the object
+    /// with the specified key is paused.
+    ///
+    /// - Parameter animKey: A string identifying an attached animation.
+    /// - Returns:  YES if the specified animation is paused. NO if the animation is
+    /// running or no animation is attached to the object with that key.
     public func isAnimationSceneForKeyPaused(_ animKey: String) -> Bool {
         let suffixes = [".transform.translation-", ".transform.quaternion-", ".transform.scale-"]
-        return isAnimationForScenePaused(at: self, forKey: animKey, withSuffixes: suffixes)
+        return isAnimationForScenePaused(at: self,
+                                         forKey: animKey,
+                                         withSuffixes: suffixes)
     }
     
     // MARK: - Skeleton
     
-    /**
-     @name Skeleton
-     */
-    /**
-     Finds the root node of the skeleton in the scene.
-     
-     @return Retuns the root node of the skeleton in the scene.
-     */
-    public func findSkeletonRootNode() -> SCNNode {
-        
+    /// Finds the root node of the skeleton in the scene.
+    ///
+    /// - Returns: Retuns the root node of the skeleton in the scene.
+    func findSkeletonRootNode() -> SCNNode {
         var rootAnimNode: SCNNode? = nil
         // find root of skeleton
         
-        enumerateChildNodes({(child: SCNNode, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
+        enumerateChildNodes({(child: SCNNode,
+            stop: UnsafeMutablePointer<ObjCBool>) -> Void in
             if child.animationKeys.count > 0 {
                 print(" found anim: \(child.animationKeys) at node \(child)")
                 rootAnimNode = child
                 stop.pointee = true
             }
         })
-        
         return rootAnimNode ?? SCNNode()
     }
-    
 }
 
