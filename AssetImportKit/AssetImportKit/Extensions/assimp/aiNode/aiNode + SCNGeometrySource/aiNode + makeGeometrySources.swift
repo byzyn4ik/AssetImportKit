@@ -16,7 +16,7 @@ extension aiNode {
     ///
     /// - Parameter aiScene: The assimp scene.
     /// - Returns: An array of geometry sources.
-    public func makeGeometrySources(from aiScene: aiScene) -> [SCNGeometrySource] {
+    func makeGeometrySources(from aiScene: aiScene) -> [SCNGeometrySource] {
         var scnGeometrySources: [SCNGeometrySource] = []
         scnGeometrySources.append(makeVertexGeometrySource(from: aiScene))
         scnGeometrySources.append(makeNormalGeometrySource(from: aiScene))
