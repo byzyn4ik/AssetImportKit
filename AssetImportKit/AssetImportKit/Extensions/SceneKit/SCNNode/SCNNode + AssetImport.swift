@@ -54,47 +54,59 @@ public extension SCNNode {
                     animation.delegate = settings.delegate
                     hasDelegate = false
                 }
-                
-                if let boneName = animNode.name, let sceneBoneNode = childNode(withName: boneName, recursively: true) {
+                if let boneName = animNode.name,
+                    let sceneBoneNode = childNode(withName: boneName,
+                                                  recursively: true) {
                     let key: String = nodeAnimKey + ("-") + (animKey)
-                    sceneBoneNode.addAnimation(animation, forKey: key)
+                    sceneBoneNode.addAnimation(animation,
+                                               forKey: key)
                 }
-                
             }
         }
-        
         for childNode in animNode.childNodes {
-            self.addAnimation(from: childNode, forKey: animKey, with: settings, hasEvents: &hasEvents, hasDelegate: &hasDelegate)
+            self.addAnimation(from: childNode,
+                              forKey: animKey,
+                              with: settings,
+                              hasEvents: &hasEvents,
+                              hasDelegate: &hasDelegate)
         }
         
     }
     
-    /**
-     Adds a skeletal animation scene to the scene.
-     
-     @param animScene The scene object representing the animation.
-     */
-    
-    public func addAnimationScene(_ animScene:  SCNScene, forKey animKey: String, with settings: AssetImporterAnimSettings) {
-        
+    /// Adds a skeletal animation scene to the scene.
+    ///
+    /// - Parameters:
+    ///   - animScene: The scene object representing the animation.
+    public func addAnimationScene(_ animScene: SCNScene,
+                                  forKey animKey: String,
+                                  with settings: AssetImporterAnimSettings) {
         let rootAnimNode = animScene.rootNode.findSkeletonRootNode()
         var hasEvents: Bool = settings.animationEvents.count > 0
         var hasDelegate: Bool = settings.delegate != nil
         if rootAnimNode.childNodes.count > 0 {
-            addAnimation(from: rootAnimNode, forKey: animKey, with: settings, hasEvents: &hasEvents, hasDelegate: &hasDelegate)
+            addAnimation(from: rootAnimNode,
+                         forKey: animKey,
+                         with: settings,
+                         hasEvents: &hasEvents,
+                         hasDelegate: &hasDelegate)
         }
         else {
             // no root exists, so add animation data to all bones
             print(" no root: \(String(describing: rootAnimNode.parent)) \(String(describing: rootAnimNode.parent?.childNodes.count))")
             if let parent = rootAnimNode.parent {
-                addAnimation(from: parent, forKey: animKey, with: settings, hasEvents: &hasEvents, hasDelegate: &hasDelegate)
+                addAnimation(from: parent,
+                             forKey: animKey,
+                             with: settings,
+                             hasEvents: &hasEvents,
+                             hasDelegate: &hasDelegate)
             }
         }
-        
     }
     
-    public func removeAnimation(at animNode: SCNNode, forKey animKey: String, fadeOutDuration: CGFloat, withSuffixes suffixes: [String]) {
-        
+    public func removeAnimation(at animNode: SCNNode,
+                                forKey animKey: String,
+                                fadeOutDuration: CGFloat,
+                                withSuffixes suffixes: [String]) {
         if animNode.name != nil {
             let keyPrefix: String = "/node-" + (animNode.name ?? "")
             for suffix: String in suffixes {
