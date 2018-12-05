@@ -40,8 +40,6 @@ This repository includes 2 small demos for macOS and iOS.
 
 ## Installation via `CocoaPods`
 
-There are two ways to install `AssetImportKit` via `CocoaPods`:
-
 ```Ruby
 pod 'AssetImportKit'
 ```
