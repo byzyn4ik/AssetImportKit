@@ -19,8 +19,6 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
     
     // MARK: - UI Actions
     
-    
-    
     @IBAction func openAssetAction(_ sender: Any) {
         openAsset()
     }
@@ -94,10 +92,10 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
             
             do {
                 let assimpScene = try SCNScene.assimpScene(filePath: filePath,
-                                                            postProcessSteps: [.defaultQuality])
+                                                           postProcessSteps: [.defaultQuality])
                 if let modelScene = assimpScene.modelScene {
-                    for childNode in modelScene.rootNode.childNodes {
-                        self.modelContainerNode.addChildNode(childNode)
+                    modelScene.rootNode.childNodes.forEach {
+                        self.modelContainerNode.addChildNode($0)
                     }
                 }
                 
@@ -130,20 +128,15 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
                 print(error.localizedDescription)
             }
         }
-        
         sceneDidLoad = true
-        
     }
     
     func unloadScene() {
-        
         for node in modelContainerNode.childNodes {
             node.removeFromParentNode()
             node.removeAllAnimations()
         }
-        
         sceneView.scene = nil
-        
     }
     
     // MARK: - File Browsing
@@ -156,9 +149,7 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
     }
     
     func openAsset() {
-        
         let dialog = NSOpenPanel();
-        
         dialog.title = "Choose an Asset file";
         dialog.showsResizeIndicator = true;
         dialog.showsHiddenFiles = false;
@@ -181,29 +172,24 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
     }
     
     func exportScene() {
-        
         let savePanel = NSSavePanel()
         savePanel.allowedFileTypes = ["scn"]
         savePanel.begin { (result) -> Void in
-            
             if result == NSApplication.ModalResponse.OK {
-                
-                if let sceneFileURL = savePanel.url, let scene = self.sceneView.scene {
-                    
-                    let success = scene.write(to: sceneFileURL, options: nil, delegate: self) { (totalProgress, error, stop) in
+                if let sceneFileURL = savePanel.url,
+                    let scene = self.sceneView.scene {
+                    let success = scene.write(to: sceneFileURL,
+                                              options: nil,
+                                              delegate: self) { (totalProgress, error, stop) in
                         print("Progress \(totalProgress) Error: \(String(describing: error))")
                     }
                     print("Success: \(success)")
-                    
                 }
-                
             } else {
                 NSSound.beep()
             }
         }
-        
     }
-
 
 }
 

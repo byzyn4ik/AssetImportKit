@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
     <img src="Media/AssetImportKit.png", width="844">
 </p>
 
@@ -23,7 +23,7 @@ The library supports:
 #### Supported file formats ####
 
 AssetImportKit supports the following file formats:
-3D, 3DS, 3MF, AC, AC3D, ACC, AMJ, ASE, ASK, B3D, BLEND (Blender), BVH, COB, CMS, DAE/Collada, DXF, ENFF, FBX, glTF 1.0 + GLB, glTF 2.0, HMB, IFC-STEP, IRR / IRRMESH, LWO, LWS, LXO, MD2, MD3, MD5, MDC, MDL, MESH / MESH.XML, MOT, MS3D, NDO, NFF, OBJ, OFF, OGEX, PLY, PMX, PRJ, Q3O, Q3S, RAW, SCN, SIB, SMD, STL, STP, TER, UC, VTA, X, X3D, XGL, ZGL.
+"dae", "fbx", "obj", "scn", "md3", "zgl", "xgl", "wrl", "stl", "smd", "raw", "q3s", "q3o", "ply", "xml", "mesh", "off", "nff", "m3sd", "md5anim", "md5mesh", "md2", "irr", "ifc", "dxf", "cob", "bvh", "b3d", "blend", "hmp", "3ds", "3d",  "ms3d", "mdl", "ase", "gltf".
 
 ## Demos
 
@@ -42,21 +42,9 @@ This repository includes 2 small demos for macOS and iOS.
 
 There are two ways to install `AssetImportKit` via `CocoaPods`:
 
-* for development purposes:
-  ```Ruby
-  pod 'AssetImportKit/Universal'
-  ```
-  or just
-  ```Ruby
-  pod 'AssetImportKit'
-  ```
-  > In this case `AssetImportKit.framework` will contain `ARM64` and `x86_64` architectures needed for `Generic Device` and `Simulator` targets respectively.
-
-* for release purposes:
-  ```Ruby
-  pod 'AssetImportKit/ARM64'
-  ```
-  > In this case `AssetImportKit.framework` will contain only `ARM64` architecture needed for uploading to the `AppStore`.
+```Ruby
+pod 'AssetImportKit'
+```
 
 ## Manual Installation
 
@@ -65,16 +53,17 @@ In order to install `AssetImportKit` manually please read the [`How-to-Install`]
 ## Usage
 
 ```Swift
-/// Create container node
-var modelContainerNode = SCNNode()
-/// Create AssetImporter
-let assetImporter = AssetImporter()
-/// Import Scene
-guard let importedScene = assetImporter.importScene(filePath, postProcessFlags: [.defaultQuality]),
-let modelScene = importedScene.modelScene else { return }
-/// Move child nodes from imported scene to container node
-modelScene.rootNode.childNodes.forEach { modelContainerNode.addChildNode($0) }
-sceneView.scene?.rootNode.addChildNode(modelContainerNode)
+do {
+  let assimpScene = try SCNScene.assimpScene(filePath: filePath,
+                                              postProcessSteps: [.defaultQuality])
+  if let modelScene = assimpScene.modelScene {
+    modelScene.rootNode.childNodes.forEach {
+      sceneView.scene?.rootNode.addChildNode($0)
+    }
+  }
+} catch {
+  print(error.localizedDescription)
+}
 ```
 
 Note for `iOS` builds: if you are developing an `iOS` application, set the `Enable Bitcode` under `Build Settings->Build Options` of your target to `NO`.
