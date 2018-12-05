@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14092" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14092"/>
-        <plugIn identifier="com.apple.SceneKitIBPlugin" version="14092"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.SceneKitIBPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -685,7 +686,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="SceneKit Asset Import" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="BluredWindow" customModule="SceneKitAssetImport" customModuleProvider="target">
+                    <window key="window" title="SceneKit Asset Import" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="BluredWindow" customModule="SceneKitAssetImport" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -711,7 +712,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <sceneView translatesAutoresizingMaskIntoConstraints="NO" id="jPb-bL-PjE">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="207"/>
+                                <rect key="frame" x="0.0" y="63" width="480" height="207"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -720,25 +721,10 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </sceneView>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="L1E-n8-SgB">
-                                <rect key="frame" x="147" y="220" width="138" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="138" id="JF1-pG-sx2"/>
-                                    <constraint firstAttribute="height" constant="37" id="uyb-vG-QRg"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" title="Export as .scn" bezelStyle="shadowlessSquare" image="Export Scene" imagePosition="left" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="nTv-aY-b3u">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="saveSceneAction:" target="XfG-lQ-9wD" id="1JP-rh-v1S"/>
-                                </connections>
-                            </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="djc-fu-Vvs">
-                                <rect key="frame" x="20" y="220" width="117" height="37"/>
+                                <rect key="frame" x="20" y="13" width="120" height="37"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="J3r-up-k4G"/>
-                                    <constraint firstAttribute="width" constant="117" id="hix-uR-end"/>
+                                    <constraint firstAttribute="width" constant="120" id="vpk-5l-oie"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" title="Open Asset" bezelStyle="shadowlessSquare" image="Open Asset" imagePosition="left" alignment="right" imageScaling="proportionallyUpOrDown" inset="2" id="eYN-e2-LQV">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -748,17 +734,32 @@
                                     <action selector="openAssetAction:" target="XfG-lQ-9wD" id="4aR-An-YvB"/>
                                 </connections>
                             </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="L1E-n8-SgB">
+                                <rect key="frame" x="150" y="13" width="136" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="136" id="sWo-56-LbN"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" title="Export as .scn" bezelStyle="shadowlessSquare" image="Export Scene" imagePosition="left" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="nTv-aY-b3u">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="saveSceneAction:" target="XfG-lQ-9wD" id="1JP-rh-v1S"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="jPb-bL-PjE" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="8pf-Tz-n04"/>
-                            <constraint firstItem="djc-fu-Vvs" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="13" id="IC2-je-SdU"/>
-                            <constraint firstAttribute="bottom" secondItem="jPb-bL-PjE" secondAttribute="bottom" id="Inm-dp-OwT"/>
-                            <constraint firstItem="L1E-n8-SgB" firstAttribute="leading" secondItem="djc-fu-Vvs" secondAttribute="trailing" constant="10" id="Pi9-Ma-KOi"/>
-                            <constraint firstAttribute="trailing" secondItem="jPb-bL-PjE" secondAttribute="trailing" id="T8o-He-L5T"/>
-                            <constraint firstItem="jPb-bL-PjE" firstAttribute="top" secondItem="L1E-n8-SgB" secondAttribute="bottom" constant="13" id="pBT-0a-qXj"/>
-                            <constraint firstItem="L1E-n8-SgB" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="13" id="pKX-aT-Bhe"/>
-                            <constraint firstItem="jPb-bL-PjE" firstAttribute="top" secondItem="djc-fu-Vvs" secondAttribute="bottom" constant="13" id="t0g-sr-5YM"/>
-                            <constraint firstItem="djc-fu-Vvs" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="wfa-kV-I64"/>
+                            <constraint firstItem="djc-fu-Vvs" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="G7c-ju-fvN"/>
+                            <constraint firstItem="jPb-bL-PjE" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="N3A-y6-WdC"/>
+                            <constraint firstItem="L1E-n8-SgB" firstAttribute="top" secondItem="jPb-bL-PjE" secondAttribute="bottom" constant="13" id="P07-90-fw0"/>
+                            <constraint firstAttribute="trailing" secondItem="jPb-bL-PjE" secondAttribute="trailing" id="Pca-Pj-FYb"/>
+                            <constraint firstItem="djc-fu-Vvs" firstAttribute="top" secondItem="jPb-bL-PjE" secondAttribute="bottom" constant="13" id="ZPl-2z-fxO"/>
+                            <constraint firstItem="L1E-n8-SgB" firstAttribute="leading" secondItem="djc-fu-Vvs" secondAttribute="trailing" constant="10" id="b51-ia-Z0e"/>
+                            <constraint firstAttribute="bottom" secondItem="jPb-bL-PjE" secondAttribute="bottom" constant="63" id="gTE-3l-G5T"/>
+                            <constraint firstItem="jPb-bL-PjE" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="gVh-1m-o2y"/>
+                            <constraint firstAttribute="bottom" secondItem="L1E-n8-SgB" secondAttribute="bottom" constant="13" id="hoB-MO-VTq"/>
+                            <constraint firstItem="L1E-n8-SgB" firstAttribute="leading" secondItem="djc-fu-Vvs" secondAttribute="trailing" constant="10" id="ihb-gy-Fa7"/>
+                            <constraint firstAttribute="bottom" secondItem="djc-fu-Vvs" secondAttribute="bottom" constant="13" id="vRZ-YT-EAy"/>
                         </constraints>
                     </view>
                     <connections>

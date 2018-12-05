@@ -13,7 +13,6 @@
 		1829E810202FF0F6008B9DE7 /* AssetImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E807202FF0F5008B9DE7 /* AssetImporter.swift */; };
 		1829E811202FF0F6008B9DE7 /* TextureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E808202FF0F5008B9DE7 /* TextureInfo.swift */; };
 		1829E812202FF0F6008B9DE7 /* AssetImporterAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E809202FF0F5008B9DE7 /* AssetImporterAnimation.swift */; };
-		1829E813202FF0F6008B9DE7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80A202FF0F6008B9DE7 /* Utilities.swift */; };
 		1829E814202FF0F6008B9DE7 /* AssetImporterScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80B202FF0F6008B9DE7 /* AssetImporterScene.swift */; };
 		1829E815202FF0F6008B9DE7 /* SCNScene + AssetImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */; };
 		1829E816202FF0F6008B9DE7 /* SCNNode + AssetImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */; };
@@ -31,14 +30,13 @@
 		1850D2B72030C371006F5972 /* AssetImporterAnimSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E806202FF0F5008B9DE7 /* AssetImporterAnimSettings.swift */; };
 		1850D2B92030C371006F5972 /* SCNScene + AssetImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */; };
 		1850D2BA2030C371006F5972 /* AssetImporterAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E809202FF0F5008B9DE7 /* AssetImporterAnimation.swift */; };
-		1850D2BB2030C371006F5972 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80A202FF0F6008B9DE7 /* Utilities.swift */; };
 		1850D2BC2030C371006F5972 /* AssetImporterScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80B202FF0F6008B9DE7 /* AssetImporterScene.swift */; };
 		1850D2BF2030C371006F5972 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E7C6202FF069008B9DE7 /* Material.swift */; };
 		1850D2C12030C371006F5972 /* AssetImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E807202FF0F5008B9DE7 /* AssetImporter.swift */; };
 		1850D2C22030C371006F5972 /* SCNNode + AssetImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */; };
 		1850D2DF2030C371006F5972 /* AssetImportKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1829E77B202FEFEC008B9DE7 /* AssetImportKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		188CDBDB21ADD7D600EC794D /* Postprocessing.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CDBDA21ADD7D600EC794D /* Postprocessing.swift.swift */; };
-		188CDBDC21ADD7D600EC794D /* Postprocessing.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CDBDA21ADD7D600EC794D /* Postprocessing.swift.swift */; };
+		188CDBDB21ADD7D600EC794D /* Postprocessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CDBDA21ADD7D600EC794D /* Postprocessing.swift */; };
+		188CDBDC21ADD7D600EC794D /* Postprocessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CDBDA21ADD7D600EC794D /* Postprocessing.swift */; };
 		188F213121AEDEC900C5A661 /* libIrrXML-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188F212F21AEDEC900C5A661 /* libIrrXML-macOS.a */; };
 		188F213221AEDEC900C5A661 /* libassimp-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188F213021AEDEC900C5A661 /* libassimp-macOS.a */; };
 		188F213521AEDF0100C5A661 /* libIrrXML-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188F213321AEDF0000C5A661 /* libIrrXML-iOS.a */; };
@@ -121,7 +119,6 @@
 		1829E807202FF0F5008B9DE7 /* AssetImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetImporter.swift; sourceTree = "<group>"; };
 		1829E808202FF0F5008B9DE7 /* TextureInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureInfo.swift; sourceTree = "<group>"; };
 		1829E809202FF0F5008B9DE7 /* AssetImporterAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetImporterAnimation.swift; sourceTree = "<group>"; };
-		1829E80A202FF0F6008B9DE7 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		1829E80B202FF0F6008B9DE7 /* AssetImporterScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetImporterScene.swift; sourceTree = "<group>"; };
 		1829E80D202FF0F6008B9DE7 /* SCNScene + AssetImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNScene + AssetImport.swift"; sourceTree = "<group>"; };
 		1829E80E202FF0F6008B9DE7 /* SCNNode + AssetImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode + AssetImport.swift"; sourceTree = "<group>"; };
@@ -132,7 +129,7 @@
 		183E822D21B3D0700068B2BF /* aiBone + getWeights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "aiBone + getWeights.swift"; sourceTree = "<group>"; };
 		1850D2FA2030C371006F5972 /* AssetImportKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssetImportKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1850D2FB2030C371006F5972 /* AssetImportKit-macOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AssetImportKit-macOS-Info.plist"; path = "/Users/eugenebokhan/Code/Github/eugenebokhan/AssetImportKit/AssetImportKit/AssetImportKit/AssetImportKit-macOS-Info.plist"; sourceTree = "<absolute>"; };
-		188CDBDA21ADD7D600EC794D /* Postprocessing.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postprocessing.swift.swift; sourceTree = "<group>"; };
+		188CDBDA21ADD7D600EC794D /* Postprocessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postprocessing.swift; sourceTree = "<group>"; };
 		188F212F21AEDEC900C5A661 /* libIrrXML-macOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-macOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/macOS/libIrrXML-macOS.a"; sourceTree = "<group>"; };
 		188F213021AEDEC900C5A661 /* libassimp-macOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-macOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/macOS/libassimp-macOS.a"; sourceTree = "<group>"; };
 		188F213321AEDF0000C5A661 /* libIrrXML-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-iOS.a"; path = "AssetImportKit/Dependencies/Assimp/lib/iOS/libIrrXML-iOS.a"; sourceTree = "<group>"; };
@@ -222,9 +219,8 @@
 				1829E806202FF0F5008B9DE7 /* AssetImporterAnimSettings.swift */,
 				1829E80B202FF0F6008B9DE7 /* AssetImporterScene.swift */,
 				1829E7C6202FF069008B9DE7 /* Material.swift */,
-				188CDBDA21ADD7D600EC794D /* Postprocessing.swift.swift */,
+				188CDBDA21ADD7D600EC794D /* Postprocessing.swift */,
 				1829E808202FF0F5008B9DE7 /* TextureInfo.swift */,
-				1829E80A202FF0F6008B9DE7 /* Utilities.swift */,
 				18C845AE21B1184B009649CD /* Typealiases */,
 				1829E80C202FF0F6008B9DE7 /* Extensions */,
 				1829E7C8202FF069008B9DE7 /* module.modulemap */,
@@ -535,7 +531,7 @@
 				18F8C2C421B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift in Sources */,
 				18F8C2D421B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift in Sources */,
 				1829E80F202FF0F6008B9DE7 /* AssetImporterAnimSettings.swift in Sources */,
-				188CDBDB21ADD7D600EC794D /* Postprocessing.swift.swift in Sources */,
+				188CDBDB21ADD7D600EC794D /* Postprocessing.swift in Sources */,
 				18C8459421B044BA009649CD /* aiMaterial + Name.swift in Sources */,
 				18F8C2BE21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift in Sources */,
 				183E822B21B3C98E0068B2BF /* aiMesh + getBondes.swift in Sources */,
@@ -559,7 +555,6 @@
 				183E822821B2BF910068B2BF /* aiNode + findMaximumWeights.swift in Sources */,
 				18F21B2A21B59BB000688F99 /* SCNNode + findDepth.swift in Sources */,
 				18F8C2CA21B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift in Sources */,
-				1829E813202FF0F6008B9DE7 /* Utilities.swift in Sources */,
 				18C845B321B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */,
 				183E822221B2B6960068B2BF /* aiNode + getNumberOfVertices.swift in Sources */,
 				1829E814202FF0F6008B9DE7 /* AssetImporterScene.swift in Sources */,
@@ -590,7 +585,7 @@
 				18F8C2C521B3E6C600D5A434 /* aiNode + makeTangentGeometrySource.swift in Sources */,
 				18F8C2D521B4033600D5A434 /* aiMesh + getNumberOfFaceIndeces.swift in Sources */,
 				1850D2B72030C371006F5972 /* AssetImporterAnimSettings.swift in Sources */,
-				188CDBDC21ADD7D600EC794D /* Postprocessing.swift.swift in Sources */,
+				188CDBDC21ADD7D600EC794D /* Postprocessing.swift in Sources */,
 				18C8459521B044BA009649CD /* aiMaterial + Name.swift in Sources */,
 				18F8C2BF21B3E0E700D5A434 /* aiNode + makeNormalGeometrySource.swift in Sources */,
 				183E822C21B3C98E0068B2BF /* aiMesh + getBondes.swift in Sources */,
@@ -614,7 +609,6 @@
 				183E822921B2BF910068B2BF /* aiNode + findMaximumWeights.swift in Sources */,
 				18F21B2B21B59BB000688F99 /* SCNNode + findDepth.swift in Sources */,
 				18F8C2CB21B3EDD900D5A434 /* aiNode + makeColorGeometrySource.swift in Sources */,
-				1850D2BB2030C371006F5972 /* Utilities.swift in Sources */,
 				18C845B421B11C64009649CD /* SCNMaterial + CullMode.swift in Sources */,
 				183E822321B2B6960068B2BF /* aiNode + getNumberOfVertices.swift in Sources */,
 				1850D2BC2030C371006F5972 /* AssetImporterScene.swift in Sources */,

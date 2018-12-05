@@ -159,13 +159,13 @@ class ViewController: NSViewController, CAAnimationDelegate, SCNSceneExportDeleg
         
         let dialog = NSOpenPanel();
         
-        dialog.title                   = "Choose an Asset file";
-        dialog.showsResizeIndicator    = true;
-        dialog.showsHiddenFiles        = false;
-        dialog.canChooseDirectories    = true;
-        dialog.canCreateDirectories    = true;
+        dialog.title = "Choose an Asset file";
+        dialog.showsResizeIndicator = true;
+        dialog.showsHiddenFiles = false;
+        dialog.canChooseDirectories = true;
+        dialog.canCreateDirectories = true;
         dialog.allowsMultipleSelection = false;
-        dialog.allowedFileTypes        = ["dae", "fbx", "obj", "scn", "md3", "zgl", "xgl", "wrl", "stl", "smd", "raw", "q3s", "q3o", "ply", "xml", "mesh", "off", "nff", "m3sd", "md5anim", "md5mesh", "md2", "irr", "ifc", "dxf", "cob", "bvh", "b3d", "ac", "blend", "hmp", "3ds", "3d", "x", "ter", "max", "ms3d", "mdl", "ase"];
+        dialog.allowedFileTypes = SCNScene.allowedFileExtensions();
         
         if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             let result = dialog.url // Pathname of the file
