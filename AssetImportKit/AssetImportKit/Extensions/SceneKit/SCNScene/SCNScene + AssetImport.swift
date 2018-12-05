@@ -22,7 +22,7 @@ public extension SCNScene {
     /// Loading scenes using assimp
     ///
     /// - Returns: Returns the array of file extensions for all the supported formats.
-    public class func allowedFileExtensions() -> [String] {
+    public static func allowedFileExtensions() -> [String] {
         return ["dae", "fbx", "obj", "scn", "md3", "zgl", "xgl", "wrl", "stl", "smd", "raw", "q3s", "q3o", "ply", "xml", "mesh", "off", "nff", "m3sd", "md5anim", "md5mesh", "md2", "irr", "ifc", "dxf", "cob", "bvh", "b3d", "blend", "hmp", "3ds", "3d",  "ms3d", "mdl", "ase", "gltf"]
     }
     
@@ -32,7 +32,7 @@ public extension SCNScene {
     /// - Parameter extension: The filename extension identifying an asset file format.
     /// - Returns: YES if the SCNAssimpScene class can read asset data from files with
     /// the specified extension; otherwise, NO.
-    public class func canImportFileExtension(_ extension: String) -> Bool {
+    public static func canImportFileExtension(_ extension: String) -> Bool {
         return allowedFileExtensions().contains(`extension`.lowercased())
     }
     
@@ -43,8 +43,8 @@ public extension SCNScene {
     ///   - postProcessSteps: The flags for all possible post processing steps.
     /// - Returns: A new scene object, or nil if no scene could be loaded.
     /// - Throws: Scene loading error.
-    public class func assimpScene(filePath: String,
-                                  postProcessSteps: PostProcessSteps) throws -> AssetImporterScene {
+    public static func assimpScene(filePath: String,
+                                   postProcessSteps: PostProcessSteps) throws -> AssetImporterScene {
         do {
             var assimpImporter = AssetImporter()
             let scene = try assimpImporter.importScene(filePath: filePath,
@@ -62,8 +62,8 @@ public extension SCNScene {
     ///   - postProcessSteps: The flags for all possible post processing steps.
     /// - Returns: A new scene object, or nil if no scene could be loaded.
     /// - Throws: Scene loading error.
-    public class func assimpScene(with url: URL,
-                                  postProcessSteps: PostProcessSteps) throws -> AssetImporterScene {
+    public static func assimpScene(with url: URL,
+                                   postProcessSteps: PostProcessSteps) throws -> AssetImporterScene {
         do {
             let scene = try assimpScene(with: url, postProcessSteps: postProcessSteps)
             return scene
