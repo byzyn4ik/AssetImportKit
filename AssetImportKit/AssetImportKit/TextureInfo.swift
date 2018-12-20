@@ -171,7 +171,8 @@ public struct TextureInfo {
                                      nil)
                 let texFilePath = aiPath.stringValue() as NSString
                 print("tex file path is: \(texFilePath)")
-                let texFileName = texFilePath.lastPathComponent
+                let texFileName = texFilePath.lastPathComponent.replacingOccurrences(of: "\\",
+                                                                                     with: "/")
                 if texFileName == "" {
                     self.applyColor = true
                     self.extractColor(for: aiMaterial,
