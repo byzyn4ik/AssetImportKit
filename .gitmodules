@@ -1,0 +1,4 @@
+[submodule "AssetImportKit/AssetImportKit/Dependencies/assimp"]
+	path = AssetImportKit/AssetImportKit/Dependencies/assimp
+	url = https://github.com/byzyn4ik/assimp.git
+	branch = ios-support-update
